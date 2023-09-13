@@ -1,3 +1,5 @@
+Contact: benjamin.t.johnson@noaa.gov / bjohns@ucar.edu / BenjaminTJohnson (github)
+
 Readme File for develop branch
 
 Development strategy:
