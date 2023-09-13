@@ -1,0 +1,33 @@
+Apodize_TauSpc_with_IRF.o : Apodize_TauSpc_with_IRF.f90 Tau_Production_Utility.o Tau_Production_Parameters.o CrIS_Define.o IASI_Define.o IASI_NG_Define.o FFT_Spectral_Utility.o LBLRTM_netCDF_IO.o TauProfile_netCDF_IO.o TauProfile_Define.o  
+Apodisation_Utility.o : Apodisation_Utility.f90 SPC_IFG_Utility.o 
+CrIS_Define.o : CrIS_Define.f90 Apodisation_Utility.o 
+FFT_Spectral_Utility.o : FFT_Spectral_Utility.f90 
+IASI_Define.o : IASI_Define.f90 
+IASI_NG_Define.o : IASI_NG_Define.f90 
+LBLRTM_Phdr_Define.o : LBLRTM_Phdr_Define.f90
+LBLRTM_Phdr_IO.o : LBLRTM_Phdr_IO.f90
+LBLRTM_Layer_Define.o : LBLRTM_Layer_Define.f90
+LBLRTM_Panel_Define.o : LBLRTM_Panel_Define.f90
+LBLRTM_Panel_IO.o : LBLRTM_Panel_IO.f90 LBLRTM_Phdr_IO.o
+LBLRTM_Fhdr_Define.o : LBLRTM_Fhdr_Define.f90
+LBLRTM_Fhdr_IO.o : LBLRTM_Fhdr_IO.f90
+LBLRTM_Layer_IO.o : LBLRTM_Layer_IO.f90 LBLRTM_Phdr_Define.o LBLRTM_Panel_Define.o LBLRTM_Panel_IO.o LBLRTM_Fhdr_IO.o
+LBLRTM_File_Define.o : LBLRTM_File_Define.f90 LBLRTM_Layer_Define.o
+LBLRTM_File_IO.o : LBLRTM_File_IO.f90 LBLRTM_Layer_IO.o
+LBLRTM_Fhdr_netCDF_IO.o : LBLRTM_Fhdr_netCDF_IO.f90
+LBLRTM_Layer_netCDF_IO.o : LBLRTM_Layer_netCDF_IO.f90 LBLRTM_Fhdr_netCDF_IO.o
+LBLRTM_File_netCDF_IO.o : LBLRTM_File_netCDF_IO.f90 LBLRTM_Layer_netCDF_IO.o
+LBLRTM_netCDF_IO.o : LBLRTM_netCDF_IO.f90 netCDF_Utility.o LBLRTM_File_Define.o LBLRTM_File_IO.o LBLRTM_File_netCDF_IO.o
+LBLRTM_Parameters.o : LBLRTM_Parameters.f90 
+LBLRTM_Utility.o : LBLRTM_Utility.fpp LBLRTM_Parameters.o 
+Linear_Interpolation.o : Linear_Interpolation.f90 Search_Utility.o 
+netCDF_Attribute_Utility.o : netCDF_Attribute_Utility.f90  
+netCDF_Dimension_Utility.o : netCDF_Dimension_Utility.f90 
+netCDF_Utility.o : netCDF_Utility.f90 netCDF_Attribute_Utility.o netCDF_Variable_Utility.o netCDF_Dimension_Utility.o 
+netCDF_Variable_Utility.o : netCDF_Variable_Utility.f90 
+Search_Utility.o : Search_Utility.f90 
+SPC_IFG_Utility.o : SPC_IFG_Utility.f90
+Tau_Production_Parameters.o : Tau_Production_Parameters.f90 LBLRTM_Parameters.o 
+Tau_Production_Utility.o : Tau_Production_Utility.f90 Tau_Production_Parameters.o 
+TauProfile_Define.o : TauProfile_Define.f90 
+TauProfile_netCDF_IO.o : TauProfile_netCDF_IO.f90 netCDF_Utility.o TauProfile_Define.o 

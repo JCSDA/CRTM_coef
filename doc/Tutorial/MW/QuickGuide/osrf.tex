@@ -1,0 +1,76 @@
+\section{oSRF File Generation}
+
+\subsection{Preparations}
+The first step in computing CRTM MW transmittance coefficients is to convert the SRF information of the instrument into the CRTM-native \verb|oSRF| data format.
+This is done using the \verb|oSRF_Create_from_ASCII| Fortran application:
+\begin{verbatim}
+cd CRTM_coef/src/oSRF/oSRF_Create_from_ASCII/
+make 
+\end{verbatim}
+The SRF information needs to be placed in the SRFDATA folder. The Fortran code expects one text file per instrument channel.
+Each individual text file needs to be formated in this simple manner:
+\begin{verbatim}
+89.484	0.0022256
+89.522	0.0026217
+89.561	0.0033972
+89.599	0.004763
+89.638	0.0067661
+89.676	0.0095845
+89.714	0.01315
+89.753	0.016683
+89.791	0.018966
+89.83	0.020105
+89.868	0.02048
+89.906	0.019944
+89.945	0.0187
+89.983	0.017721
+90.022	0.019286
+90.06	0.024162
+90.098	0.028599
+90.137	0.031213
+90.175	0.031505
+90.214	0.029475
+. .
+. .
+. .
+\end{verbatim}
+The first column is the SRF frequency in units of Gigahertz [GHz], and the second column is the normalized, dimensionless instrument response $\Phi$.
+Thus the first column is the abscissa and the second column is the ordinate of the SRF.
+It is the responsibility of the user to prepare the SRF data in the necessary ASCII format and to ensure that the spectral resolution of the SRF is sufficient. 
+A convergence study in the spectral domain is highly recommended as part of the coefficient generation process.\\
+
+The name of the ASCII files needs to be specified as the \verb|oSRF_Filename| in the Fortran source file \verb|main.f90| before the application is compiled:
+\begin{verbatim}
+      ! ============================================================================
+      ! **** READ IN THE SRF ASCII DATA ****
+      !  
+      NULLIFY( head ) ! Initialize list to point to no target
+
+      ios = 0
+      Error_Status = 0
+      IF( ll < 10 ) THEN
+        format_string = "(A42,I1,A4)"
+        WRITE(oSRF_Filename,format_string) './SRFDATA/TROPICS_SV1_passband_MIT_LL_Ch0', ll, '.txt'
+      ELSE
+        format_string = "(A42,I2,A4)"
+        WRITE(oSRF_Filename,format_string) './SRFDATA/TROPICS_SV1_passband_MIT_LL_Ch', ll, '.txt'
+      END IF
+\end{verbatim}
+
+Further metadata for the oSRF format, such as the author, WMO IDs etc. also needs to be specified manually in \verb|main.f90|:
+\begin{verbatim}
+  ! Create an instance of oSRF_File
+  CALL oSRF_File_Create( oSRF_File,n_Channels )
+  ! ...Copy over other information
+  oSRF_File%Filename         = TRIM(Sensor_Id) // '.osrf.nc'
+  oSRF_File%Sensor_ID        = TRIM(Sensor_Id)
+  oSRF_File%WMO_Satellite_Id = 1
+  oSRF_File%WMO_Sensor_Id    = 1
+  oSRF_File%Sensor_Type      = MICROWAVE_SENSOR
+  oSRF_File%Title            = 'TROPICS instrument oSRF'
+  oSRF_File%History          = 'P. Stegmann, 2020-12-30'
+  oSRF_File%Comment          = 'Test implementation'
+  oSRF_File%n_Channels       = n_Channels
+\end{verbatim}
+
+

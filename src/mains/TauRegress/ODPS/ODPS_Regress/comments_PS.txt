@@ -1,0 +1,3 @@
+group = 3 is for MW.
+The main driver source file is Compute_Coeff.f90
+Compute_Coeff.f90 <- Namelist.txt

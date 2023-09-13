@@ -1,0 +1,6 @@
+Assemble_FTS_TauProfile.o : Assemble_FTS_TauProfile.f90 Tau_Production_Utility.o Tau_Production_Parameters.o TauProfile_netCDF_IO.o TauProfile_Define.o  
+LBLRTM_Parameters.o : LBLRTM_Parameters.f90  
+TauProfile_Define.o : TauProfile_Define.f90 
+TauProfile_netCDF_IO.o : TauProfile_netCDF_IO.f90 TauProfile_Define.o 
+Tau_Production_Parameters.o : Tau_Production_Parameters.f90 LBLRTM_Parameters.o 
+Tau_Production_Utility.o : Tau_Production_Utility.f90 Tau_Production_Parameters.o  

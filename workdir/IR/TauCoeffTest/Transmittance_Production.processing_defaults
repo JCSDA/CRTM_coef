@@ -1,0 +1,16 @@
+:QUEUE:serial:Default batch processing queue
+:BAND1:1:Beginning band to process
+:BAND2:13:Ending band to process
+:F1_BAND1:500:The begin frequency of band #1
+:DF_BAND:250:The effective bandwidth of each band
+:DF_AVG:0.1000:The averaging kernel frequency width. Must have 4dp
+:DF_INDEX:2:The averaging kernel frequency width index
+:TAPE3_LIST:1 10 11 12 13 14 15:Molecule set numbers
+:TAPE3_ID:aer_v_3.6:The spectroscopic database to use
+:TAPE5_DIR:./TAPE5_files:The directory where the TAPE5 files are located.
+:PROFILE1:1:Beginning profile to process
+:PROFILE2:83:Ending profile to process
+:PROFILE_SET_ID:ECMWF83:Profile set identifier
+:PROFILE_SET_NUMBER:5:Profile set identifier number
+:ANGLE1:1:Beginning angle to process
+:ANGLE2:7:Ending angle to process

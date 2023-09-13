@@ -1,0 +1,16 @@
+    &SATSEN
+      SatName      = "NOAA-15",
+      SenName      = "AMSU-A",
+      Ichan_top    =  0001,
+      Ichan_last   =  0001 
+/
+    &GENCOEF
+      Iabsorber =  2,
+      Alpha     =  0.d0,
+      A0        =  0.d+0,
+      A1        =  23.6669371639008190d0,
+      Nangle    = 6,
+      Natmpred_allcombsearch  = 6,
+      Flag_netCDF_file        = .true.,
+      Flag_AtmProfile_Lev2Lay = .true. 
+/

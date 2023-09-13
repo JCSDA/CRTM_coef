@@ -1,0 +1,7 @@
+CRTM_PATH = /data/CRTM_dev
+CRTM_SOURCE_ROOT = $(CRTM_PATH)/src
+CRTM_BUILD = $(CRTM_PATH)/src/Build/crtm_v2.3.0
+NC4_DIR = /opt/intel/netcdf
+HDF_DIR = /opt/intel/hdf5
+HDF4_DIR = unknown
+FL = $(FC)

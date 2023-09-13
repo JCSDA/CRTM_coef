@@ -1,0 +1,16 @@
+
+    &SATSEN
+      File_Prefix  = "amsua_metop-c",
+      Ichan_start    =  001,
+      Ichan_end   =  001 
+/
+    &GENCOEF
+      icom = 2,
+      Nangle_regression    = 7      
+/
+    &FILENAMES
+      inFilename_spcCoef = "../../../../cases/amsua_metop-c_benchmark/amsua_metop-c.SpcCoeff.nc",
+      inFilename_atmProfile = "../../../../src/TauProd/Microwave/Compute_MW_Transmittance/ECMWF83.AtmProfile.nc",
+      inFilename_tauProfile = "../../../../cases/amsua_metop-c_benchmark/upwelling.amsua_metop-c.TauProfile.nc",
+      inFilename_tauCoeff = "NotExist"
+/      

@@ -1,0 +1,62 @@
+==============================================
+!
+!	HOW TO BUILD CRTM_coef on macOS
+!
+==============================================
+
+
+Requirements:
+=============
+Before attempting to build CRTM_coef, please
+ensure that the following dependencies are 
+fulfilled on your system:
+
+- Homebrew package manager
+- gfortran (build tested with version 9.2.0)
+- netCDF (from homebrew)
+- HDF5
+- CRTM REL-2.3.0 or higher
+- lblrtmio v1.0.0
+
+Preliminaries:
+==============
+The root folder contains a make.macros file 
+which contains all necessary environment 
+variables for building CRTM_coef in a macOS
+environment.
+For macOS, the file is called:
+
+	make.macros.macOS_brew
+
+You will find other, similar make.macro 
+files for other system configurations.
+Before attempting to build an executable in
+the CRTM_coef repository, please ensure that
+all necessary paths in make.macros.macOS_brew
+are set correctly.
+These include:
+
+- CRTM_PATH: The location of your CRTM folder
+- NC4_DIR_BREW: The path of your homebrew 
+  netCDF installation
+- HDF_DIR_BREW: The path of your homebrew
+  HDF installation
+- LIBLBLRTMIO: The path of the lblrtmio
+  library (included in the CRTM_dev repo)
+
+Build instructions:
+===================
+In order to build a specific executable of
+CRTM_coef, you need to enter the corresponding
+folder in CRTM_coef/src and compile it from
+scratch with the following command:
+
+make -f Makefile.brew
+
+This invokes 'make' with the specific makefile
+for homebrew. Makefile.brew relies on the 
+path variables set in make.macros.macOS_brew,
+so please ensure that all paths are set 
+correctly.
+
+

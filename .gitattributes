@@ -1,0 +1,16 @@
+*.nc filter=lfs diff=lfs merge=lfs -text
+*.nc4 filter=lfs diff=lfs merge=lfs -text
+*.bin* filter=lfs diff=lfs merge=lfs -text
+*.atm filter=lfs diff=lfs merge=lfs -text
+*.pdf filter=lfs diff=lfs merge=lfs -text
+tape* filter=lfs diff=lfs merge=lfs -text
+TAPE* filter=lfs diff=lfs merge=lfs -text
+HNO* filter=lfs diff=lfs merge=lfs -text
+HFC* filter=lfs diff=lfs merge=lfs -text
+ISO* filter=lfs diff=lfs merge=lfs -text
+HCF* filter=lfs diff=lfs merge=lfs -text
+CLO* filter=lfs diff=lfs merge=lfs -text
+F1* filter=lfs diff=lfs merge=lfs -text
+test_data/** filter=lfs diff=lfs merge=lfs -text
+upwelling_tau* filter=lfs diff=lfs merge=lfs -text
+downwelling_tau* filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,18 @@
+CRTM_PATH = /gpfs/dell2/emc/modeling/noscrub/Yanqiu.Zhu/CRTM_ceof_generation/CRTM_dev
+CRTM_SOURCE_ROOT = $(CRTM_PATH)/src
+CRTM_BUILD = $(CRTM_PATH)/src/Build/crtm_v2.3.0
+NC4_DIR = /usrx/local/prod/packages/ips/18.0.1/netcdf/4.5.0
+HDF_DIR = /usrx/local/prod/packages/ips/18.0.1/hdf5/1.8.20
+HDF4_DIR = /usrx/local/prod/packages/ips/18.0.1/hdf5/1.8.20
+
+FC = IFORT
+FL = $(FC)
+EXTRA_FC_FLAGS = -g  \
+                 -I$(NC4_DIR)/include/ \
+                 -I$(HDF_DIR)/include/  \
+                 -I$(CRTM_BUILD)/include
+
+LIBRARIES = -L/usrx/local/prod/intel/2018UP01/compilers_and_libraries/linux/mpi/lib64/ -lmpi  \
+	-L$(NC4_DIR)/lib -lnetcdff -lnetcdf
+
+LIBLBLRTMIO = $(CRTM_SOURCE_ROOT)/TauProd/LBL/lblrtm/build/libsrc

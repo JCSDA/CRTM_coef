@@ -1,0 +1,17 @@
+CRTM_PATH = $(CRTM_ROOT)
+CRTM_SOURCE_ROOT = $(CRTM_PATH)/src
+CRTM_BUILD = $(CRTM_PATH)/build/
+#CRTM_BUILD = $(CRTM_PATH)/src/Build/crtm_v2.3.0
+NC4_DIR = /usr/local/Cellar/netcdf-fortran/4.6.0
+HDF_DIR = /usr/local/Cellar/hdf5/1.12.1
+HDF4_DIR_BREW = unknown
+FC=gfortran
+LIBLBLRTMIO = $(CRTM_SOURCE_ROOT)/TauProd/LBL/lblrtm/build/libsrc
+
+EXTRA_FC_FLAGS =  -g -std=legacy\
+				  -I$(NC4_DIR)/include \
+				  -I$(HDF_DIR)/include  \
+				  -I$(CRTM_BUILD)module/crtm/GNU/12.2.0/
+LIBRARIES =  -lm\
+			 -L$(NC4_DIR)/lib -lnetcdf -lnetcdff\
+			 -L$(HDF_DIR)/lib  -lhdf5

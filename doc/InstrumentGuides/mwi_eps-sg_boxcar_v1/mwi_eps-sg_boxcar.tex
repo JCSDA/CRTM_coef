@@ -1,0 +1,136 @@
+\input{preamble.tex}
+
+% Title info
+\title{MWI EPS-SG CRTM Coefficients: Boxcar v1}
+\author{Dr. Patrick Stegmann\ - \emph{JCSDA},\\ Veljko Petkovic - \emph{University of Maryland}}
+\date{\today}
+\docnumber{(unassigned)}
+\docseries{CRTM}
+
+
+%-------------------------------------------------------------------------------
+%                            Ze document begins...
+%-------------------------------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+\draftwatermark
+
+\tableofcontents
+
+\newpage
+
+% The front matter
+%=================
+\thispagestyle{empty}
+\vspace*{10cm}
+\begin{center}
+  {\sffamily\Large\bfseries Change History}
+  \begin{table}[htp]
+    \centering
+    \begin{tabular}{|p{2cm}|p{3cm}|p{8cm}|}
+      \hline
+      \sffamily\textbf{Date} & \sffamily\textbf{Author} & \sffamily\textbf{Change}\\
+      \hline\hline
+      2022-01-1 & P. Stegmann& Initial Draft.\\
+      \hline
+    \end{tabular}
+  \end{table}
+\end{center}
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+% The main matter
+%================
+%\include{}
+
+\section{Introduction}
+The Microwave Imager (MWI) onboard the EUMETSAT Polar System - Second Generation (EPS-SG) is an instrument onboard a polar-orbiting satellite that is designed by EUMETSAT for the timeframe beyond 2022 \cite{mwi}.
+The CRTM coefficient implementation of this instrument is a first guess for research applications at the University of Maryland. More refined coefficients will likely be released later on, once additional details about the instrument are known.
+
+\section{Channel Assumptions}
+The table below summarizes the assumption about the channel layout taken from Ref. \cite{mwi}. A particularity of the MWI instrument is that the first 8 channels are dual polarization channels, i.e. both horizontal and vertical linear polarization are measured at the same time for these channels. It is currently not possible to simulate this with the CRTM, so the easiest solution is to provide two separate sets of SpcCoeff files, one for each polarization.
+The listed bandwidths are the total bandwidths for each channel, viz. a channel is only one bandwidth wide, not twice the bandwidth on either side of the center frequency.
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{ l | c | c | c }
+ Channel & Frequency [GHz] & Bandwidth [MHz] & Polarization\\ 
+ \hline \hline
+ MWI-1 & 18.7 & 200 & VL + HL \\
+ MWI-2 & 23.8 & 400 & VL + HL\\  
+ MWI-3 & 31.4 & 200 & VL + HL\\  
+ MWI-4 & 50.3 & 400 & VL + HL\\  
+ MWI-5 & 52.610 & 400 & VL + HL\\  
+ MWI-6 & 53.24 & 400 & VL + HL\\  
+ MWI-7 & 53.750 & 400 & VL + HL\\  
+ MWI-8 & 89.0 & 4000  & VL + HL\\  
+ MWI-9 & 118.7503+/-3.20 & 2 x 500 & VL\\  
+ MWI-10 & 118.7503+/-2.10 & 2 x 400 & VL\\  
+ MWI-11 & 118.7503+/-1.40 & 2 x 400 & VL\\  
+ MWI-12 & 118.7503+/-1.20 & 2 x 400 & VL\\  
+ MWI-13 & 165.5+/-0.75 & 2 x 1350 & VL\\  
+ MWI-14 & 183.31+/-7.0 & 2 x 2000 & VL\\  
+ MWI-15 & 183.31+/-6.1 & 2 x 1500 & VL\\  
+ MWI-16 & 183.31+/-4.9 & 2 x 1500 & VL\\  
+ MWI-17 & 183.31+/-3.4 & 2 x 1500 & VL\\    
+ MWI-18 & 183.31+/-2.0 & 2 x 1500 & VL 
+\end{tabular}
+ \caption{Channel data for MWI EPS-SG.}
+ \label{tab:channels}
+\end{center}
+\end{table}
+
+\section{Spectral Response Function Assumptions}
+
+Since the instrument is in the planning stage and no precise SRF measurements are yet available, the SRF data for the CRTM instrument coefficients was estimated as a collection of boxcar SRFs based on the channel center frequencies and bandwidths listed in table \ref{tab:channels}. 
+The corresponding SRFs can be seen in Figs. \ref{fig:boxcar1} to \ref{fig:boxcar3}.
+
+ \begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{graphics/mwi-boxcar.png}
+ \caption{Boxcar SRFs for all channels of EPS-SG MWI.}
+ \label{fig:boxcar1}
+ \end{figure}
+ 
+ Fig. \ref{fig:boxcar2} shows a zoom on the SRF of channel 13, which consists of two symmetric bands around the center frequency.
+ 
+  \begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{graphics/mwi_boxcar_zoom_ch13.png}
+ \caption{Zoom on channel 13 boxcar SRF with two symmetric bands.}
+ \label{fig:boxcar2}
+ \end{figure}
+ 
+  \begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{graphics/mwi_boxcar_zoom_183GHz.png}
+ \caption{Zoom on the 183 GHz region with multiple overlapping channels..}
+ \label{fig:boxcar3}
+ \end{figure}
+ 
+ \section{Coefficient Calculations}
+ 
+ The microwave line-by-line calculations for the CRTM coefficients were performed using the CRTM-internal Rosenkranz'03 model at a resolution of 1 MHz, and for the coefficient regression the ODPS scheme was used.
+ 
+ % The references section
+%=======================
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+\begin{thebibliography}{9}
+
+\bibitem{mwi}
+  V. Mattioli, C. Accadia, J. Ackermann, S. Di Michele, Imke Hans, P. Sch\"ussel, P. Colucci, and A Canestri
+  \textit{ The EUMETSAT Polar System - Second Generation (EPS-SG) Passive Microwave and Sub-mm Wave Missions},
+  Photonics and Electromagnetics Research Symposium,
+  PIERS, Rome,
+  2019.
+  
+ \end{thebibliography}
+
+\end{document}
+

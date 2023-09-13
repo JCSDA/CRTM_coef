@@ -1,0 +1,123 @@
+!
+! LBLRTM_to_netCDF
+!
+! Program to read an LBLRTM format transmittance production data file
+! and write it out in netCDF format.
+!
+! Note: This is *not* a generic LBLRTM -> netCDF format converter.
+!       It is specifically for use with the transmittance production
+!       code suite.
+!
+!
+! FILES ACCESSED:
+!       Input:  LBLRTM format data file.
+!
+!       Output: - netCDF format data file.
+!               - Completion signal file.
+!
+! SIDE EFFECTS:
+!       Output files are overwritten if they already exist.
+!
+! CREATION HISTORY:
+!       Written by:     Paul van Delst, CIMSS/SSEC 10-Apr-2002
+!                       paul.vandelst@ssec.wisc.edu
+!
+
+PROGRAM LBLRTM_to_netCDF
+
+  ! ------------------
+  ! Environment set up
+  ! ------------------
+  ! Module usage
+  USE LBLRTMIO_Module  
+  USE Type_Kinds
+  USE File_Utility
+  USE LBLRTM_netCDF_IO
+
+  ! Disable all implicit typing
+  IMPLICIT NONE
+
+
+  ! ----------
+  ! Parameters
+  ! ----------
+
+  CHARACTER(*), PARAMETER :: PROGRAM_NAME = 'LBLRTM_to_netCDF'
+  CHARACTER(*), PARAMETER :: PROGRAM_RCS_ID = &
+  '$Id: LBLRTM_to_netCDF.f90 13518 2011-04-22 17:25:42Z paul.vandelst@noaa.gov $'
+
+
+  REAL(fp), PARAMETER :: ONEpointFIVE = 1.5_fp
+  ! ---------
+  ! Variables
+  ! ---------
+  CHARACTER(256) :: Message
+  CHARACTER(256) :: LBLRTM_Filename
+  INTEGER        :: LBLRTM_FileID
+  CHARACTER(256) :: NC_Filename
+  CHARACTER(256) :: Title
+  CHARACTER(256) :: Comment
+  CHARACTER(256) :: Id_Tag
+  INTEGER :: Error_Status
+  INTEGER :: LBLRTM_EOF
+  INTEGER :: i, k, n
+  TYPE(LBLRTM_Fhdr_type)  :: LBLRTM_Fhdr
+  TYPE(LBLRTM_Layer_type) :: LBLRTM_Layer
+  INTEGER :: Direction, iDirection
+  REAL(fp) :: f1
+  REAL(fp) :: f2
+  REAL(fp) :: df
+!  INTEGER :: fIdx
+  INTEGER :: n_freq
+
+
+  ! Program header
+  ! --------------
+  CALL Program_Message( PROGRAM_NAME, &
+                        'Program to read LBLRTM format data files and write '//&
+                        'netCDF format output files.', &
+                        ' $Revision: 13518 $' )
+
+  ! Get user input
+  ! --------------
+  ! Get the input binary filename
+  WRITE( *, FMT     = '( /5x, "Enter input LBLRTM file:  " )', &
+            ADVANCE = 'NO' )
+  READ( *,'(a)' ) LBLRTM_Filename
+  LBLRTM_Filename = ADJUSTL(LBLRTM_Filename)
+  IF ( .NOT. File_Exists( TRIM(LBLRTM_Filename) ) ) THEN
+    CALL Display_Message( PROGRAM_NAME, &
+                          'File not found', &
+                          FAILURE )
+    STOP
+  END IF
+  NC_Filename = TRIM(LBLRTM_Filename)//'.nc'
+
+  ! Read in the global attributes
+  WRITE( *,'(/5x, "Enter a TITLE global attribute string:")' )
+  READ( *,'(a)' ) Title
+  Title = ADJUSTL(Title)
+  WRITE( *,'( /5x, "Enter a COMMENT global attribute string:")' )
+  READ( *,'(a)' ) Comment
+  Comment = ADJUSTL(Comment)
+  WRITE( *,'( /5x, "Enter a PROFILE SET ID_TAG global attribute string:")' )
+  READ( *,'(a)' ) Id_Tag
+  ID_Tag = ADJUSTL(ID_Tag)
+
+
+  Error_Status = LBLRTM_netCDF_ConvertFile(TRIM(LBLRTM_Filename), &
+                                           n_Layers=101, &
+!                                           Double_Panel=.TRUE., &
+                                           Title=Title, &
+                                           History="Isaac Moradi May 2016 ", Comment=Comment )
+
+    IF ( Error_Status /= SUCCESS ) THEN
+      WRITE( Message, '( "Error writing layer #", i0, " to file ", a )' ) &
+                      k, TRIM(NC_Filename)
+      CALL Display_Message( PROGRAM_NAME, &
+                            TRIM(Message), &
+                            FAILURE )
+      STOP
+    END IF
+
+END PROGRAM LBLRTM_to_netCDF

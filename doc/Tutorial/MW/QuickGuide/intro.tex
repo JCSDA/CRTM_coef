@@ -1,0 +1,58 @@
+\section{Introduction}
+This document is a quick guide for users who want to generate CRTM MW instrument coefficients (\emph{TauCoeff} and \emph{SpcCoeff} files) as part of the CRTM Transmittance Coefficient Generation Package v1.0 (henceforth called TCGP) tutorial. 
+A minimal set of instructions is provided to achieve this goal. This tutorial is written for the \emph{bash} terminal.
+
+\section{Preliminaries}
+Using the TCGP v1.0 requires setting up its environment. The TCGP makes use of CRTM modules and thus cannot run without a working installation of the CRTM v2.4.0+. Likewise the build environment of the TCGP code itself needs to be set beforehand.
+
+\subsection{Requirements}
+Building CRTM and TCGP requires the following dependencies:
+\begin{itemize}
+  \item HDF5 and netCDF4.
+  \item A shared-memory multiprocessing API, such as OpenMP.
+\end{itemize}
+
+\subsection{Building the CRTM}
+In this section a minimal approach towards compiling the CRTM using the ecbuild build system is provided. 
+The ecbuild system from the ECMWF needs to be cloned and added to the \verb|PATH|:
+\begin{verbatim}
+git clone https://github.com/ecmwf/ecbuild
+export PATH=$PWD/ecbuild/bin:$PATH
+\end{verbatim}
+The CRTM repository needs to be cloned and the CRTM environment needs to be set:
+\begin{verbatim}
+git clone https://github.com/JCSDA-internal/crtm
+cd crtm
+. ./Set_CRTM_Environment.sh
+\end{verbatim}
+Building the CRTM is straightforward at this point:
+\begin{verbatim}
+mkdir build
+cd build/
+ecbuild ..
+make 
+\end{verbatim}
+This process may take a few minutes to complete, depending on your system.
+Lastly, the successful build of the CRTM can tested by simply typing:
+\begin{verbatim}
+ctest
+\end{verbatim}
+
+\subsection{Setting make.macros for the TCGP}
+The first step to build the TCGP applications is to select the \verb|make.macros| file appropriate for your machine.
+Currently, the following systems are actively supported:
+\begin{itemize}
+  \item macOS homebrew
+  \item GNU Linux
+  \item SSEC S4
+  \item NCCS Discover
+  \item MSU Orion
+\end{itemize}
+
+Using the TGCP on S4 as an example would then require using the appropriate \verb|make.macros| file:
+\begin{verbatim}
+cd CRTM_coef
+rm make.macros
+ln -s make.macros.s4 make.macros 
+\end{verbatim}
+This completes the setup of the TCGP.

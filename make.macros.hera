@@ -1,0 +1,19 @@
+e# This file assumes the following modules are already loaded:
+#   intel/18.0.5.274   netcdf/4.6.1   hdf5/1.10.4
+
+CRTM_PATH = /scratch2/BMC/gsd-hpcs/rosinski/CRTM_dev
+CRTM_SOURCE_ROOT = $(CRTM_PATH)/src
+CRTM_BUILD = $(CRTM_PATH)/src/Build/crtm_v2.3.0
+NC4_DIR = /apps/netcdf/4.6.1/intel/16.1.150
+HDF_DIR = $(HDF5)
+HDF4_DIR = none
+FC = ifort
+FL = $(FC)
+EXTRA_FC_FLAGS = -g  \
+                 -I$(NC4_DIR)/include \
+                 -I$(HDF_DIR)/include  \
+                 -I$(CRTM_BUILD)/include
+
+LIBRARIES = -L$(NC4_DIR)/lib -lnetcdff -lnetcdf
+
+LIBLBLRTMIO = $(CRTM_SOURCE_ROOT)/TauProd/LBL/lblrtm/build/libsrc

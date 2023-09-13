@@ -1,0 +1,19 @@
+CRTM_PATH = $(CRTM_ROOT)
+CRTM_BUILD = $(CRTM_PATH)/build/
+NC4_DIR = $(NETCDF)
+HDF_DIR = $(HDF5)
+HDF4_DIR = $(HDF4_ROOT) 
+FC = ifort
+FL = $(FC)
+EXTRA_FC_FLAGS =  -g -traceback -check bounds \
+                 -I$(NC4_DIR)/include \
+                 -I$(HDF_DIR)/include  \
+                 -I$(CRTM_BUILD)/module/crtm/Intel/19.1.2.20200623
+#                -I$(CRTM_PATH)/src/TauProd/LBL/lblrtm/build/libsrc
+LIBRARIES =  -limf -lm\
+            -L$(NC4_DIR)/lib -lnetcdf -lnetcdff\
+            -L$(HDF_DIR)/lib  -lhdf5
+#            -L$(HDF_DIR)/lib  -lmfhdf -ldf
+#           -L$(CRTM_PATH)/src/TauProd/LBL/lblrtm/build/libsrc -llblrtmio
+
+LIBLBLRTMIO = $(CRTM_SOURCE_ROOT)/TauProd/LBL/lblrtm/build/libsrc

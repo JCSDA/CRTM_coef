@@ -1,0 +1,10 @@
+#!/bin/sh
+
+rm *.tmp
+for file in `ls TAPE5.*`; do
+  tmpfile="${file}.tmp"
+  sed '4s/380.000/CCC.CCC/' ${file} > ${tmpfile}
+  mv ${tmpfile} ${file}
+done
+
+

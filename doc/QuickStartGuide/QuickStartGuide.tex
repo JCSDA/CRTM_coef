@@ -1,0 +1,377 @@
+\input{preamble.tex}
+
+% Title info
+\title{Transmittance Coefficient Generation Package\\ \normalsize{Quickstart Guide}}
+\author{Dr. Patrick Stegmann\\ JCSDA}
+\date{\today}
+\docnumber{(unassigned)}
+\docseries{CRTM}
+
+
+%-------------------------------------------------------------------------------
+%                            Ze document begins...
+%-------------------------------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+%\draftwatermark
+
+\tableofcontents
+
+\newpage
+
+% The front matter
+%=================
+\thispagestyle{empty}
+\vspace*{10cm}
+\begin{center}
+  {\sffamily\Large\bfseries Change History}
+  \begin{table}[htp]
+    \centering
+    \begin{tabular}{|p{2cm}|p{3cm}|p{8cm}|}
+      \hline
+      \sffamily\textbf{Date} & \sffamily\textbf{Author} & \sffamily\textbf{Change}\\
+      \hline\hline
+      2021-12-14 & P. Stegmann& Initial Draft.\\
+      \hline
+    \end{tabular}
+  \end{table}
+\end{center}
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+% The main matter
+%================
+%\include{}
+
+\section{Introduction}
+This document is a quick start guide for the JCSDA CRTM Transmittance Coefficient Generation package (CGP).
+To this end, the document provides a minimal step-by-step guide to create CRTM \verb|SpcCoeff| and \verb|TauCoeff| files for an example MW instrument. 
+This is a minimal walkthrough that only demonstrates the mechanics and necessary commands for the end-to-end workflow to obtain instrument coefficients.
+
+\section{CRTM Microwave Coefficient Generation}
+The example sensor chosen for this walkthrough is TROPICS Pathfinder, with the CRTM instrument ID \emph{tropics\_sv1\_srf\_v2}.
+
+\subsection{Prerequisites}
+The CGP requires a number of depencies that need to be available:
+\begin{itemize}
+  \item A Fortran compiler, e.g. gfortran or ifort.
+  \item netCDF4 and HDF5.
+  \item The slurm scheduler for the ODPS regression.
+  \item The cmake build system.
+  \item git
+\end{itemize}
+
+\subsection{Compiling the code}
+Before running any of the Fortran applications, they need to be compiled and their dependencies enabled.
+
+\subsubsection{Compiling the CRTM}
+In order to make the CRTM itself available to the coefficient generation package, the following steps need to be taken:
+\begin{enumerate}
+  \item Clone the CRTM repository.
+  \item Set up the CRTM environment.
+  \item Create a build directory.
+  \item Configure the build with \emph{ecbuild}.
+  \item Compile the CRTM.
+\end{enumerate}
+The \emph{bash} terminal commands for the sequence look like this:
+\begin{verbatim}
+ # Cloning the crtm
+ git clone https://github.com/JCSDA-internal/crtm
+ cd crtm
+
+ # Setting up the environment
+ . ./Set_CRTM_Environnment.sh
+
+ # Creating a build directory
+ mkdir build
+ cd build
+
+ # Configuring the crtm build
+ ecbuild ..
+
+ # Compiling the CRTM
+ make -j4
+\end{verbatim}
+This assumes that you have already cloned and set up the \verb|ecbuild| extension to cmake. For more details please see the documentation of the CRTM and the ECMWF ecbuild user guide.
+
+\subsubsection{Cloning the Coefficient Generation Package}
+The CGP can be cloned like this:
+\begin{verbatim}
+ git clone https://github.com/JCSDA-internal/CRTM_coef
+\end{verbatim}
+
+\subsubsection{Creating a new git branch}
+Before you create a new instrument coefficient, it is highly encouraged that you create a new branch of the \verb|CRTM_coef| repository for your work, e.g.:
+\begin{verbatim}
+ git branch feature/tropics
+ git checkout feature/tropics
+\end{verbatim}
+
+\subsubsection{Configuring the Coefficient Generation Package}
+Currently the build system for the CGP is still based on \verb|make|. In order to configure the CGP for the machine you are using, the \verb make.macros file in the CGP root directory needs to be modified. A number of sample macro files are already provided for selected machines, and an example for the \emph{University of Wisconsin SSEC S4} cluster would look like this:
+\begin{verbatim}
+ # Entering the CGP root directory
+ cd CRTM_coef/
+
+ # Linking the machine-specific make macros
+ rm make.macros
+ ln -s make.macros.s4 make.macros
+\end{verbatim}
+
+
+\subsubsection{Compiling the CGP Fortran Applications}
+Finally, all necessary CGP Fortran applications can be compiled. All applications are located in the \verb|src/| folder.
+This is a checklist of applications that need to be compiled for a MW sensor:
+\begin{todolist}
+ \item \verb|oSRF/oSRF_Create_from_ASCII|
+ \item \verb|SpcCoeff/Create_SpcCoeff|
+ \item \verb|SpcCoeff/SpcCoeff_NC2BIN|
+ \item \verb|TauProd/Microwave/MW_TauProfile|
+ \item \verb|TauRegress/ODPS/Assemble_ODPS|
+ \item \verb|TauRegress/ODPS/GetSenInfo|
+ \item \verb|TauRegress/ODPS/ODPS_NC2BIN|
+ \item \verb|TauRegress/ODPS/ODPS_Regress|
+\end{todolist}
+Simply enter each directory and type \verb|make|. Problems can arise at this step if the CRTM or the CGP are not correctly configured, or if one or more of the dependencies are not available.
+
+\subsection{Preparing the SRF}
+Before starting the coefficient generation process, the spectral response function of the instrument needs to be brought into the correct input format. 
+This is the responsibility of the user, as is making sure that the SRF spectral resolution is high enough to resolve all desired absorption features.
+Input data for a new CRTM instrument should be stored in the \verb|inbox/fix/config/| directory of the CGP.
+An example ASCII input file for TROPICS looks like this:
+\begin{verbatim}
+89.484  0.0022256
+89.522  0.0026217
+89.561  0.0033972
+89.599  0.004763
+89.638  0.0067661
+89.676  0.0095845
+89.714  0.01315
+89.753  0.016683
+89.791  0.018966
+89.83   0.020105
+89.868  0.02048
+89.906  0.019944
+89.945  0.0187
+89.983  0.017721
+90.022  0.019286
+90.06   0.024162
+90.098  0.028599
+90.137  0.031213
+90.175  0.031505
+90.214  0.029475
+...
+\end{verbatim}
+The first column contains the frequency in units of [GHz] and the second column contains the unitless normalized SRF value.
+The example file can be found in \verb|inbox/fix/config/TROPICS_Pathfinder/tropics_sv1_srf_v2/SRFDATA|.
+One input file per channel is required.
+
+\subsection{Creating a Case Directory}
+The coefficient generation should be carried out in the \verb|workdir| folder.
+In the case of a MW sensor, the \verb|workdir/MW| directory is the appropriate location.
+In order to create a new case directory, simple type:
+\begin{verbatim}
+ ./Create_CaseDirectory -i <instrument_name>
+\end{verbatim}
+where \verb|instrument_name| is the CRTM instrument identifier. This will create the case directory and automatically link in all necessary executables.\\
+For the concrete example of TROPICS this would be:
+\begin{verbatim}
+ ./Create_CaseDirectory -i tropics_sv1_srf_v2
+\end{verbatim}
+For help on the input options type:
+\begin{verbatim}
+ ./Create_CaseDirectory -h
+\end{verbatim}
+Once the case folder is created, you can enter it to proceed.
+\begin{verbatim}
+ cd tropics_sv1_srf_v2/
+\end{verbatim}
+Into this folder, link in the sensor information you created from the \verb|inbox/fix/config/| directory.
+
+\subsection{Creating the oSRF file}
+The CRTM oSRF file is an intermediate representation of the SRF as a netCDF file. The converter application is \verb|oSRF/oSRF_Create_from_ASCII|.
+Currently the executable is called \verb|var.out|. In order to obtain an oSRF file for TROPICS with 1 band, 12 channels and an interpolated SRF resolution of 1 MHz, follow the prompt:
+\begin{verbatim}
+./var.out 
+ Enter the Sensor ID of the current instrument: 
+tropics_sv1_srf_v2
+ Enter the number of bands for the instrument: 
+1
+ Enter the number of instrument channels: 
+12
+ Is SRF interpolation requested (yes/no)?
+yes 
+ Enter the spectral resolution in GHz: 
+0.001
+\end{verbatim}
+This will create the file \verb|tropics_sv1_srf_v2.osrf.nc|.
+
+\subsection{Creating the SpcCoeff file}
+Creating the SpcCoeff file requires the \verb|polangle.txt| and \verb|polarization.txt| files to be linked into the case directory from the \verb|inbox/fix/config/| directory.
+They specify the polarization offset angle in degrees per channel and the CRTM polarization scheme per channel as an integer.
+In order to create the SpcCoeff spectral coefficient file, run the \verb|Create_SpcCoeff| application in the case directory:
+\begin{verbatim}
+ ./Create_SpcCoeff 
+
+     **********************************************************
+                           Create_SpcCoeff
+
+      Program to create the SpcCoeff files from the sensor 
+      oSRF data files.
+
+      $Revision: 46293 $
+     **********************************************************
+
+
+     Enter the oSRF netCDF filename: tropics_sv1_srf_v2.osrf.nc
+
+     Default SpcCoeff version is: 1. Enter value: 2
+
+\end{verbatim}
+This will create the file \verb|tropics_sv1_srf_v2.SpcCoeff.nc|.
+
+\subsection{Converting the SpcCoeff file from netCDF to Binary format}
+Converting the SpcCoeff file from netCDF to binary format works like this:
+\begin{verbatim}
+ ./SpcCoeff_NC2BIN 
+
+     **********************************************************
+                           SpcCoeff_NC2BIN
+
+      Program to convert a CRTM SpcCoeff data file from netCDF 
+      to Binary format.
+
+      $Revision$
+     **********************************************************
+
+
+     Enter the INPUT netCDF SpcCoeff filename : tropics_sv1_srf_v2.SpcCoeff.nc
+
+     Enter the OUTPUT Binary SpcCoeff filename: tropics_sv1_srf_v2.SpcCoeff.bin
+
+     Increment the OUTPUT version number? [y/n]: n
+\end{verbatim}
+This will create the file \verb|tropics_sv1_srf_v2.SpcCoeff.bin| (either little-endian or big-endian, depending on your system).
+
+\subsection{Rosenkranz MW Transmittance Calculations}
+The simplest approach to compute the line-by-line MW layer-to-space transmittances for the ODPS regression is to use the Rosenkranz model implemented in the CRTM.
+First, link in the \verb|ECMWF83.AtmProfile.nc| predictor dataset from the \verb|fix/TauProd/| folder.
+Second, create a SensorInfo file by modifying an existing template or create a script to write the SensorInfo file for more complex instruments.
+A generic SensorInfo generator will be provided in the future.
+
+\begin{verbatim}
+ ./MW_TauProfile 
+
+     **********************************************************
+                            MW_TauProfile
+
+      Program to compute transmittance profiles for 
+      user-defined microwave instruments.
+
+      $Revision: 45710 $
+     **********************************************************
+
+
+     Select atmospheric path
+          1) upwelling  
+          2) downwelling
+     Enter choice: 1
+
+     Enter the SensorInfo filename: SensorInfo_tropics
+       Number of sensor entries read: 1
+
+     Enter the netCDF AtmProfile filename: ECMWF83.AtmProfile.nc
+\end{verbatim}
+
+Depending on the spectral resolution of the oSRF file, these calculations may take several minutes.
+
+\subsection{ODPS Regression}
+The ODPS regression is the last step in the CRTM MW transmittance coefficient generation and produces the TauCoeff file.
+This step is performed in a separate folder and an example case directory for the regression is provided in \verb|workdir/MW/GenCoeff/|.
+Before starting the regression calculations, the instrument ID needs to be added to the \verb|sensor_list| file:
+\begin{verbatim}
+ ## This file contains a list of sensors and is one of the input file of
+ ## run_tau_coeff.sh
+ ## Only those between BEGIN and END are processed.
+
+ BEGIN_LIST
+ tropics_sv1_srf_v2
+ END_LIST
+\end{verbatim}
+Afterwards, the \verb|tau_coeff.parameters| input file needs to be modified for your local system:
+\begin{verbatim}
+:MAX_CPUs:256
+:CH_INT:1
+:EXE_FILE:/data/users/pstegmann/lib/CRTM/trunk/src/TauRegress/ODPS/ODPS_Regress/Compute_Coeff
+:WORK_DIR:CRTM_coef/workdir/MW/GenCoeff
+:PROF_SET:ECMWF83
+:SPC_COEFF_DIR:CRTM_coef/workdir/MW/tropics_sv1_srf_v2
+:TAU_PROFILE_DIR:CRTM_coef/workdir/MW/tropics_sv1_srf_v2
+:ATM_PROFLE_FILE:/data/users/pstegmann/lib/CRTM/trunk/fix/TauProd/AtmProfile/ECMWF83.AtmProfile.nc
+:GET_SEN_INFO:/data/users/pstegmann/lib/CRTM/trunk/src/TauRegress/ODPS/GetSenInfo/GetSenInfo
+:IR_TYPE:3
+:COMPONENTS:DEFAULT
+#COMPONENTS:ozo
+# Parameters below should not be modified in normal operations
+:COMPONENT_GROUP1:dry,wlo,wco,ozo,co2,n2o,co,ch4
+:COMPONENT_GROUP2:dry,wlo,wco,ozo,co2
+:COMPONENT_GROUP3:dry,wet
+\end{verbatim}
+Make sure that all variables in \verb|tau_coeff.parameters| point to the right directories.
+If the \verb|control/| doesn't exist, create it now:
+\begin{verbatim}
+ mkdir control
+\end{verbatim}
+Lastly, open the \verb|gen_tau_coeff.sh| script, and check that the log output of the slurm script template points to the \verb|control/| directory:
+\begin{verbatim}
+echo "#!/bin/bash" >> ${jobScript}
+echo "#SBATCH --job-name=ODPS_Run.%j.out" >> ${jobScript}
+echo "#SBATCH --partition=serial" >> ${jobScript}
+echo "#SBATCH --export=ALL" >> ${jobScript}
+#      echo "#SBATCH --share" >> ${jobScript}
+#      echo "#SBATCH --account=star" >> ${jobScript}
+echo "#SBATCH --time=1:00:00" >> ${jobScript}
+echo "#SBATCH --ntasks=1" >> ${jobScript}
+echo "#SBATCH --cpus-per-task=1" >> ${jobScript}
+echo "#SBATCH --mem-per-cpu=4096" >> ${jobScript}
+echo "#SBATCH --output=CRTM_coef/workdir/MW/GenCoeff/control/output.%j.txt" >> ${jobScript}
+echo "#SBATCH --error=CRTM_coef/workdir/MW/GenCoeff/control/output.%j.err" >> ${jobScript}
+\end{verbatim}
+
+Finally, to perform the regression, open the \verb|run_tau_coeff.sh| script and run step 1 first, followed by step 3:
+
+\begin{verbatim}
+#!/bin/sh
+
+#------------------------------------------------------------------------
+# Generate transmittance coefficients for each channel and tau component
+#------------------------------------------------------------------------
+
+#-----------------------------------
+# 1): Generate tau coefficients
+#-----------------------------------
+
+#./gen_tau_coeff.sh tau_coeff.parameters
+
+#------------------------------------------------------------------
+# 2) Get fitting errors for each component - run after 1)
+#------------------------------------------------------------------
+
+#get_stat.sh tau_coeff.parameters
+
+#----------------------------------------------------------------------
+# 3) Merge (concatenate) tau coefficient files into one - run after 1)
+#----------------------------------------------------------------------
+
+EXE_file=CRTM_coef/src/TauRegress/ODPS/Assemble_ODPS/Cat_ODPS
+./cat_taucoef.sh tau_coeff.parameters $EXE_file
+\end{verbatim}
+
+If everything worked, the resulting TauCoeff file can be found in the \verb|results/| folder.
+
+\end{document}
+

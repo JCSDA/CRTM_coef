@@ -1,0 +1,8 @@
+#!/bin/sh
+
+SCNMRG_FILE='TAPE5.scnmrg_suffix'
+
+for TAPE5_FILE in `ls TAPE5.*profile*`; do
+  cat ${TAPE5_FILE} ${SCNMRG_FILE} > ${TAPE5_FILE}.tmp
+  mv ${TAPE5_FILE}.tmp ${TAPE5_FILE}
+done

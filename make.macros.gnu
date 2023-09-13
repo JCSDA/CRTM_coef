@@ -1,0 +1,9 @@
+CRTM_PATH = /data/CRTM_dev
+CRTM_SOURCE_ROOT = $(CRTM_PATH)/src
+CRTM_BUILD = $(CRTM_PATH)/src/Build/crtm_v2.3.0
+NC4_DIR = /usr
+HDF_DIR = /usr/lib/x86_64-linux-gnu/hdf5/serial
+HDF4_DIR = unknown
+FC = gfortran
+FL = $(FC)
+LIBLBLRTMIO = $(CRTM_SOURCE_ROOT)/TauProd/LBL/lblrtm/build/libsrc

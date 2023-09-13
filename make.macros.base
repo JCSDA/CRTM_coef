@@ -1,0 +1,18 @@
+CRTM_PATH = /discover/nobackup/projects/gmao/obsdev/wrmccart/CRTM_Sprint/CRTM_dev/
+CRTM_SOURCE_ROOT = $(CRTM_PATH)/src
+CRTM_BUILD = /discover/nobackup/projects/gmao/obsdev/wrmccart/CRTM_Sprint/CRTM_dev/src/Build/crtm_v2.3.0/
+NC4_DIR = /discover/swdev/mathomp4/Baselibs/ESMA-Baselibs-5.2.6/x86_64-unknown-linux-gnu/gfortran_8.2.0-openmpi_3.1.1/Linux/
+HDF_DIR = /discover/swdev/mathomp4/Baselibs/ESMA-Baselibs-5.2.6/x86_64-unknown-linux-gnu/gfortran_8.2.0-openmpi_3.1.1/Linux/
+HDF4_DIR = unknown
+EXTRA_FC_FLAGS =  -g -traceback -check bounds \
+                 -I$(NC4_DIR)/include \
+                 -I$(HDF_DIR)/include  \
+                 -I$(CRTM_BUILD)/include
+#                -I$(CRTM_PATH)/src/TauProd/LBL/lblrtm/build/libsrc
+LIBRARIES =  -limf -lm\
+            -L$(NC4_DIR)/lib -lnetcdf -lnetcdff\
+            -L$(HDF_DIR)/lib  -lhdf5
+#            -L$(HDF_DIR)/lib  -lmfhdf -ldf
+#           -L$(CRTM_PATH)/src/TauProd/LBL/lblrtm/build/libsrc -llblrtmio
+
+LIBLBLRTMIO = $(CRTM_SOURCE_ROOT)/TauProd/LBL/lblrtm/build/libsrc

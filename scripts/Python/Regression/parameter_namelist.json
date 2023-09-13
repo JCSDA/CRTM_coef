@@ -1,0 +1,21 @@
+{
+"max_cpu": 1,
+"ch_int": 1,
+"exe_file": "/Users/stegmann/workspace/Fortran_dev/CRTM/REL-2.4.1/CRTM_coef/src/mains/TauRegress/ODPS/ODPS_Regress/Compute_Coeff",
+"work_dir": "/scratch/users/pstegmann/CRTM_coef/workdir/MW/GenCoeff",
+"prof_set": "ECMWF83",
+"instrument": ["amsu-a"],
+"start_channel": 1,
+"end_channel": 1,
+"start_angle": 1,
+"end_angle": 1,
+"spc_coeff_dir": "/scratch/users/pstegmann/CRTM_coef/workdir/MW/tropics_sv1_srf_v2",
+"tau_profile_dir": "/scratch/users/pstegmann/CRTM_coef/workdir/MW/tropics_sv1_srf_v2",
+"atm_profile_file": "/data/users/pstegmann/lib/CRTM/trunk/fix/TauProd/AtmProfile/ECMWF83.AtmProfile.nc",
+"get_sen_info": "/data/users/pstegmann/lib/CRTM/trunk/src/TauRegress/ODPS/GetSenInfo/GetSenInfo",
+"IR_type": 3,
+"components": "default",
+"component_group_1": ["dry","wlo","wco","ozo","co2","n2o","co","ch4"],
+"component_group_2": ["dry","wlo","wco","ozo","co2"],
+"component_group_3": ["dry","wet"]
+}

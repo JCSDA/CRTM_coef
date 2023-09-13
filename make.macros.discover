@@ -1,0 +1,22 @@
+CRTM_PATH = ${CRTM_ROOT}
+CRTM_SOURCE_ROOT = $(CRTM_PATH)/src
+CRTM_BUILD = ${CRTM_ROOT}/build/
+NC4_DIR = ${NETCDF}
+HDF_DIR = 
+HDF4_DIR = 
+MKL_LIB_PATH = ${MKLPATH}
+MKL_INC_PATH = ${MKLROOT}/include
+
+FC = ifort
+FL = $(FC)
+EXTRA_FC_FLAGS = -g -m64 -O -Wall -fcheck=all -g -fbacktrace \
+                 -I$(NC4_DIR)/include/ \
+                 -I$(CRTM_BUILD)module/ \
+                 -I$(MKL_INC_PATH)
+
+EXTRA_LIBRARIES = -lmpi  -lm\
+            -L$(NC4_DIR)/lib -lnetcdf -lnetcdff\
+            -lm -L$(MKL_LIB_PATH) -Wl,--no-as-needed -lmkl_gf_lp64 -lmkl_sequential -lmkl_core -lpthread -lm 
+# -lmkl_blas95_lp64 -lmkl_lapack95_lp64  -lmkl_gf_ilp64 -lmkl_sequential -lmkl_core
+
+LIBLBLRTMIO = $(CRTM_SOURCE_ROOT)/TauProd/LBL/lblrtm/build/libsrc

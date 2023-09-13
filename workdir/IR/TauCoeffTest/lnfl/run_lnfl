@@ -1,0 +1,191 @@
+#!/bin/tcsh
+
+set TAPE3_LIST = (1 2 7 10 11 12 13 14 15 17 18 19 20 21 22)
+#set TAPE3_LIST = (17)
+
+
+# Set up link to AER line file (e.g. aer_v_3.0) that comes in the AER line parameter database
+set TAPE3_ID = "aer_v_3.6"
+
+# Set up link to LNFL executable
+set lnfl_ex = "AER/lnfl/lnfl_v3.1_linux_intel_sgl"
+  
+set TAPE5_DIR = "CRTM/fix/TauProd/lnfl/TAPE5_DIR"
+#set TAPE5_DIR = "TAPE5_DIR"
+
+foreach THIS_TAPE3 ($TAPE3_LIST)
+     switch ( ${THIS_TAPE3} )
+          # -- Individual molecules
+          case 1: 
+             set species = H2O
+             set TAPE5_FILE = "tape5.mol${THIS_TAPE3}"
+             set TAPE3_FILE = "tape3.mol${THIS_TAPE3}.${TAPE3_ID}"
+             set TAPE3_TAG = "mol${THIS_TAPE3}"
+             breaksw
+          case 2: 
+             set species = CO2
+             set TAPE5_FILE = "tape5.mol${THIS_TAPE3}"
+             set TAPE3_FILE = "tape3.mol${THIS_TAPE3}.${TAPE3_ID}"
+             set TAPE3_TAG = "mol${THIS_TAPE3}"
+             breaksw
+          case 3: 
+             set species = O3
+             set TAPE5_FILE = "tape5.mol${THIS_TAPE3}"
+             set TAPE3_FILE = "tape3.mol${THIS_TAPE3}.${TAPE3_ID}"
+             set TAPE3_TAG = "mol${THIS_TAPE3}"
+             breaksw
+          case 4: 
+             set species = N2O
+             set TAPE5_FILE = "tape5.mol${THIS_TAPE3}"
+             set TAPE3_FILE = "tape3.mol${THIS_TAPE3}.${TAPE3_ID}"
+             set TAPE3_TAG = "mol${THIS_TAPE3}"
+             breaksw
+          case 5: 
+             set species = CO
+             set TAPE5_FILE = "tape5.mol${THIS_TAPE3}"
+             set TAPE3_FILE = "tape3.mol${THIS_TAPE3}.${TAPE3_ID}"
+             set TAPE3_TAG = "mol${THIS_TAPE3}"
+             breaksw
+          case 6: 
+             set species = CH4
+             set TAPE5_FILE = "tape5.mol${THIS_TAPE3}"
+             set TAPE3_FILE = "tape3.mol${THIS_TAPE3}.${TAPE3_ID}"
+             set TAPE3_TAG = "mol${THIS_TAPE3}"
+             breaksw
+          case 7: 
+             set species = O2
+             set TAPE5_FILE = "tape5.mol${THIS_TAPE3}"
+             set TAPE3_FILE = "tape3.mol${THIS_TAPE3}.${TAPE3_ID}"
+             set TAPE3_TAG = "mol${THIS_TAPE3}"
+             breaksw
+          case 8:
+          # -- All first seven molecules but no continua
+             set species = H2O:CO2:O3:N2O:CO:CH4:O2
+             set TAPE5_FILE = "tape5.7mol"
+             set TAPE3_FILE = "tape3.${TAPE3_ID}"
+             set TAPE3_TAG = "anc"
+             breaksw
+          case 9:
+          # -- Just the continua
+             set species = NONE
+             set TAPE5_FILE = "tape5.nomol"
+             set TAPE3_FILE = "tape3.nomol.${TAPE3_ID}"
+             set TAPE3_TAG = "con"
+             breaksw
+          case 10:
+          # -- All first seven molecules + continua
+             set species = H2O:CO2:O3:N2O:CO:CH4:O2
+             set TAPE5_FILE = "tape5.7mol"
+             set TAPE3_FILE = "tape3.${TAPE3_ID}"
+             set TAPE3_TAG = "awc"
+             breaksw
+          case 11:   
+          # -- Water vapor + ozone only (and their continua)
+             set species = H2O:O3
+             set TAPE5_FILE = "tape5.wvo"
+             set TAPE3_FILE = "tape3.wvo.${TAPE3_ID}"
+             set TAPE3_TAG = "wvo"
+             breaksw
+          case 12:
+          # -- Water vapor only (and its continua)
+             set species = H2O
+             set TAPE5_FILE = "tape5.mol1"
+             set TAPE3_FILE = "tape3.mol1.${TAPE3_ID}"
+             set TAPE3_TAG = "wet"
+             breaksw
+          case 13:
+          # -- "Dry" gases. Everything except water vapor and ozone
+             set species = CO2:N2O:CO:CH4:O2
+             set TAPE5_FILE = "tape5.dry"
+             set TAPE3_FILE = "tape3.dry.${TAPE3_ID}"
+             set TAPE3_TAG = "dry"
+             breaksw
+          case 14:
+          # -- Ozone only (and its continua)
+             set species = O3
+             set TAPE5_FILE = "tape5.mol3"
+             set TAPE3_FILE = "tape3.mol3.${TAPE3_ID}"
+             set TAPE3_TAG = "ozo"
+             breaksw
+          case 15:
+          # -- Water vapor continua only (NO line data)
+             set species = NONE
+             set TAPE5_FILE = "tape5.nomol"
+             set TAPE3_FILE = "tape3.nomol.${TAPE3_ID}"
+             set TAPE3_TAG = "wco"
+             breaksw
+          case 17:
+          # -- O2
+             set species = O2
+             set TAPE5_FILE = "tape5.molc1"
+             set TAPE3_FILE = "tape3.molc1.${TAPE3_ID}"
+             set TAPE3_TAG = "molc1"
+             breaksw
+          case 18:
+          # -- O2 +CH4
+             set species = O2:CH4
+             set TAPE5_FILE = "tape5.molc2"
+             set TAPE3_FILE = "tape3.molc2.${TAPE3_ID}"
+             set TAPE3_TAG = "molc2"
+             breaksw
+          case 19:
+          # -- O2+CH4+CO
+             set species = O2:CH4:CO 
+             set TAPE5_FILE = "tape5.molc3"
+             set TAPE3_FILE = "tape3.molc3.${TAPE3_ID}"
+             set TAPE3_TAG = "molc3"
+             breaksw
+          case 20:
+          # -- O2+CH4+CO+N2
+             set species = O2:CH4:CO:N2
+             set TAPE5_FILE = "tape5.molc4"
+             set TAPE3_FILE = "tape3.molc4.${TAPE3_ID}"
+             set TAPE3_TAG = "molc4"
+             breaksw
+          case 21:
+          # -- O2+CH4+CO+N2O+CO2
+             set species = O2:CH4:CO:N2O:CO2
+             set TAPE5_FILE = "tape5.molc5"
+             set TAPE3_FILE = "tape3.molc5.${TAPE3_ID}"
+             set TAPE3_TAG = "molc5"
+             breaksw
+          case 22:
+          # -- O2+CH4+CO+N2O+CO2+H20
+             set species = O2:CH4:CO:N2O:CO2:H20
+             set TAPE5_FILE = "tape5.molc6"
+             set TAPE3_FILE = "tape3.molc6.${TAPE3_ID}"
+             set TAPE3_TAG = "molc6"
+             breaksw
+          default:
+          # -- Invalid option
+             echo "${SCRIPT_NAME}: Invalid TAPE3_LIST index" ; usage ) | more
+             exit 2
+     endsw
+
+     echo $TAPE5_FILE
+     echo $TAPE3_FILE
+     echo $TAPE3_TAG
+     echo " "
+
+     \rm -f TAPE1 TAPE2 TAPE3 TAPE5 TAPE6* TAPE7* TAPE10* lnfl
+
+#     ln -s $TAPE3_ID TAPE1
+     # Copy TAPE5 file and change the first line and third line(old format)
+#     \cp ${TAPE5_DIR}/${TAPE5_FILE} TAPE5
+#     sed -i '1s/(PvD)/$/' TAPE5
+#     sed -i '3s/F160/         LNOUT/' TAPE5
+
+     # run python to generate TAPE5
+     python3 create_lnfl_record3.py 0 20000 $species
+     time $lnfl_ex $TAPE3_ID
+
+     \mv TAPE3 $TAPE3_FILE
+     #if (-e TAPE6) \mv TAPE6 TAPE6_$line_file
+     #if(-e TAPE7) \mv TAPE7 TAPE7_$line_file
+end
+
+
+
+
+
+

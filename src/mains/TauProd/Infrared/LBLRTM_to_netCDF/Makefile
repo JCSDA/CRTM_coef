@@ -1,0 +1,87 @@
+#==============================================================================
+#
+# Makefile for JCSDA CRTM SeeBor Data
+#
+# $Id:$
+#
+#==============================================================================
+
+include ../../../../../make.macros
+include $(CRTM_PATH)/src/make.macros
+
+FL=ifort
+linkfiles=$(HOME)/bin/linkfiles.sh
+unlinkfiles=$(HOME)/bin/unlinkfiles.sh
+
+# The file definitions.
+EXE_FILE=LBLRTM_to_netCDF
+
+SRC_FILE = Type_Kinds.f90 \
+           File_Utility.f90 \
+           Message_Handler.f90 \
+           Compare_Float_Numbers.f90 \
+           netCDF_Attribute_Utility.f90 \
+           netCDF_Dimension_Utility.f90 \
+           netCDF_Utility.f90 \
+           netCDF_Variable_Utility.f90 \
+           Tau_Production_Parameters.f90 \
+           Tau_Production_Utility.f90 \
+           LBLRTM_Utility.f90 \
+           LBLRTM_Parameters.f90 \
+           LBLRTM_Phdr_Define.f90 \
+           LBLRTM_Panel_Define.f90 \
+           LBLRTM_Fhdr_Define.f90 \
+           LBLRTM_Layer_Define.f90 \
+           LBLRTM_Phdr_IO.f90 \
+           LBLRTM_Panel_IO.f90 \
+           LBLRTM_Fhdr_IO.f90 \
+           LBLRTM_Fhdr_netCDF_IO.f90 \
+           LBLRTM_Layer_IO.f90 \
+           LBLRTMIO_Module.f90 \
+           LBLRTM_File_Define.f90 \
+           LBLRTM_File_IO.f90 \
+           LBLRTM_Layer_netCDF_IO.f90 \
+           String_Utility.f90 \
+           LBLRTM_File_netCDF_IO.f90 \
+           LBLRTM_netCDF_IO.f90 \
+           LBLRTM_to_netCDF.f90
+
+OBJ_FILE = ${SRC_FILE:.f90=.o}
+
+# Second INCLUDE/LIBS are added to read and write NetCDF files
+#EXTRA_FC_FLAGS = -stand f03 -heap-arrays  -g -traceback -check-bounds
+EXTRA_FC_FLAGS =  -g -fpp -traceback -check bounds \
+		 -I$(NC4_DIR)/include \
+		 -I$(HDF_DIR)/include 
+#-I$(CRTM_PATH)/src/TauProd/LBL/lblrtm/build/libsrc/include \
+
+LIBRARIES =  -limf -lm \
+            -L$(NC4_DIR)/lib -lnetcdff\
+            -L$(HDF_DIR)/lib  -lhdf5
+#-L$(CRTM_PATH)/src/TauProd/LBL/lblrtm/build/libsrc/lib -llblrtmio\
+#            -L$(HDF_DIR)/lib  -lmfhdf -ldf
+
+%.o: %.f90
+	$(FL) $(EXTRA_FC_FLAGS) $(FL_FLAGS) $(LIBRARIES) -c $<
+
+all: $(OBJ_FILE)
+	$(FL) $(OBJ_FILE) $(EXTRA_FC_FLAGS) $(FL_FLAGS) $(LIBRARIES) -o $(EXE_FILE)
+
+clean:
+	$(REMOVE) $(EXE_FILE) *.o *.mod gmon.out *.output results/*.signal
+
+# Source link creation and removal
+#create_links:
+#	${linkfiles} $(CRTM_SOURCE_ROOT) $(SRC_FILE)
+
+#remove_links:
+#	${unlinkfiles} $(SRC_FILE)
+
+# Squeaky clean target
+realclean: clean
+
+# Local dependencies
+$(OBJ_FILE): $(SRC_FILE)
+
+include $(CRTM_PATH)/src/make.rules
+include make.dependencies

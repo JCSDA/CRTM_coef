@@ -1,0 +1,69 @@
+!
+! $Id: SensorInfo 71513 2016-03-08 18:33:57Z paul.vandelst@noaa.gov $
+!
+! Master Sensor/Satellite information table
+!
+! Components:
+! -----------
+! o A sensor information line:
+!   READ FORMAT is '(1x,2(1x,a12),1x,a20,1x,i1,6x,4(1x,i5))'
+!
+!
+!    +------------------- Sensor name
+!    |            +------ Satellite/platform name +--------------------------------- Sensor Type
+!    |            |  +--- Sensor ID               |          +---------------------- WMO sensor ID
+!    |            |  |                            |          |     +---------------- WMO satellite ID
+!    |            |  +-------------+              |          |     |      +--------- No. of channels
+!    |            |                |              |          |     |      |     +--- No. of FOVs
+!    |            |                |              |          |     |      |     |
+!  HIRS/3       NOAA-17      hirs3_n17            2         606   208    19    56
+!  AMSU-A       NOAA-17      amsua_n17            1         570   208    15    30
+!  AMSU-B       NOAA-17      amsub_n17            1         574   208     5    90
+!  AVHRR/3      NOAA-19      v.avhrr3_n19         3         591   223     3    90
+!  AIRS         Aqua         airsM4c_aqua         2         420   784    94    90
+!  MODIS        TERRA        modisD08_terra       2         389   783    16  1354
+!
+! o A channel information line for each sensor channel:
+!   READ FORMAT is '(i5,3x,i2,5x,es13.6)'
+!
+!     +--------------------- Channel number
+!     |    +---------------- Use flag. If == 0, do not use
+!     |    |                              == 1, use
+!     |    |            +--- Noise estimate (K)
+!     |    |            |
+!     |    |            |
+!     1    1      7.410000E-01
+!     6    1      7.490000E-01
+!     7    1      8.030000E-01
+!    10    1      7.510000E-01
+!    11    1      7.860000E-01
+!    15    1      7.350000E-01
+!    16    1      7.850000E-01
+!    17    1      7.510000E-01
+!    20    1      6.780000E-01
+!    21    1      7.390000E-01
+!    22    1      7.400000E-01
+!    24    1      6.910000E-01
+!         .......etc
+!
+! Notes:
+! ------
+! o The WMO Sensor and Satellite ID numbers are taken from Common Code
+!   Table C-8 and C-5 respectively.
+!
+! o The Sensor ID string is used throughout CRTM and ancillary codes to
+!   identify sensor/satellite combinations and for sensor-specific file names.
+!
+! o Sensor ID strings that begin with "v." signify the visible channel portion
+!   of predominantly infrared instruments.
+!
+  COSMIR       AIR          cosmir_air           1        1023  2047     9    96
+    1    1      9.000000E+00
+    2    1      9.000000E+00
+    3    1      9.000000E+00
+    4    1      6.000000E-01
+    5    1      3.000000E-01
+    6    1      2.000000E-01
+    7    1      2.500000E-01
+    8    1      2.750000E-01
+    9    1      3.000000E-01

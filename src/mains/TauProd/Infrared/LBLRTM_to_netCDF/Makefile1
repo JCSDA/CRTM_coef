@@ -1,0 +1,56 @@
+#==============================================================================
+#
+# Makefile for JCSDA CRTM SeeBor Data
+#
+# $Id:$
+#
+#==============================================================================
+
+CRTM_PATH=/data/users/imoradi/programs/crtm/REL-2.1/
+NC4_DIR=/opt/netcdf4/4.3.3-intel-15.0-2
+HDF_DIR=/opt/hdf5/1.8.14-intel-15.0-2
+HDF4_DIR=/opt/hdf4/4.2.9-intel-15.0-2
+INCLUDE_DIR=/data/users/imoradi/workspace/codes/fortran/fortran
+include $(CRTM_PATH)/make.macros
+
+FL=ifort
+
+# The executable and object files
+EXE_FILE = LBLRTM_to_netCDF
+# put the majules first to avoid independency problems
+SRC_FILE = Type_Kinds.f90 File_Utility.f90 Message_Handler.f90 Compare_Float_Numbers.f90 \
+           netCDF_Attribute_Utility.f90 netCDF_Dimension_Utility.f90 netCDF_Utility.f90 \
+           netCDF_Variable_Utility.f90 Tau_Production_Parameters.f90 Tau_Production_Utility.f90 \
+          LBLRTM_File_Define.f90 LBLRTM_File_IO.f90 LBLRTM_netCDF_IO.f90.f90 LBLRTM_to_netCDF.f90
+
+OBJ_FILE = ${SRC_FILE:.f90=.o}
+
+
+# Second INCLUDE/LIBS are added to read and write NetCDF files
+#EXTRA_FC_FLAGS = -stand f03 -heap-arrays  -g -traceback -check-bounds
+EXTRA_FC_FLAGS = -stand f03 -openmp -g -traceback -check bounds \
+                 -I$(INCLUDE_DIR)/include \
+	         -I$(CRTM_PATH)/include \
+		 -I$(NC4_DIR)/include \
+		 -I$(HDF_DIR)/include \
+		 -I$(pwd)/lblrtmio_v1.0.0/include \
+		 -I/data/users/imoradi/svn-files/subversion/crtm/src/TauProd/LBL/lblrtm/build/libsrc
+
+LIBRARIES =  -limf -lm\
+	    -L$(CRTM_PATH)/$(LIB_DIR) -l$(PACKAGE)\
+            -L$(NC4_DIR)/lib -lnetcdf -lnetcdff\
+            -L$(HDF_DIR)/lib  -lhdf5 \
+            -L./lblrtmio_v1.0.0/lib/lblrtmio
+#            -L$(HDF_DIR)/lib  -lmfhdf -ldf
+
+all:
+	$(FL) $(EXTRA_FC_FLAGS) $(FL_FLAGS) $(LIBRARIES)  -c  $(SRC_FILE)
+	$(FL) $(OBJ_FILE) $(EXTRA_FC_FLAGS) $(FL_FLAGS) $(LIBRARIES) -o $(EXE_FILE)
+
+clean:
+	$(REMOVE) $(EXE_FILE) *.o *.mod gmon.out *.output results/*.signal
+
+# Local dependencies
+$(OBJ_FILE): $(SRC_FILE)
+
+include $(CRTM_PATH)/make.rules
