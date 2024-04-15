@@ -22,7 +22,7 @@ PROGRAM Compute_Coeff
                                   Single                           
   USE Message_Handler    , ONLY : SUCCESS, WARNING, FAILURE, Display_Message     
   USE File_Utility
-  USE Parameters
+  USE TmpParameters
   USE SensorInfo_Parameters
   USE AtmProfile_Define
   USE AtmProfile_netCDF_IO
@@ -174,7 +174,7 @@ PROGRAM Compute_Coeff
   REAL( fp_kind ), DIMENSION( :,: ), ALLOCATABLE :: Absorber
 
   REAL( fp_kind ) :: wgt, OD, path, frequency, VirtEmiss, &
-                     H_top, sin_ang
+                     H_top, sin_ang 
 
   INTEGER :: j ! n_Absorbers
   INTEGER :: k ! n_Layers, n_Levels

@@ -37,7 +37,7 @@ PROGRAM Create_SpcCoeff
                                        Display_Message, Program_Message
   USE Compare_Float_Numbers    , ONLY: OPERATOR(.EqualTo.)
   USE SignalFile_Utility       , ONLY: Create_SignalFile
-  USE SensorInfo_Parameters    , ONLY: MICROWAVE_SENSOR, &
+  USE TmpSensorInfo_Parameters    , ONLY: MICROWAVE_SENSOR, &
                                        INFRARED_SENSOR, &
                                        VISIBLE_SENSOR  , &
                                        UNPOLARIZED,      &

@@ -1,4 +1,4 @@
-MODULE SensorInfo_Parameters
+MODULE TmpSensorInfo_Parameters
 
   ! -----------------
   ! Environment setup
@@ -106,4 +106,4 @@ MODULE SensorInfo_Parameters
                                 'Polarization rotation angle                      '/)
 
 
-END MODULE SensorInfo_Parameters
+END MODULE TmpSensorInfo_Parameters

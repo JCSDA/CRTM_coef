@@ -28,7 +28,7 @@ MODULE MW_SensorData_Define
   USE Type_Kinds           , ONLY: fp
   USE Message_Handler      , ONLY: SUCCESS, FAILURE, INFORMATION, Display_Message
   USE Compare_Float_Numbers, ONLY: OPERATOR(.EqualTo.)
-  USE SensorInfo_Parameters, ONLY: XSAT => INVALID_WMO_SATELLITE_ID, &
+  USE TmpSensorInfo_Parameters, ONLY: XSAT => INVALID_WMO_SATELLITE_ID, &
                                    XSEN => INVALID_WMO_SENSOR_ID   , &
                                    INVALID_POLARIZATION    , &
                                    UNPOLARIZED             , &

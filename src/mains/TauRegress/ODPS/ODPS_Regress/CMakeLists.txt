@@ -30,7 +30,7 @@ list( APPEND odps_regress_src_files
             ODPS_netCDF_IO.f90
             Subset_Define.f90
             NLTECoeff_Define.f90
-            Parameters.f90
+            TmpParameters.f90
             Compute_Coeff.f90
             PlanckFunc.f90
             CalcStatTransTemp.f90

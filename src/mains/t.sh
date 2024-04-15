@@ -1,0 +1,13 @@
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./SpcCoeff/SpcCoeff_NC2BIN/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./SpcCoeff/Create_SpcCoeff/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauRegress/ODAS/ODAS_Regress/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauRegress/ODPS/ODAS_WLO_Regress/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauRegress/ODPS/GetSenInfo/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauRegress/ODPS/ODPS_Regress/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauProd/Microwave/Compute_MW_Transmittance/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauProd/Microwave/MW_TauProfile/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauProd/Infrared/Effective_TauProfile/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauProd/Infrared/Convolve_TauSpc/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauProd/Infrared/Create_ProcessControl_File/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauProd/Infrared/Convolve_TauSpc_with_SRF/SensorInfo_Parameters.f90
+cp  /data/users/bjohnson/CRTM/CRTM_coef_clean/crtm/src/InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90 ./TauProd/Add_Angle_Tau/SensorInfo_Parameters.f90

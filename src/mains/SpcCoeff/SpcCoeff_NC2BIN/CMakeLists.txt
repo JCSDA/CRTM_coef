@@ -10,7 +10,7 @@ list( APPEND spc_nc2bin_src_files
             SignalFile_Utility.f90 
             Sort_Utility.f90 
             Subset_Define.f90 
-            SensorInfo_Parameters.f90 
+            TmpSensorInfo_Parameters.f90 
             SpcCoeff_Define.f90 
               ACCoeff_Define.f90 
               NLTECoeff_Define.f90 

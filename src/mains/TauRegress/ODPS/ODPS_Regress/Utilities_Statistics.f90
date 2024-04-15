@@ -25,7 +25,7 @@ module Utilities_Statistics
   !--- Modules
 
   USE Type_Kinds, only : fp_kind
-  USE Parameters, only : ZERO, INFINITE
+  USE TmpParameters, only : ZERO, INFINITE
 
 
   !--- implicit

@@ -30,7 +30,7 @@ MODULE SpcCoeff_Define
                                    Subset_Associated, &
                                    Subset_GetValue  , &
                                    Subset_Generate
-  USE SensorInfo_Parameters, ONLY: INVALID_WMO_SATELLITE_ID, &
+  USE TmpSensorInfo_Parameters, ONLY: INVALID_WMO_SATELLITE_ID, &
                                    INVALID_WMO_SENSOR_ID   , &
                                    N_SENSOR_TYPES          , &
                                    INVALID_SENSOR          , &

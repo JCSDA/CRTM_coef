@@ -16,7 +16,7 @@ list( APPEND create_spc_src_files
             Integrate_Utility.f90 
             Planck_Functions.f90 
             Spectral_Units_Conversion.f90 
-            SensorInfo_Parameters.f90 
+            TmpSensorInfo_Parameters.f90 
             SpcCoeff_Define.f90 
             ACCoeff_Define.f90 
             NLTECoeff_Define.f90 
