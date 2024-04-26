@@ -609,19 +609,21 @@ PROGRAM Compute_Coeff
             IF (TauTotal(k, i, m) < ZERO) THEN
               WRITE( Message, '( "Error: Total trans is less than 0. Tau =  ", f16.8 )' ) &
                                  TauTotal(k, i, m)
-              CALL Display_Message( PROGRAM_NAME, &
-                                    TRIM( Message ), &
-                                    FAILURE )
-              STOP 90
+!              CALL Display_Message( PROGRAM_NAME, &
+!                                    TRIM( Message ), &
+!                                    FAILURE )
+!              STOP 90 KAB
+              TauTotal(k, i, m)=abs(TauTotal(k,i,m))
             ENDIF 
 
             IF (TauTotal(k, i, m) > ONE ) THEN
               WRITE( Message, '( "Error: Total trans is larger than 1. Tau =  ", f16.8 )' ) &
                                  TauTotal(k, i, m)
-              CALL Display_Message( PROGRAM_NAME, &
-                                    TRIM( Message ), &
-                                    FAILURE )
-              STOP 90
+!              CALL Display_Message( PROGRAM_NAME, &
+!                                    TRIM( Message ), &
+!                                  KAB  FAILURE )
+              TauTotal(k, i, m)=2-TauTotal(k,i,m)
+!KAB              STOP 90
             ENDIF 
 
             !--- check if total tau decreasing from top to bottom

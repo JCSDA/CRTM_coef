@@ -59,7 +59,7 @@ PROGRAM oSRF_Create_from_ASCII
   CHARACTER(LEN = 256):: oSRF_Filename
   CHARACTER(LEN = 256):: format_string
   CHARACTER(LEN = 256):: msg
-  CHARACTER(LEN = 2):: integer_channel_conversion
+  CHARACTER(LEN = 4):: integer_channel_conversion
   CHARACTER( * ), PARAMETER:: PROGRAM_NAME = 'oSRF_Create_from_ASCII'
   REAL(KIND = fp), DIMENSION(:,:), ALLOCATABLE:: srf_data
   REAL(KIND = fp), DIMENSION(:,:), ALLOCATABLE:: srf_data_interp
@@ -160,8 +160,14 @@ PROGRAM oSRF_Create_from_ASCII
       IF( (ll-1+channel_start) < 10 ) THEN
         format_string = "(I1)"
         WRITE(integer_channel_conversion, format_string) (ll-1+channel_start)
-      ELSE
+      ELSE IF ( (ll-1+channel_start) < 100 ) THEN
         format_string = "(I2)"
+        WRITE(integer_channel_conversion, format_string) (ll-1+channel_start)
+      ELSE IF ( (ll-1+channel_start) < 1000 ) THEN
+        format_string = "(I3)"
+        WRITE(integer_channel_conversion, format_string) (ll-1+channel_start)
+      ELSE
+        format_string = "(I4)"
         WRITE(integer_channel_conversion, format_string) (ll-1+channel_start)
       END IF
 
@@ -268,6 +274,7 @@ PROGRAM oSRF_Create_from_ASCII
           IF ( (delta_f >= (srf_data(2, 1) - srf_data(1, 1)) ) ) THEN
             msg = 'Input resolution delta_f is too coarse for interpolation!'
             CALL Display_Message( PROGRAM_NAME, msg, FAILURE)
+            print *, srf_data(2, 1),srf_data(1, 1),delta_f
             STOP 4
           END IF      
 

@@ -1,5 +1,17 @@
-## Target from sources
-list( APPEND odas_wlo_regress_src_files
+set(PROGRAM_NAME ODAS_WLO_Regress)
+cmake_minimum_required(VERSION 3.10)
+project(${PROGRAM_NAME} Fortran)
+
+
+
+# Set the directory to place the compiled mod files
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules)
+
+# Include directories only for this specific binary
+include_directories(${CMAKE_Fortran_MODULE_DIRECTORY})
+
+# List all the source files including modules and the main program
+add_executable(${PROGRAM_NAME} 
             Type_Kinds.f90
             File_Utility.f90
             Message_Handler.f90
@@ -11,9 +23,6 @@ list( APPEND odas_wlo_regress_src_files
             netCDF_Variable_Utility.f90
             netCDF_Attribute_Utility.f90
             SensorInfo_Parameters.f90
-            #SpcCoeff_Define.f90
-            #SpcCoeff_netCDF_IO.f90
-            #ACCoeff_Define.f90
             TmpODAS_Define.f90
             TmpODAS_netCDF_IO.f90
             MR_PPMV.f90
@@ -44,8 +53,10 @@ list( APPEND odas_wlo_regress_src_files
             PredictandPredictor.f90  
             WriteTransTable.f90     
             predictors.f90 
-            GenTransCoef.f90 )
+						${PROGRAM_NAME}.f90  )
 
-ecbuild_add_executable( TARGET ODAS_WLO_Regress
-                        SOURCES ${odas_wlo_regress_src_files}
-                        LIBS crtm ${LAPACK_LIBRARIES} )
+target_link_libraries(${PROGRAM_NAME} crtm ${LAPACK_LIBRARIES})
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}")
+# Specify where the executable should be placed after building
+install(TARGETS ${PROGRAM_NAME} DESTINATION bin)
+

@@ -22,3 +22,13 @@ This repository contains the code to produce instrument transmittance coefficent
 See Contributors.txt.
 # License
 See LICENSE.txt.
+
+#CMake Installation Instructions (only cmake supported for this experimental branch)
+
+mkdir build
+cd build
+cmake ..
+make -j8
+make install 
+
+contact bjohns@ucar.edu / Benjamin.T.Johnson@noaa.gov for additional help

@@ -1,5 +1,15 @@
-## Target from sources
-list( APPEND gsinfo_src_files
+cmake_minimum_required(VERSION 3.10)
+set(PROGRAM_NAME GetSenInfo)
+project(${PROGRAM_NAME} Fortran)
+
+# Set the directory to place the compiled mod files
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules)
+
+# Include directories only for this specific binary
+include_directories(${CMAKE_Fortran_MODULE_DIRECTORY})
+
+# List all the source files including modules and the main program
+add_executable(${PROGRAM_NAME} 
             Type_Kinds.f90 
             File_Utility.f90 
             Compare_Float_Numbers.f90 
@@ -12,10 +22,12 @@ list( APPEND gsinfo_src_files
             ACCoeff_Define.f90 
             Sort_Utility.f90 
             String_Utility.f90 
-            GetSenInfo.f90 
             Subset_Define.f90 
-            NLTECoeff_Define.f90 )
+            NLTECoeff_Define.f90 
+						${PROGRAM_NAME}.f90  )
 
-ecbuild_add_executable( TARGET GetSenInfo
-                        SOURCES ${gsinfo_src_files}
-                        LIBS crtm )
+target_link_libraries(${PROGRAM_NAME} crtm)
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}")
+# Specify where the executable should be placed after building
+install(TARGETS ${PROGRAM_NAME} DESTINATION bin)
+

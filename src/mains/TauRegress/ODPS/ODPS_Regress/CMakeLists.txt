@@ -1,5 +1,15 @@
-## Target from sources
-list( APPEND odps_regress_src_files
+cmake_minimum_required(VERSION 3.10)
+set(PROGRAM_NAME ODPS_Regress)
+project(${PROGRAM_NAME} Fortran)
+
+# Set the directory to place the compiled mod files
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules)
+
+# Include directories only for this specific binary
+include_directories(${CMAKE_Fortran_MODULE_DIRECTORY})
+
+# List all the source files including modules and the main program
+add_executable(${PROGRAM_NAME} 
             Type_Kinds.f90
             File_Utility.f90
             Compare_Float_Numbers.f90
@@ -31,14 +41,16 @@ list( APPEND odps_regress_src_files
             Subset_Define.f90
             NLTECoeff_Define.f90
             Parameters.f90
-            Compute_Coeff.f90
             PlanckFunc.f90
             CalcStatTransTemp.f90
             Utilities_Statistics.f90
             PredictorSubsetIndex.f90
             Interpolation.f90
-            Regression.f90 )
+						Regression.f90
+						${PROGRAM_NAME}.f90  )
 
-ecbuild_add_executable( TARGET ODPS_Regress
-                        SOURCES ${odps_regress_src_files}
-                        LIBS crtm ${LAPACK_LIBRARIES} )
+target_link_libraries(${PROGRAM_NAME} crtm ${LAPACK_LIBRARIES})
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}")
+# Specify where the executable should be placed after building
+install(TARGETS ${PROGRAM_NAME} DESTINATION bin)
+

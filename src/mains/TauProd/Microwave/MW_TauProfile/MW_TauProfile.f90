@@ -239,7 +239,7 @@ PROGRAM MW_TauProfile
     atmprofile, &
     atmprofile_filename, &
     Profile_Set = profile_set, &
-    Reverse = .TRUE. )
+    Reverse = .FALSE. ) !KAB
   IF ( err_stat /= SUCCESS ) THEN
     msg = 'Error reading AtmProfile file '//TRIM(atmprofile_filename)
     CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
@@ -444,9 +444,9 @@ PROGRAM MW_TauProfile
         WRITE( msg,'("Error transferring passband frequencies to array for oSRF #",i0)') l
         CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
       END IF
-      !frequency = inverse_cm_to_GHz(wavenumber)
+      frequency = inverse_cm_to_GHz(wavenumber) !KAB
       !WRITE(*,*) "Frequenz: ", frequency
-      frequency = wavenumber
+      !frequency = wavenumber
       
       ! Begin profile loop
       Profile_Loop: DO m = 1, n_profiles

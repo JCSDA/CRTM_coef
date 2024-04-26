@@ -225,7 +225,8 @@ CONTAINS
                   ACCESS = 'SEQUENTIAL' , &
                   FORM   = 'UNFORMATTED', &
                   IOSTAT = io_stat      , &
-                  IOMSG  = io_msg         )
+                  IOMSG  = io_msg, CONVERT='big_endian' )
+!KAB
     IF ( io_stat /= 0 ) THEN
       msg = 'Error opening '//TRIM(Filename)//' - '//TRIM(io_msg)
       CALL CleanUp(); RETURN
@@ -731,7 +732,8 @@ CONTAINS
                FORM   = 'UNFORMATTED', &
                RECL   = n_Bytes_Long , &
                IOSTAT = io_stat      , &
-               IOMSG  = io_msg         )
+               IOMSG  = io_msg, CONVERT='big_endian'        )
+!KAB
     IF ( io_stat /= 0 ) THEN
       msg = 'Error opening '//TRIM(Filename)//' - '//TRIM(io_msg)
       CALL CleanUp(); RETURN

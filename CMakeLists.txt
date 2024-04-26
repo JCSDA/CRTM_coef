@@ -46,11 +46,15 @@ else()
     find_package( LAPACK REQUIRED )
 endif()
 
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}")
+
 ecbuild_bundle_initialize()
 
-ecbuild_bundle( PROJECT crtm GIT "https://github.com/JCSDA-internal/crtm.git"        BRANCH develop  UPDATE )
+ecbuild_bundle( PROJECT crtm GIT "https://github.com/JCSDA/crtm.git" TAG v2.4.1-jedi.1 UPDATE )
 
 ecbuild_bundle_finalize()
+
+
 
 add_subdirectory( src )
 
