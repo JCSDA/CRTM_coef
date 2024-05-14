@@ -58,15 +58,15 @@ def make_dir(path):
 
 def link_executables(destination):
   try:
-    executable_names = ['var.out',\
+    executable_names = ['oSRF_Create_from_ASCII',\
                         'Create_SpcCoeff',\
                         'SpcCoeff_NC2BIN',\
                         'MW_TauProfile']
-    executable_dirs = ['oSRF/oSRF_Create_from_ASCII/',\
-                       'SpcCoeff/Create_SpcCoeff/',\
-                       'SpcCoeff/SpcCoeff_NC2BIN/',\
-                       'TauProd/Microwave/MW_TauProfile/']
-    relative_base_dir = '../../src/mains/'
+    executable_dirs = ['',\
+                       '',\
+                       '',\
+                       '']
+    relative_base_dir = '../../build/bin/'
     for ii in range(0,len(executable_dirs)):
       executable_dirs[ii] = relative_base_dir + executable_dirs[ii] + executable_names[ii]
     current_dir = os.path.dirname(__file__)
