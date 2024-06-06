@@ -14,10 +14,11 @@ project(CRTM_coef VERSION 1.0.0 LANGUAGES Fortran)
 ## Configuration options
 option(ENABLE_MKL "Use MKL for LAPACK implementation (if available)" OFF)
 
-include(GNUInstallDirs)
-
 ## Dependencies
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
+
+include( cmake/${PROJECT_NAME}_compiler_flags.cmake )
+include(GNUInstallDirs)
 
 find_package(NetCDF REQUIRED COMPONENTS Fortran)
 
@@ -42,7 +43,7 @@ include(FetchContent)
 FetchContent_Declare(
   crtm
   GIT_REPOSITORY "https://github.com/JCSDA/crtm.git"
-  GIT_TAG "v2.4.1-jedi.1"
+  GIT_TAG "feature/btj_crtm241_for_crtm_coef"
 )
 FetchContent_MakeAvailable(crtm)
 
