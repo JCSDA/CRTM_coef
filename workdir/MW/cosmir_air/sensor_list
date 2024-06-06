@@ -1,0 +1,5 @@
+## This file contains a list of sensors and is one of the input file of
+## run_tau_coeff.sh
+
+
+cosmir_air
