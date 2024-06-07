@@ -2,7 +2,6 @@
 
 % Title info
 \title{Transmittance Coefficient Generation Package\\ \normalsize{Quickstart Guide}}
-\author{Dr. Patrick Stegmann\\ JCSDA}
 \date{\today}
 \docnumber{(unassigned)}
 \docseries{CRTM}
@@ -29,12 +28,13 @@
   {\sffamily\Large\bfseries Change History}
   \begin{table}[htp]
     \centering
-    \begin{tabular}{|p{2cm}|p{3cm}|p{8cm}|}
+    \begin{tabular}{l l l}
       \hline
       \sffamily\textbf{Date} & \sffamily\textbf{Author} & \sffamily\textbf{Change}\\
       \hline\hline
       2021-12-14 & P. Stegmann& Initial Draft.\\
-      2024-06-07 & B. Johnson (bjohns@ucar.edu or Benjamin.T.Johnson@noaa.gov) & Updated for improved workflow.\\
+      2024-06-07 & B. Johnson & (bjohns@ucar.edu or Benjamin.T.Johnson@noaa.gov) \\
+       & & Updated for improved workflow.\\
       \hline
     \end{tabular}
   \end{table}
@@ -124,6 +124,7 @@ Aside for macos/linux box (tested on macbook-intel so far).  This package is rea
 OR install spack-stack:  https://wiki.ucar.edu/display/JEDI/Building+spack-stack+on+MacOS  (this takes awhile, and is unnecessary if you're only doing CRTM stuff).  
 
 Try to run the \verb|cmake ..| step again.
+
 Contact the JCSDA CRTM team via github with any questions (\verb|https://github.com/JCSDA/CRTM_coef|)
 
 \begin{verbatim}
@@ -456,8 +457,8 @@ echo "#SBATCH --time=1:00:00" >> ${jobScript}
 echo "#SBATCH --ntasks=1" >> ${jobScript}
 echo "#SBATCH --cpus-per-task=1" >> ${jobScript}
 echo "#SBATCH --mem-per-cpu=4096" >> ${jobScript}
-echo "#SBATCH --output=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.txt" >> ${jobScript}
-echo "#SBATCH --error=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.err" >> ${jobScript}
+echo "#SBATCH --output=<path>/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.txt" >> ${jobScript}
+echo "#SBATCH --error=<path>/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.err" >> ${jobScript}
 #echo "source /etc/bashrc" >> ${jobScript}
 # Load the required modules (you might have to mess around with these)
 echo "module purge" >> ${jobScript}
