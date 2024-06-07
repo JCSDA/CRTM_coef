@@ -60,43 +60,14 @@ The CGP requires a number of depencies that need to be available:
 \begin{itemize}
   \item A Fortran compiler, e.g. gfortran or ifort.
   \item netCDF4 and HDF5.
+  \item Some sort of BLAS package, such as openblas (brew install openblas, also provided by HPC module systems (e.g., spack-stack, hpc-stack, etc.)
   \item The slurm scheduler for the ODPS regression.
   \item The cmake build system.
   \item git
 \end{itemize}
 
 \subsection{Compiling the code}
-Before running any of the Fortran applications, they need to be compiled and their dependencies enabled.
-
-\subsubsection{Compiling the CRTM}
-In order to make the CRTM itself available to the coefficient generation package, the following steps need to be taken:
-\begin{enumerate}
-  \item Clone the CRTM repository.
-  \item Set up the CRTM environment.
-  \item Create a build directory.
-  \item Configure the build with \emph{ecbuild}.
-  \item Compile the CRTM.
-\end{enumerate}
-The \emph{bash} terminal commands for the sequence look like this:
-\begin{verbatim}
- # Cloning the crtm
- git clone https://github.com/JCSDA-internal/crtm
- cd crtm
-
- # Setting up the environment
- . ./Set_CRTM_Environnment.sh
-
- # Creating a build directory
- mkdir build
- cd build
-
- # Configuring the crtm build
- ecbuild ..
-
- # Compiling the CRTM
- make -j4
-\end{verbatim}
-This assumes that you have already cloned and set up the \verb|ecbuild| extension to cmake. For more details please see the documentation of the CRTM and the ECMWF ecbuild user guide.
+Before running any of the Fortran applications, the above items need to be compiled and their dependencies enabled.
 
 \subsubsection{Cloning the Coefficient Generation Package}
 The CGP can be cloned like this:
@@ -112,37 +83,85 @@ Before you create a new instrument coefficient, it is highly encouraged that you
 \end{verbatim}
 
 \subsubsection{Configuring the Coefficient Generation Package}
-Currently the build system for the CGP is still based on \verb|make|. In order to configure the CGP for the machine you are using, the \verb make.macros file in the CGP root directory needs to be modified. A number of sample macro files are already provided for selected machines, and an example for the \emph{University of Wisconsin SSEC S4} cluster would look like this:
-\begin{verbatim}
- # Entering the CGP root directory
- cd CRTM_coef/
+Currently the build system for the CGP is based on \verb|cmake|.  It will attempt to find BLAS and netCDF.
 
- # Linking the machine-specific make macros
- rm make.macros
- ln -s make.macros.s4 make.macros
+\begin{verbatim}
+ # Entering the CGP root directory and starting the \verb|cmake| process.
+ cd CRTM_coef/
+ mkdir build
+ cd build
+ cmake ..
 \end{verbatim}
 
+You might run into issues where cmake can't find netCDF.
+\begin{verbatim}
+ #help cmake find netcdf
+ # example:
+ > locate netcdf.mod
+ /opt/netcdf4/4.4.1-intel-16.0.2/include/netcdf.mod
+ /opt/netcdf4/4.6.2-intel-16.0.2/include/netcdf.mod
+ /opt/netcdf4/4.6.2-intel-17.0.6/include/netcdf.mod
+ /opt/netcdf4/4.6.2-intel-18.0.3/include/netcdf.mod
+ /opt/netcdf4/4.7.1-intel-19.0.5/include/netcdf.mod
+ /opt/netcdf4/4.7.3-intel-18.0.3/include/netcdf.mod
+ /opt/netcdf4/4.7.3-intel-19.0.5/include/netcdf.mod
+ /opt/netcdf4/4.8.1-intel-2022.1/include/netcdf.mod
+
+ #pick the path to the include directory that matches your compiler 
+ export NetCDF_INCLUDE_DIRS=/opt/netcdf4/4.7.1-intel-19.0.5/include
+
+ \end{verbatim}
+
+ \begin{verbatim}
+ #aside #1 for macos/linux box (tested on macbook-intel so far)
+ This package is really designed for HPC use, because it's fairly intensive.  However, for MW-only development, you can probably get away with doing it on a Mac/Linux desktop / laptop.
+ A lot of the instruction / testing has occured with Intel Fortran Compiler (ifort), but you can give this a shot on your local box
+ brew install gcc
+ brew install netcdf
+ brew install netcdf-fortran
+ brew install openblas
+ OR
+ install spack-stack:  https://wiki.ucar.edu/display/JEDI/Building+spack-stack+on+MacOS  (this takes awhile, and is unnecessary if you're only doing CRTM stuff).  
+
+ \end{verbatim}
+
+Try to run the \verb|cmake ..| step again.  Contact the JCSDA CRTM team via github with any questions (\verb|https://github.com/JCSDA/CRTM_coef|)
+
+ \begin{verbatim}
+ #still in the \verb|build| directory ...
+ make -j12
+ # if successful
+ make install
+ \end{verbatim}
+
+Have a look at the \verb|build/bin| directory, you should see the following applications installed:
 
 \subsubsection{Compiling the CGP Fortran Applications}
-Finally, all necessary CGP Fortran applications can be compiled. All applications are located in the \verb|src/| folder.
-This is a checklist of applications that need to be compiled for a MW sensor:
+This is a checklist of applications that are created in the previous step:
 \begin{todolist}
- \item \verb|oSRF/oSRF_Create_from_ASCII|
- \item \verb|SpcCoeff/Create_SpcCoeff|
- \item \verb|SpcCoeff/SpcCoeff_NC2BIN|
- \item \verb|TauProd/Microwave/MW_TauProfile|
- \item \verb|TauRegress/ODPS/Assemble_ODPS|
- \item \verb|TauRegress/ODPS/GetSenInfo|
- \item \verb|TauRegress/ODPS/ODPS_NC2BIN|
- \item \verb|TauRegress/ODPS/ODPS_Regress|
+
+\item \verb|Assemble_ODAS|  (occasionally called ``\verb|Cat_ODAS|'' in older documentation)
+\item \verb|Assemble_ODPS|
+\item \verb|AtmProfile_CreateFile|
+\item \verb|Create_SpcCoeff|
+\item \verb|GetSenInfo|
+\item \verb|MW_TauProfile|
+\item \verb|ODAS_NC2BIN|
+\item \verb|ODAS_Regress|
+\item \verb|ODAS_WLO_Regress|
+\item \verb|ODPS_NC2BIN|
+\item \verb|ODPS_Regress|
+\item \verb|SpcCoeff_NC2BIN|
+\item \verb|oSRF_Create_from_ASCII| (occasionally called ``\verb|var.out|'' in older documentation)
+
 \end{todolist}
-Simply enter each directory and type \verb|make|. Problems can arise at this step if the CRTM or the CGP are not correctly configured, or if one or more of the dependencies are not available.
+
 
 \subsection{Preparing the SRF}
-Before starting the coefficient generation process, the spectral response function of the instrument needs to be brought into the correct input format. 
+Before starting the coefficient generation process, the spectral response function (SRF) of the instrument needs to be brought into the correct input format. 
 This is the responsibility of the user, as is making sure that the SRF spectral resolution is high enough to resolve all desired absorption features.
 Input data for a new CRTM instrument should be stored in the \verb|inbox/fix/config/| directory of the CGP.
-An example ASCII input file for TROPICS looks like this:
+An example ASCII input file for TROPICS (e.g., \verb|inbox/fix/config/TROPICS_Pathfinder/tropics_sv1_srf_v4/SRFDATA/tropics_sv1_srf_v4_ch1.txt| looks like this:)
 \begin{verbatim}
 89.484  0.0022256
 89.522  0.0026217
@@ -167,12 +186,38 @@ An example ASCII input file for TROPICS looks like this:
 ...
 \end{verbatim}
 The first column contains the frequency in units of [GHz] and the second column contains the unitless normalized SRF value.
-The example file can be found in \verb|inbox/fix/config/TROPICS_Pathfinder/tropics_sv1_srf_v2/SRFDATA|.
-One input file per channel is required.
+Recommend perusing the \verb|SRFDATA/| directory noted above just to understand how things are organized.   The creation of these files typically come from you, the coefficient developer, based on whatever SRF information you can obtain from the instrument team for a given instrument.  Your best bet for support at this point is to (a) ask the CRTM teams (JCSDA, STAR), and (b) the instrument science team for the given sensor -- they likely have this information.    When you don't know the SRF, you assume a ``boxcar'', which looks like this:
+\begin{verbatim}
+84.09999999899999 0.0
+84.1 1.0
+86.9 1.0
+86.90000000100001 0.0
+\end{verbatim}
+Note the sideband handling for this ``85.5'' GHz channel (+/- 1.4 GHz).  
+
+Note that these are organized on a per channel basis, but sidebands are not (usually) considered separate channels, unless you're trying to get tricky with sideband averaging activities, which might be useful for concept instruments or other sensitivity studies. 
+
+Here's an example what your \verb|SRFDATA/| directory could look like:
+\begin{verbatim}
+tropics_sv2_ch1.txt
+tropics_sv2_ch2.txt
+tropics_sv2_ch3.txt
+tropics_sv2_ch4.txt
+tropics_sv2_ch5.txt
+tropics_sv2_ch6.txt
+tropics_sv2_ch7.txt
+tropics_sv2_ch8.txt
+tropics_sv2_ch9.txt
+tropics_sv2_ch10.txt
+tropics_sv2_ch11.txt
+tropics_sv2_ch12.txt
+\end{verbatim}
+filename structure is: \verb|sensor_id_ch##.txt|.  Not sure if ``Ch01'' works vs. ``Ch1''.  
 
 \subsection{Creating a Case Directory}
 The coefficient generation should be carried out in the \verb|workdir| folder.
 In the case of a MW sensor, the \verb|workdir/MW| directory is the appropriate location.
+
 In order to create a new case directory, simple type:
 \begin{verbatim}
  ./Create_CaseDirectory -i <instrument_name>
@@ -189,14 +234,17 @@ For help on the input options type:
 Once the case folder is created, you can enter it to proceed.
 \begin{verbatim}
  cd tropics_sv1_srf_v2/
+ ln -s <path_to_build>/bin/* .  
 \end{verbatim}
-Into this folder, link in the sensor information you created from the \verb|inbox/fix/config/| directory.
+This softlinks the previously compiled executables to the local working directory, you can also play around with your \verb|PATH| variable to point to the \verb|bin| directory. 
+
+Note: When running these later, if you get an error about not being able to find a particular \verb|.so| library, you can add the paths to the required libraries using the \verb|LD_LIBRARY_PATH| variable, or be lazy (like me) and soft link the appropriate libraries to the local directory.   Please contact the JCSDA CRTM team for recommendations on better ways to handle this.   Building static isn't always possible, given that we depend on shared objects built on HPC stacks.
 
 \subsection{Creating the oSRF file}
 The CRTM oSRF file is an intermediate representation of the SRF as a netCDF file. The converter application is \verb|oSRF/oSRF_Create_from_ASCII|.
-Currently the executable is called \verb|var.out|. In order to obtain an oSRF file for TROPICS with 1 band, 12 channels and an interpolated SRF resolution of 1 MHz, follow the prompt:
+In order to obtain an oSRF file for TROPICS with 1 band, 12 channels and an interpolated SRF resolution of 1 MHz, follow the prompt:
 \begin{verbatim}
-./var.out 
+> ./oSRF_Create_from_ASCII
  Enter the Sensor ID of the current instrument: 
 tropics_sv1_srf_v2
  Enter the number of bands for the instrument: 
@@ -208,14 +256,72 @@ yes
  Enter the spectral resolution in GHz: 
 0.001
 \end{verbatim}
-This will create the file \verb|tropics_sv1_srf_v2.osrf.nc|.
+This will create the file \verb|tropics_sv1_srf_v2.osrf.nc|.  You can try it without interpolation too (recommended, in fact).  
 
 \subsection{Creating the SpcCoeff file}
 Creating the SpcCoeff file requires the \verb|polangle.txt| and \verb|polarization.txt| files to be linked into the case directory from the \verb|inbox/fix/config/| directory.
 They specify the polarization offset angle in degrees per channel and the CRTM polarization scheme per channel as an integer.
 In order to create the SpcCoeff spectral coefficient file, run the \verb|Create_SpcCoeff| application in the case directory:
+
+polarization.txt structure, one entry per channel:
 \begin{verbatim}
- ./Create_SpcCoeff 
+9
+9
+10
+10
+10
+10
+10
+10
+\end{verbatim}
+Where these numbers refer to the values defined in:
+\verb|./InstrumentInfo/SensorInfo/SensorInfo_Parameters.f90|
+and repeated here for your convenience, but double check:
+\begin{verbatim}
+  INTEGER, PARAMETER :: N_POLARIZATION_TYPES    = 14
+  INTEGER, PARAMETER :: INVALID_POLARIZATION    = 0
+  INTEGER, PARAMETER :: UNPOLARIZED             = 1
+  INTEGER, PARAMETER :: INTENSITY               = UNPOLARIZED
+  INTEGER, PARAMETER :: FIRST_STOKES_COMPONENT  = UNPOLARIZED
+  INTEGER, PARAMETER :: SECOND_STOKES_COMPONENT = 2
+  INTEGER, PARAMETER :: THIRD_STOKES_COMPONENT  = 3
+  INTEGER, PARAMETER :: FOURTH_STOKES_COMPONENT = 4
+  INTEGER, PARAMETER :: VL_POLARIZATION         = 5
+  INTEGER, PARAMETER :: HL_POLARIZATION         = 6
+  INTEGER, PARAMETER :: plus45L_POLARIZATION    = 7
+  INTEGER, PARAMETER :: minus45L_POLARIZATION   = 8
+  INTEGER, PARAMETER :: VL_MIXED_POLARIZATION   = 9
+  INTEGER, PARAMETER :: HL_MIXED_POLARIZATION   = 10
+  INTEGER, PARAMETER :: RC_POLARIZATION         = 11
+  INTEGER, PARAMETER :: LC_POLARIZATION         = 12
+  INTEGER, PARAMETER :: CONST_MIXED_POLARIZATION= 13
+  INTEGER, PARAMETER :: PRA_POLARIZATION        = 14
+\end{verbatim}
+Most passive MW sounders are 9/10.   Most passive MW imagers are 5/6.   If you're not sure, or if it's something weird, then discuss with the CRTM team(s).   
+
+polangle.txt structure, which defines the rotation of the polarization angle with respect to the along-flight direction, 0 degrees being directly along the direction of flight, assuming a standard sensor orientation (lots of caveats apply).  Usually these are given in degrees of offset clockwise from zero.   One entry per channel. 
+\begin{verbatim}
+0.00
+0.00
+<...> 
+0.00
+0.00
+\end{verbatim}
+Note: If you find you've got some biases WRT obs in your cross-track MW instrument over ocean, particularly at the edges of the scan, you might try some different polarization options. 
+
+After you've created these files in your inbox directory, copy the following to your working directory (e.g., \verb|workdir/MW/sensor|)
+\begin{verbatim}
+SRFDATA/
+polangle.txt
+polarization.txt
+<sensor_id>_srf_v?.osrf.nc
+\end{verbatim}
+
+is what you should have so far in that directory (and the links to the binary files).
+
+Yay.  Now we can finally create the Spectral Coefficient (aka \verb|SpcCoeff|) file.   
+\begin{verbatim}
+> ./Create_SpcCoeff 
 
      **********************************************************
                            Create_SpcCoeff
@@ -235,9 +341,9 @@ In order to create the SpcCoeff spectral coefficient file, run the \verb|Create_
 This will create the file \verb|tropics_sv1_srf_v2.SpcCoeff.nc|.
 
 \subsection{Converting the SpcCoeff file from netCDF to Binary format}
-Converting the SpcCoeff file from netCDF to binary format works like this:
+Converting the SpcCoeff file from netCDF to binary format (if you want to) works like this:
 \begin{verbatim}
- ./SpcCoeff_NC2BIN 
+ > ./SpcCoeff_NC2BIN 
 
      **********************************************************
                            SpcCoeff_NC2BIN
@@ -256,12 +362,13 @@ Converting the SpcCoeff file from netCDF to binary format works like this:
      Increment the OUTPUT version number? [y/n]: n
 \end{verbatim}
 This will create the file \verb|tropics_sv1_srf_v2.SpcCoeff.bin| (either little-endian or big-endian, depending on your system).
+If you need both endian formats of binary files, you'll have to recompile/rerun the \verb|SpcCoeff_NC2BIN| in the other endian.  e.g., \verb|-convert big_endian| flag.   We leave this as an exercise for the reader.
 
 \subsection{Rosenkranz MW Transmittance Calculations}
 The simplest approach to compute the line-by-line MW layer-to-space transmittances for the ODPS regression is to use the Rosenkranz model implemented in the CRTM.
 First, link in the \verb|ECMWF83.AtmProfile.nc| predictor dataset from the \verb|fix/TauProd/| folder.
-Second, create a SensorInfo file by modifying an existing template or create a script to write the SensorInfo file for more complex instruments.
-A generic SensorInfo generator will be provided in the future.
+Second, create a \verb|SensorInfo_<sensor_id>| file by modifying an existing template or create a script to write the SensorInfo file for more complex instruments.
+A generic SensorInfo generator will be provided in the future. 
 
 \begin{verbatim}
  ./MW_TauProfile 
@@ -287,12 +394,24 @@ A generic SensorInfo generator will be provided in the future.
      Enter the netCDF AtmProfile filename: ECMWF83.AtmProfile.nc
 \end{verbatim}
 
-Depending on the spectral resolution of the oSRF file, these calculations may take several minutes.
+Depending on the spectral resolution of the oSRF file, these calculations may take several minutes.  
+
+At this point your workdir should look something like:
+\begin{verbatim}
+ SRFDATA/
+ polangle.txt
+ polarization.txt
+ ECMWF83.AtmProfile.nc
+ <sensor_id>_srf_v?.osrf.nc
+ <sensor_id>.SpcCoeff.nc
+ <sensor_id>.SpcCoeff.bin
+ upwelling.<sensor_id>.TauProfile.nc
+\end{verbatim}
 
 \subsection{ODPS Regression}
 The ODPS regression is the last step in the CRTM MW transmittance coefficient generation and produces the TauCoeff file.
 This step is performed in a separate folder and an example case directory for the regression is provided in \verb|workdir/MW/GenCoeff/|.
-Before starting the regression calculations, the instrument ID needs to be added to the \verb|sensor_list| file:
+Before starting the regression calculations, the instrument ID needs to be added to a \verb|sensor_list| file that goes right in your workdir like everything else. 
 \begin{verbatim}
  ## This file contains a list of sensors and is one of the input file of
  ## run_tau_coeff.sh
@@ -302,17 +421,19 @@ Before starting the regression calculations, the instrument ID needs to be added
  tropics_sv1_srf_v2
  END_LIST
 \end{verbatim}
-Afterwards, the \verb|tau_coeff.parameters| input file needs to be modified for your local system:
+
+Afterwards, the \verb|tau_coeff.parameters| input file needs to be modified for your local system.  I recommend copying from a previous example and modifying to suit your requirements.
+We fully realize this isn't fun or very generic.  Future releases will include utilities that automate this process.  Here's an example from the \verb|cosmir_air| example I did on S4:
 \begin{verbatim}
 :MAX_CPUs:256
 :CH_INT:1
-:EXE_FILE:/data/users/pstegmann/lib/CRTM/trunk/src/TauRegress/ODPS/ODPS_Regress/Compute_Coeff
-:WORK_DIR:CRTM_coef/workdir/MW/GenCoeff
+:EXE_FILE:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/build/bin/ODPS_Regress
+:WORK_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air
 :PROF_SET:ECMWF83
-:SPC_COEFF_DIR:CRTM_coef/workdir/MW/tropics_sv1_srf_v2
-:TAU_PROFILE_DIR:CRTM_coef/workdir/MW/tropics_sv1_srf_v2
-:ATM_PROFLE_FILE:/data/users/pstegmann/lib/CRTM/trunk/fix/TauProd/AtmProfile/ECMWF83.AtmProfile.nc
-:GET_SEN_INFO:/data/users/pstegmann/lib/CRTM/trunk/src/TauRegress/ODPS/GetSenInfo/GetSenInfo
+:SPC_COEFF_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air
+:TAU_PROFILE_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air
+:ATM_PROFLE_FILE:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air/ECMWF83.AtmProfile.nc
+:GET_SEN_INFO:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/build/bin/GetSenInfo
 :IR_TYPE:3
 :COMPONENTS:DEFAULT
 #COMPONENTS:ozo
@@ -326,52 +447,47 @@ If the \verb|control/| doesn't exist, create it now:
 \begin{verbatim}
  mkdir control
 \end{verbatim}
-Lastly, open the \verb|gen_tau_coeff.sh| script, and check that the log output of the slurm script template points to the \verb|control/| directory:
+Lastly, open the \verb|gen_tau_coeff.sh| script, scroll down, and check that the log output of the slurm script template points to the \verb|control/| directory:
 \begin{verbatim}
 echo "#!/bin/bash" >> ${jobScript}
 echo "#SBATCH --job-name=ODPS_Run.%j.out" >> ${jobScript}
 echo "#SBATCH --partition=serial" >> ${jobScript}
 echo "#SBATCH --export=ALL" >> ${jobScript}
-#      echo "#SBATCH --share" >> ${jobScript}
-#      echo "#SBATCH --account=star" >> ${jobScript}
 echo "#SBATCH --time=1:00:00" >> ${jobScript}
 echo "#SBATCH --ntasks=1" >> ${jobScript}
 echo "#SBATCH --cpus-per-task=1" >> ${jobScript}
 echo "#SBATCH --mem-per-cpu=4096" >> ${jobScript}
-echo "#SBATCH --output=CRTM_coef/workdir/MW/GenCoeff/control/output.%j.txt" >> ${jobScript}
-echo "#SBATCH --error=CRTM_coef/workdir/MW/GenCoeff/control/output.%j.err" >> ${jobScript}
-\end{verbatim}
+echo "#SBATCH --output=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.txt" >> ${jobScript}
+echo "#SBATCH --error=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.err" >> ${jobScript}
+#echo "source /etc/bashrc" >> ${jobScript}
+# Load the required modules (you might have to mess around with these)
+echo "module purge" >> ${jobScript}
+echo "module load license_intel/S4" >> ${jobScript}
+echo "module load stack-intel/2021.5.0" >> ${jobScript}
+echo "module load openblas" >> ${jobScript}
+# Go to the execution directory
+echo "cd ${RunDir}" >> ${jobScript}
+#echo "I_MPI_JOB_STARTUP_TIMEOUT=10000" >> ${jobScript}
+echo "${EXE_FILE} ${GROUP_ID}" >> ${jobScript}
 
-Finally, to perform the regression, open the \verb|run_tau_coeff.sh| script and run step 1 first, followed by step 3:
+# -- execute the job script
+chmod 700 $jobScript
+sbatch ./$jobScript
+\end{verbatim}
+You may wish to make substantial modifications to the above depening on your HPC environment.  This is also where you would do some modifications to run locally instead, not officially supported yet.
+
+Finally, to perform the regression:
+
 
 \begin{verbatim}
-#!/bin/sh
-
-#------------------------------------------------------------------------
-# Generate transmittance coefficients for each channel and tau component
-#------------------------------------------------------------------------
-
-#-----------------------------------
-# 1): Generate tau coefficients
-#-----------------------------------
-
-#./gen_tau_coeff.sh tau_coeff.parameters
-
-#------------------------------------------------------------------
-# 2) Get fitting errors for each component - run after 1)
-#------------------------------------------------------------------
-
-#get_stat.sh tau_coeff.parameters
-
-#----------------------------------------------------------------------
-# 3) Merge (concatenate) tau coefficient files into one - run after 1)
-#----------------------------------------------------------------------
-
-EXE_file=CRTM_coef/src/TauRegress/ODPS/Assemble_ODPS/Cat_ODPS
-./cat_taucoef.sh tau_coeff.parameters $EXE_file
+./gen_tau_coeff.sh tau_coeff.parameters
+./cat_taucoef.sh tau_coeff.parameters ./Assemble_ODPS 
 \end{verbatim}
 
-If everything worked, the resulting TauCoeff file can be found in the \verb|results/| folder.
+If everything worked, the resulting TauCoeff file can be found in the \verb|results/| folder.  If it seems to hang, check your \verb|control/| directory for the output / errors.  Usually the issue is some library missing.   Feel free to ask for help.
+
+You'll want to rename the resultant \verb|results/taucoef.<sensor_id>.ECMWF83.nc| file to \verb|<sensor_id>.TauCoeff.nc| to be consistent with typical CRTM naming convention.  
+To convert to binary format, use \verb|ODPS_NC2BIN| and follow the prompts, with the same endian caveats as previously noted. 
 
 \end{document}
 
