@@ -109,30 +109,27 @@ You might run into issues where cmake can't find netCDF.
 
  #pick the path to the include directory that matches your compiler 
  export NetCDF_INCLUDE_DIRS=/opt/netcdf4/4.7.1-intel-19.0.5/include
+\end{verbatim}
+ 
 
- \end{verbatim}
 
- \begin{verbatim}
- #aside #1 for macos/linux box (tested on macbook-intel so far)
- This package is really designed for HPC use, because it's fairly intensive.  However, for MW-only development, you can probably get away with doing it on a Mac/Linux desktop / laptop.
- A lot of the instruction / testing has occured with Intel Fortran Compiler (ifort), but you can give this a shot on your local box
+Aside for macos/linux box (tested on macbook-intel so far).  This package is really designed for HPC use, because it's fairly intensive.  However, for MW-only development, you can probably get away with doing it on a Mac/Linux desktop / laptop. A lot of the instruction / testing has occured with Intel Fortran Compiler (ifort), but you can give this a shot on your local box
+\begin{verbatim}
  brew install gcc
  brew install netcdf
  brew install netcdf-fortran
  brew install openblas
- OR
- install spack-stack:  https://wiki.ucar.edu/display/JEDI/Building+spack-stack+on+MacOS  (this takes awhile, and is unnecessary if you're only doing CRTM stuff).  
-
- \end{verbatim}
+\end{verbatim}
+OR install spack-stack:  https://wiki.ucar.edu/display/JEDI/Building+spack-stack+on+MacOS  (this takes awhile, and is unnecessary if you're only doing CRTM stuff).  
 
 Try to run the \verb|cmake ..| step again.  Contact the JCSDA CRTM team via github with any questions (\verb|https://github.com/JCSDA/CRTM_coef|)
 
- \begin{verbatim}
+\begin{verbatim}
  #still in the \verb|build| directory ...
  make -j12
  # if successful
  make install
- \end{verbatim}
+\end{verbatim}
 
 Have a look at the \verb|build/bin| directory, you should see the following applications installed:
 
