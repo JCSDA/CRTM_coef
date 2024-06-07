@@ -29,6 +29,7 @@ PROGRAM oSRF_Create_from_ASCII
                                        INFRARED_SENSOR, &
                                        VISIBLE_SENSOR, &
                                        ULTRAVIOLET_SENSOR
+
   USE Spectral_Units_Conversion, ONLY: GHz_to_inverse_cm, &
                                        micron_to_inverse_cm
   USE LinkedList
@@ -55,7 +56,7 @@ PROGRAM oSRF_Create_from_ASCII
                                                 '[cm^-1]   ', &
                                                 '[mum]     ', &
                                                 '[mum]     ' /) 
-  CHARACTER(LEN = 30):: Sensor_Id = 'tropics_sv1_srf_v1'
+  CHARACTER(LEN = 30):: Sensor_Id = 'cosmir_air'
   CHARACTER(LEN = 256):: oSRF_Filename
   CHARACTER(LEN = 256):: format_string
   CHARACTER(LEN = 256):: msg
@@ -100,11 +101,11 @@ PROGRAM oSRF_Create_from_ASCII
   ! ...Copy over other information
   oSRF_File%Filename         = TRIM(Sensor_Id) // '.osrf.nc'
   oSRF_File%Sensor_ID        = TRIM(Sensor_Id)
-  oSRF_File%WMO_Satellite_Id = 1
-  oSRF_File%WMO_Sensor_Id    = 1
+  oSRF_File%WMO_Satellite_Id = 1023
+  oSRF_File%WMO_Sensor_Id    = 2047
   !oSRF_File%Sensor_Type      = MICROWAVE_SENSOR
-  oSRF_File%Title            = 'TROPICS instrument oSRF'
-  oSRF_File%History          = 'P. Stegmann, 2020-12-30'
+  oSRF_File%Title            = 'CoSMIR AIR'
+  oSRF_File%History          = 'B. Johnson June 6, 2024'
   oSRF_File%Comment          = 'Test implementation'
   oSRF_File%n_Channels       = n_Channels
 

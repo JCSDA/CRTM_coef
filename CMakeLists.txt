@@ -20,6 +20,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
 include( cmake/${PROJECT_NAME}_compiler_flags.cmake )
 include(GNUInstallDirs)
 
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -convert little_endian")
+
 find_package(NetCDF REQUIRED COMPONENTS Fortran)
 
 if(OPENMP)

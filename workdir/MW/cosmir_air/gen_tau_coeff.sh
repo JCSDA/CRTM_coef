@@ -124,6 +124,8 @@ BATCH_DIR=${WORK_DIR}/${ProfSet}
 rm -f ${BATCH_DIR}/CoeffJob_*.sh 2>/dev/null
 TotalJob_count=0
 
+echo "XXX" ${SENSOR_LIST}
+
 for SatSen in ${SENSOR_LIST}; do
 
   #--- work directory for current sensor
@@ -173,7 +175,7 @@ EOF`
     #--- parse gas name list
     GasName_List=`echo $COMPONENTS | awk -F, '{for(i=1;i<=NF;i++)print $i}'`
   fi
-
+	
   echo $GasName_List > ${Sensor_DIR}/components.txt
 
   # --- Get the full algorithm-associated components and assign group ID
@@ -194,6 +196,7 @@ EOF`
   #--- when computing components such as dry, wet and ozo, the
   #    file $TauCoeffFile does not exist
   
+
   if [ ! -f ${TauCoeffFile} ];then
     TauCoeffFile="NotExist"
   fi
@@ -265,6 +268,7 @@ EOF`
       #--- create and go to execution directory
 
       RunDir=${Sensor_DIR}/${GasName}/${ProcSuffix}
+			echo "Rundir" $RunDir
       mkdir -p $RunDir
       cd ${RunDir}
       ln -s /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air/upwelling.cosmir_air.TauProfile.nc ./
@@ -273,6 +277,7 @@ EOF`
       rm -f *signal.txt 2>/dev/null
 
       #--- create namelist file
+			TauCoeffFile="TauCoeff_${TopSeqCh}.nc"
 
 cat << EOF > Namelist.txt
 
@@ -298,7 +303,6 @@ EOF
       #-------------------------------------------------------
 
      #--- move back to where the batch files are
-
       cd ${BATCH_DIR}
   
       Job_count=`expr $Job_count + 1`                                       
@@ -333,7 +337,7 @@ EOF
       Error_file_id=${SatSen}.${GasName}.ch${TopSeqCh}
  
       echo "#!/bin/bash" >> ${jobScript}
-      echo "#SBATCH --job-name=ODPS_Run.%j.out" >> ${jobScript}
+      echo "#SBATCH --job-name=ODPS_Run.${SLURM_JOB_ID}.out" >> ${jobScript}
       echo "#SBATCH --partition=serial" >> ${jobScript}
       echo "#SBATCH --export=ALL" >> ${jobScript}
 #      echo "#SBATCH --share" >> ${jobScript}
@@ -349,19 +353,19 @@ EOF
       echo "module purge" >> ${jobScript}
       echo "module load license_intel/S4" >> ${jobScript}
       #echo "module load impi/4.1.3.049" >> ${jobScript}
-      echo "module load intel/2022.1" >> ${jobScript}
-      echo "module load hdf hdf5 netcdf4" >> ${jobScript}
+      echo "module load stack-intel/2021.5.0" >> ${jobScript}
+#      echo "module load hdf hdf5 netcdf4" >> ${jobScript}
+			echo "module load netcdf-fortran/4.6.1" >> ${jobScript}
+			echo "module load openblas" >> ${jobScript}
       # Go to the execution directory
       echo "cd ${RunDir}" >> ${jobScript}
       #echo "I_MPI_JOB_STARTUP_TIMEOUT=10000" >> ${jobScript}
-      echo "srun ${EXE_FILE} ${GROUP_ID}" >> ${jobScript}
-     
+      echo "${EXE_FILE} ${GROUP_ID}" >> ${jobScript}
 
       # -- execute the job script                                                       
 
       chmod 700 $jobScript  
-#      qsub $jobScript   
-      sbatch $jobScript
+      sbatch ./$jobScript
 
       #--- put the execution directory in a file
 

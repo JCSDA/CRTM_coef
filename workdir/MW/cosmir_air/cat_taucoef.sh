@@ -110,34 +110,34 @@ for SatSen in ${SENSOR_LIST}; do
     TAU_COEFF_FILE1=""                                                                   
 
     for signalFileDIR in $DirList ;do                                                    
-
-      TAU_FILE_IN=${signalFileDIR}/TauCoeff.${FILE_TYPE} 
+				
+				TAU_FILE_IN=${signalFileDIR}/TauCoeff.${FILE_TYPE} 
+        
+				if [ "$TAU_COEFF_FILE1" == "" ];then                                               
+						
+						TAU_COEFF_FILE1=${TAU_FILE_IN}                                                   
+						# add by ychen 03/02/09 for one channel sensor case
+						cp ${TAU_COEFF_FILE1} ${TAU_COEFF_FILE}
+						
+				else                                                                               
                                                                                          
-      if [ "$TAU_COEFF_FILE1" == "" ];then                                               
-
-        TAU_COEFF_FILE1=${TAU_FILE_IN}                                                   
-# add by ychen 03/02/09 for one channel sensor case
-         cp ${TAU_COEFF_FILE1} ${TAU_COEFF_FILE}
-
-      else                                                                               
-                                                                                         
-        TAU_COEFF_FILE2=${TAU_FILE_IN}                                                   
-
-#        echo "${SCRIPT_DIR}/$EXE_FILE << EOF" > Cat_tmp_script                                         
-        echo "$EXE_FILE << EOF" > Cat_tmp_script                                         
-        echo "$TAU_COEFF_FILE1" >> Cat_tmp_script                                        
-        echo "$TAU_COEFF_FILE2" >> Cat_tmp_script                                        
-        echo "$TAU_COEFF_FILE" >> Cat_tmp_script                                         
-        echo "2" >> Cat_tmp_script                                                       
-        echo "EOF" >> Cat_tmp_script                                                     
-        chmod 700 Cat_tmp_script                                                         
-        ./Cat_tmp_script                                                                   
-        rm -f Cat_tmp_script                                                             
-                                                                                         
-        TAU_COEFF_FILE1=$TAU_COEFF_FILE                                                  
-
-      fi                                             
-
+						TAU_COEFF_FILE2=${TAU_FILE_IN}                                                   
+						
+						#        echo "${SCRIPT_DIR}/$EXE_FILE << EOF" > Cat_tmp_script                                         
+						echo "$EXE_FILE << EOF" > Cat_tmp_script                                         
+						echo "$TAU_COEFF_FILE1" >> Cat_tmp_script                                        
+						echo "$TAU_COEFF_FILE2" >> Cat_tmp_script                                        
+						echo "$TAU_COEFF_FILE" >> Cat_tmp_script                                         
+						echo "2" >> Cat_tmp_script                                                       
+						echo "EOF" >> Cat_tmp_script                                                     
+						chmod 700 Cat_tmp_script                                                         
+						./Cat_tmp_script                                                                   
+						rm -f Cat_tmp_script                                                             
+            
+						TAU_COEFF_FILE1=$TAU_COEFF_FILE                                                  
+						
+				fi                                             
+				
     done                                                                                
 
     TAU_FILE_IN=$TAU_COEFF_FILE   

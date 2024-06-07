@@ -10,7 +10,7 @@
 # FLAGS COMMON TO ALL BUILD TYPES
 ####################################################################
 
-set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -assume byterecl -fPIC")
+set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -assume byterecl -fPIC -convert big_endian")
 
 if( HAVE_AUTOPROFILE )
   set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -finstrument-functions")
@@ -38,7 +38,7 @@ set( CMAKE_Fortran_FLAGS_BIT     "-O2 -ip -ipo -unroll -inline -no-heap-arrays" 
 # LINK FLAGS
 ####################################################################
 
-set( CMAKE_Fortran_LINK_FLAGS    "" )
+set( CMAKE_Fortran_LINK_FLAGS    "-convert big_endian" )
 
 ####################################################################
 
