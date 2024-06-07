@@ -34,6 +34,7 @@
       \sffamily\textbf{Date} & \sffamily\textbf{Author} & \sffamily\textbf{Change}\\
       \hline\hline
       2021-12-14 & P. Stegmann& Initial Draft.\\
+      2024-06-07 & B. Johnson (bjohns@ucar.edu or Benjamin.T.Johnson@noaa.gov) & Updated for improved workflow.\\
       \hline
     \end{tabular}
   \end{table}
@@ -122,7 +123,8 @@ Aside for macos/linux box (tested on macbook-intel so far).  This package is rea
 \end{verbatim}
 OR install spack-stack:  https://wiki.ucar.edu/display/JEDI/Building+spack-stack+on+MacOS  (this takes awhile, and is unnecessary if you're only doing CRTM stuff).  
 
-Try to run the \verb|cmake ..| step again.  Contact the JCSDA CRTM team via github with any questions (\verb|https://github.com/JCSDA/CRTM_coef|)
+Try to run the \verb|cmake ..| step again.
+Contact the JCSDA CRTM team via github with any questions (\verb|https://github.com/JCSDA/CRTM_coef|)
 
 \begin{verbatim}
  #still in the \verb|build| directory ...
@@ -260,7 +262,7 @@ Creating the SpcCoeff file requires the \verb|polangle.txt| and \verb|polarizati
 They specify the polarization offset angle in degrees per channel and the CRTM polarization scheme per channel as an integer.
 In order to create the SpcCoeff spectral coefficient file, run the \verb|Create_SpcCoeff| application in the case directory:
 
-polarization.txt structure, one entry per channel:
+\verb|polarization.txt| structure, one entry per channel:
 \begin{verbatim}
 9
 9
@@ -296,7 +298,7 @@ and repeated here for your convenience, but double check:
 \end{verbatim}
 Most passive MW sounders are 9/10.   Most passive MW imagers are 5/6.   If you're not sure, or if it's something weird, then discuss with the CRTM team(s).   
 
-polangle.txt structure, which defines the rotation of the polarization angle with respect to the along-flight direction, 0 degrees being directly along the direction of flight, assuming a standard sensor orientation (lots of caveats apply).  Usually these are given in degrees of offset clockwise from zero.   One entry per channel. 
+\verb|polangle.txt| structure, which defines the rotation of the polarization angle with respect to the along-flight direction, 0 degrees being directly along the direction of flight, assuming a standard sensor orientation (lots of caveats apply).  Usually these are given in degrees of offset clockwise from zero.   One entry per channel. 
 \begin{verbatim}
 0.00
 0.00
