@@ -56,7 +56,7 @@ PROGRAM oSRF_Create_from_ASCII
                                                 '[cm^-1]   ', &
                                                 '[mum]     ', &
                                                 '[mum]     ' /) 
-  CHARACTER(LEN = 30):: Sensor_Id = 'cosmir_air'
+  CHARACTER(LEN = 30) :: Sensor_Id
   CHARACTER(LEN = 256):: oSRF_Filename
   CHARACTER(LEN = 256):: format_string
   CHARACTER(LEN = 256):: msg
@@ -104,9 +104,9 @@ PROGRAM oSRF_Create_from_ASCII
   oSRF_File%WMO_Satellite_Id = 1023
   oSRF_File%WMO_Sensor_Id    = 2047
   !oSRF_File%Sensor_Type      = MICROWAVE_SENSOR
-  oSRF_File%Title            = 'CoSMIR AIR'
-  oSRF_File%History          = 'B. Johnson June 6, 2024'
-  oSRF_File%Comment          = 'Test implementation'
+  oSRF_File%Title            = 'CoSMIR-H Sounder AIR'
+  oSRF_File%History          = 'B. Johnson June 7, 2024'
+  oSRF_File%Comment          = 'Test implementation. oSRF_Create_from_ASCII.f90'
   oSRF_File%n_Channels       = n_Channels
 
   ! Set the sensor type
