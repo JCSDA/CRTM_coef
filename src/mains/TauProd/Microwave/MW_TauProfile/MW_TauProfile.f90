@@ -354,7 +354,7 @@ PROGRAM MW_TauProfile
 
     ! Output an info message
     WRITE( *,'(//2x,"Calculating ",a," transmittances for ",a,/)' ) &
-             TRIM(DIRECTION_NAME(direction)), TRIM(sinfo%Sensor_id)
+             TRIM(DIRECTION_NAME(direction)), TRIM(ADJUSTL(sinfo%Sensor_id))
 
     ! Construct sensor filenames
     osrf_filename = './'//TRIM(ADJUSTL(sinfo%Sensor_Id))//'.osrf.nc'
@@ -386,7 +386,7 @@ PROGRAM MW_TauProfile
                                     N_MOLECULE_SETS, &
                                     tauprofile       )
     IF ( err_stat /= SUCCESS ) THEN
-      msg = 'Error allocating TauProfile structure for '//TRIM(sinfo%Sensor_Id)
+      msg = 'Error allocating TauProfile structure for '//TRIM(ADJUSTL(sinfo%Sensor_id))
       CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
     END IF
 
@@ -433,7 +433,7 @@ PROGRAM MW_TauProfile
                 STAT=alloc_stat )
       IF ( alloc_stat /= 0 ) THEN
         WRITE( msg,'("Error allocating frequency and transmittance arrays for ",a," oSRF #",i0)') &
-                   TRIM(sinfo%Sensor_Id), l
+                   TRIM(ADJUSTL(sinfo%Sensor_id)), l
         CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
       END IF
       
@@ -473,7 +473,7 @@ PROGRAM MW_TauProfile
         IF ( err_stat /= SUCCESS ) THEN
           WRITE( msg,'("Error computing MW LBL transmittance for profile #",i0,&
                       &", channel ",i0," of ",a)' ) &
-                      m, sinfo%Sensor_Channel(l), TRIM(sinfo%Sensor_Id)
+                      m, sinfo%Sensor_Channel(l), TRIM(ADJUSTL(sinfo%Sensor_id))
           CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
         END IF
 
@@ -496,7 +496,7 @@ PROGRAM MW_TauProfile
             CASE DEFAULT
               WRITE( msg,'("Invalid molecule list index found at profile #",i0,&
                           &", channel ",i0," of ",a)' ) &
-                          m, sinfo%Sensor_Channel(l), TRIM(sinfo%Sensor_Id)
+                          m, sinfo%Sensor_Channel(l), TRIM(ADJUSTL(sinfo%Sensor_id))
               CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
           END SELECT
 
@@ -572,7 +572,7 @@ PROGRAM MW_TauProfile
                   STAT=alloc_stat )
       IF ( alloc_stat /= 0 ) THEN
         WRITE( msg,'("Error deallocating frequency and transmittance arrays for ",a," oSRF #",i0)') &
-                   TRIM(sinfo%Sensor_Id), l
+                   TRIM(ADJUSTL(sinfo%Sensor_id)), l
         CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
       END IF
 
@@ -585,7 +585,7 @@ PROGRAM MW_TauProfile
                     n_frequencies, MODEL_NAME(model)
     ! ...Create the output data file
     tauprofile_filename = TRIM(DIRECTION_NAME(direction))//'.'//&
-                          TRIM(sinfo%Sensor_Id)//&
+                          TRIM(ADJUSTL(sinfo%Sensor_id))//&
                           '.TauProfile.nc'
     err_stat = Create_TauProfile_netCDF( tauprofile_filename, &
                                          atmprofile(1)%Level_Pressure, &
@@ -614,14 +614,14 @@ PROGRAM MW_TauProfile
     err_stat = Write_TauProfile_netCDF( tauprofile_filename, tauprofile, profile_angle=1 )
     IF ( err_stat /= SUCCESS ) THEN
       msg = 'Error writing TauProfile structure for '//&
-            TRIM(sinfo%Sensor_Id)//' to '//TRIM(tauprofile_filename)
+            TRIM(ADJUSTL(sinfo%Sensor_id))//' to '//TRIM(tauprofile_filename)
       CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
     END IF
 
 
     ! Display the sensor timing results
     CALL Timing_End(sensor_timing)
-    WRITE( *,'(7x,"Timing for ",a,":")') TRIM(sinfo%Sensor_id)
+    WRITE( *,'(7x,"Timing for ",a,":")') TRIM(ADJUSTL(sinfo%Sensor_id))
     CALL Timing_Display(sensor_timing)
 
 
@@ -629,7 +629,7 @@ PROGRAM MW_TauProfile
     ! ...TauProfile
     err_stat = Destroy_TauProfile( tauprofile )
     IF ( err_stat /= SUCCESS ) THEN
-      msg = 'Error destroying TauProfile structure for '//TRIM(sinfo%Sensor_Id)
+      msg = 'Error destroying TauProfile structure for '//TRIM(ADJUSTL(sinfo%Sensor_id))
       CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
     END IF
     ! ...oSRF
