@@ -1,0 +1,1296 @@
+ parameters from namelist.txt file:
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ampr_air.SpcCoeff.
+ nc
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83.AtmProfile
+ .nc
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/upwelling.ampr_air
+ .TauProfile.nc
+ TauCoeff_003.nc
+ SpcCoeff_ReadFile(netCDF)(INFORMATION) : FILE: /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ampr_air.SpcCoeff.nc; 
+ SpcCoeff RELEASE.VERSION:  8.01
+   N_CHANNELS=8
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ Reference profiles are calculated.
+         100         100          83          83
+ Calculating brightness temperatures.
+ Write_ODPS_netCDF(INFORMATION) : FILE: TauCoeff.nc; 
+   ODPS RELEASE.VERSION:  2.01  N_LAYERS=100  N_COMPONENTS=1  N_ABSORBERS=1  N_CHANNELS=1  N_COEFFS=1400
+ *** NORMAL END ***
+ parameters from namelist.txt file:
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ampr_air.SpcCoeff.
+ nc
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83.AtmProfile
+ .nc
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/upwelling.ampr_air
+ .TauProfile.nc
+ TauCoeff_003.nc
+ SpcCoeff_ReadFile(netCDF)(INFORMATION) : FILE: /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ampr_air.SpcCoeff.nc; 
+ SpcCoeff RELEASE.VERSION:  8.01
+   N_CHANNELS=8
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ Reference profiles are calculated.
+         100         100          83          83
+ Calculating brightness temperatures.
+ Write_ODPS_netCDF(INFORMATION) : FILE: TauCoeff.nc; 
+   ODPS RELEASE.VERSION:  2.01  N_LAYERS=100  N_COMPONENTS=1  N_ABSORBERS=1  N_CHANNELS=1  N_COEFFS=1400
+ *** NORMAL END ***
+ parameters from namelist.txt file:
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ampr_air.SpcCoeff.
+ nc
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83.AtmProfile
+ .nc
+ /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/upwelling.ampr_air
+ .TauProfile.nc
+ TauCoeff_003.nc
+ SpcCoeff_ReadFile(netCDF)(INFORMATION) : FILE: /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ampr_air.SpcCoeff.nc; 
+ SpcCoeff RELEASE.VERSION:  8.01
+   N_CHANNELS=8
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ AtmProfile_netCDF_IO::ReadGroup(INFORMATION) : 
+ AtmProfile RELEASE.VERSION:  3.01  N_LAYERS=100  N_ABSORBERS=6  
+     ABSORBERS:         H2O     CO2     O3      N2O     CO      CH4  
+     ABSORBER_UNITS:  g/kg    ppmv    ppmv    ppmv    ppmv    ppmv
+         100         100
+ Reference profiles are calculated.
+         100         100          83          83
+ Calculating brightness temperatures.
+ Write_ODPS_netCDF(INFORMATION) : FILE: TauCoeff.nc; 
+   ODPS RELEASE.VERSION:  2.01  N_LAYERS=100  N_COMPONENTS=1  N_ABSORBERS=1  N_CHANNELS=1  N_COEFFS=1400
+ *** NORMAL END ***

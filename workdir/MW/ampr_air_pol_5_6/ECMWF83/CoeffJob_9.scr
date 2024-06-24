@@ -1,0 +1,51 @@
+#!/bin/bash
+#SBATCH --job-name=ODPS_Run..out
+#SBATCH --partition=serial
+#SBATCH --export=ALL
+#SBATCH --time=1:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=4096
+#SBATCH --output=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/control/output.%j.txt
+#SBATCH --error=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/control/output.%j.err
+module purge
+module load license_intel/S4
+module load stack-intel/2021.5.0
+module load netcdf-fortran/4.6.1
+module load openblas
+cd /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/wet/ampr_air.wet.ch001to001.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/build/bin/ODPS_Regress 3
+#!/bin/bash
+#SBATCH --job-name=ODPS_Run..out
+#SBATCH --partition=serial
+#SBATCH --export=ALL
+#SBATCH --time=1:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=4096
+#SBATCH --output=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/control/output.%j.txt
+#SBATCH --error=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/control/output.%j.err
+module purge
+module load license_intel/S4
+module load stack-intel/2021.5.0
+module load netcdf-fortran/4.6.1
+module load openblas
+cd /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/wet/ampr_air.wet.ch001to001.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/build/bin/ODPS_Regress 3
+#!/bin/bash
+#SBATCH --job-name=ODPS_Run..out
+#SBATCH --partition=serial
+#SBATCH --export=ALL
+#SBATCH --time=1:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=4096
+#SBATCH --output=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/control/output.%j.txt
+#SBATCH --error=/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/control/output.%j.err
+module purge
+module load license_intel/S4
+module load stack-intel/2021.5.0
+module load netcdf-fortran/4.6.1
+module load openblas
+cd /data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/wet/ampr_air.wet.ch001to001.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/build/bin/ODPS_Regress 3

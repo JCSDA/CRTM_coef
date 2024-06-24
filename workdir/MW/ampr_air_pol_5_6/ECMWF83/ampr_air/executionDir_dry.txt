@@ -1,0 +1,8 @@
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch001to001.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch002to002.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch003to003.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch004to004.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch005to005.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch006to006.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch007to007.ECMWF83
+/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83/ampr_air/dry/ampr_air.dry.ch008to008.ECMWF83

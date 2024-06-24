@@ -1,0 +1,16 @@
+
+    &SATSEN
+      File_Prefix  = "ampr_air",
+      Ichan_start    =  002,
+      Ichan_end   =  002 
+/
+    &GENCOEF
+      icom = 1,
+      Nangle_regression    = 7      
+/
+    &FILENAMES
+      inFilename_spcCoef = "/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ampr_air.SpcCoeff.nc",
+      inFilename_atmProfile = "/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/ECMWF83.AtmProfile.nc",
+      inFilename_tauProfile = "/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/ampr_air/upwelling.ampr_air.TauProfile.nc"
+      inFilename_tauCoeff = "TauCoeff_002.nc"
+/      
