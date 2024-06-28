@@ -104,8 +104,8 @@ PROGRAM oSRF_Create_from_ASCII
   oSRF_File%WMO_Satellite_Id = 1023
   oSRF_File%WMO_Sensor_Id    = 2047
   !oSRF_File%Sensor_Type      = MICROWAVE_SENSOR
-  oSRF_File%Title            = 'CoSMIR-H Sounder AIR'
-  oSRF_File%History          = 'B. Johnson June 7, 2024'
+  oSRF_File%Title            = 'AMPR AIR'
+  oSRF_File%History          = 'B. Johnson June 24, 2024'
   oSRF_File%Comment          = 'Test implementation. oSRF_Create_from_ASCII.f90'
   oSRF_File%n_Channels       = n_Channels
 
