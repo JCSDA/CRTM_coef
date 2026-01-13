@@ -16,4 +16,4 @@ else( ${crtm_FOUND} )
   message(STATUS "CRTM NOT FOUND; Excluding CRTM Observation Operator")
 endif( ${crtm_FOUND} )
 
-add_subdirectory( mains )
+add_subdirectory( apps )

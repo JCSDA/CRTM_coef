@@ -53,7 +53,7 @@ class Test_ODPS(unittest.TestCase):
     'COMP_IDX':2,\
     'Nincang':7,\
     'SpcCoeffFile':"../../../../cases/amsua_metop-c_benchmark/amsua_metop-c.SpcCoeff.nc",\
-    'ATM_PROFLE_FILE':"../../../../src/TauProd/Microwave/Compute_MW_Transmittance/ECMWF83.AtmProfile.nc",\
+    'ATM_PROFLE_FILE':"../../../../src/apps/TauProd/Microwave/Compute_MW_Transmittance/ECMWF83.AtmProfile.nc",\
     'TauProfileFile':"../../../../cases/amsua_metop-c_benchmark/upwelling.amsua_metop-c.TauProfile.nc",\
     'TauCoeffFile':"NotExist"}
     nl.create_NameList(namelist_dict)
@@ -72,7 +72,7 @@ class Test_ODPS(unittest.TestCase):
 /
     &FILENAMES
       inFilename_spcCoef = "../../../../cases/amsua_metop-c_benchmark/amsua_metop-c.SpcCoeff.nc",
-      inFilename_atmProfile = "../../../../src/TauProd/Microwave/Compute_MW_Transmittance/ECMWF83.AtmProfile.nc",
+      inFilename_atmProfile = "../../../../src/apps/TauProd/Microwave/Compute_MW_Transmittance/ECMWF83.AtmProfile.nc",
       inFilename_tauProfile = "../../../../cases/amsua_metop-c_benchmark/upwelling.amsua_metop-c.TauProfile.nc",
       inFilename_tauCoeff = "NotExist"
 /     

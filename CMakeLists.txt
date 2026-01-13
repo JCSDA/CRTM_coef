@@ -20,7 +20,11 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
 include( cmake/${PROJECT_NAME}_compiler_flags.cmake )
 include(GNUInstallDirs)
 
-set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -convert little_endian")
+if(CMAKE_Fortran_COMPILER_ID MATCHES "Intel")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -convert little_endian")
+elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fconvert=little-endian")
+endif()
 
 find_package(NetCDF REQUIRED COMPONENTS Fortran)
 

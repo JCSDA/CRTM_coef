@@ -10,7 +10,7 @@
 /
     &FILENAMES
       inFilename_spcCoef = "../../../../cases/amsua_metop-c_benchmark/amsua_metop-c.SpcCoeff.nc",
-      inFilename_atmProfile = "../../../../src/TauProd/Microwave/Compute_MW_Transmittance/ECMWF83.AtmProfile.nc",
+      inFilename_atmProfile = "../../../../src/apps/TauProd/Microwave/Compute_MW_Transmittance/ECMWF83.AtmProfile.nc",
       inFilename_tauProfile = "../../../../cases/amsua_metop-c_benchmark/upwelling.amsua_metop-c.TauProfile.nc",
       inFilename_tauCoeff = "NotExist"
 /      

@@ -160,8 +160,8 @@ This is a checklist of applications that are created in the previous step:
 \subsection{Preparing the SRF}
 Before starting the coefficient generation process, the spectral response function (SRF) of the instrument needs to be brought into the correct input format. 
 This is the responsibility of the user, as is making sure that the SRF spectral resolution is high enough to resolve all desired absorption features.
-Input data for a new CRTM instrument should be stored in the \verb|inbox/fix/config/| directory of the CGP.
-An example ASCII input file for TROPICS (e.g., \verb|inbox/fix/config/TROPICS_Pathfinder/tropics_sv1_srf_v4/SRFDATA/tropics_sv1_srf_v4_ch1.txt| looks like this:)
+Input data for a new CRTM instrument should be stored in the \verb|staging/fix/config/| directory of the CGP.
+An example ASCII input file for TROPICS (e.g., \verb|staging/fix/config/TROPICS_Pathfinder/tropics_sv1_srf_v4/SRFDATA/tropics_sv1_srf_v4_ch1.txt| looks like this:)
 \begin{verbatim}
 89.484  0.0022256
 89.522  0.0026217
@@ -215,8 +215,8 @@ tropics_sv2_ch12.txt
 filename structure is: \verb|sensor_id_ch##.txt|.  Not sure if ``Ch01'' works vs. ``Ch1''.  
 
 \subsection{Creating a Case Directory}
-The coefficient generation should be carried out in the \verb|workdir| folder.
-In the case of a MW sensor, the \verb|workdir/MW| directory is the appropriate location.
+The coefficient generation should be carried out in the \verb|workflows| folder.
+In the case of a MW sensor, the \verb|workflows/MW| directory is the appropriate location.
 
 In order to create a new case directory, simple type:
 \begin{verbatim}
@@ -259,7 +259,7 @@ yes
 This will create the file \verb|tropics_sv1_srf_v2.osrf.nc|.  You can try it without interpolation too (recommended, in fact).  
 
 \subsection{Creating the SpcCoeff file}
-Creating the SpcCoeff file requires the \verb|polangle.txt| and \verb|polarization.txt| files to be linked into the case directory from the \verb|inbox/fix/config/| directory.
+Creating the SpcCoeff file requires the \verb|polangle.txt| and \verb|polarization.txt| files to be linked into the case directory from the \verb|staging/fix/config/| directory.
 They specify the polarization offset angle in degrees per channel and the CRTM polarization scheme per channel as an integer.
 In order to create the SpcCoeff spectral coefficient file, run the \verb|Create_SpcCoeff| application in the case directory:
 
@@ -309,7 +309,7 @@ Most passive MW sounders are 9/10.   Most passive MW imagers are 5/6.   If you'r
 \end{verbatim}
 Note: If you find you've got some biases WRT obs in your cross-track MW instrument over ocean, particularly at the edges of the scan, you might try some different polarization options. 
 
-After you've created these files in your inbox directory, copy the following to your working directory (e.g., \verb|workdir/MW/sensor|)
+After you've created these files in your staging directory, copy the following to your working directory (e.g., \verb|workflows/MW/sensor|)
 \begin{verbatim}
 SRFDATA/
 polangle.txt
@@ -366,7 +366,7 @@ If you need both endian formats of binary files, you'll have to recompile/rerun 
 
 \subsection{Rosenkranz MW Transmittance Calculations}
 The simplest approach to compute the line-by-line MW layer-to-space transmittances for the ODPS regression is to use the Rosenkranz model implemented in the CRTM.
-First, link in the \verb|ECMWF83.AtmProfile.nc| predictor dataset from the \verb|fix/TauProd/| folder.
+First, link in the \verb|ECMWF83.AtmProfile.nc| predictor dataset from the \verb|data/reference/TauProd/| folder.
 Second, create a \verb|SensorInfo_<sensor_id>| file by modifying an existing template or create a script to write the SensorInfo file for more complex instruments.
 A generic SensorInfo generator will be provided in the future. 
 
@@ -396,7 +396,7 @@ A generic SensorInfo generator will be provided in the future.
 
 Depending on the spectral resolution of the oSRF file, these calculations may take several minutes.  
 
-At this point your workdir should look something like:
+At this point your workflows directory should look something like:
 \begin{verbatim}
  SRFDATA/
  polangle.txt
@@ -410,8 +410,8 @@ At this point your workdir should look something like:
 
 \subsection{ODPS Regression}
 The ODPS regression is the last step in the CRTM MW transmittance coefficient generation and produces the TauCoeff file.
-This step is performed in a separate folder and an example case directory for the regression is provided in \verb|workdir/MW/GenCoeff/|.
-Before starting the regression calculations, the instrument ID needs to be added to a \verb|sensor_list| file that goes right in your workdir like everything else. 
+This step is performed in a separate folder and an example case directory for the regression is provided in \verb|workflows/MW/GenCoeff/|.
+Before starting the regression calculations, the instrument ID needs to be added to a \verb|sensor_list| file that goes right in your workflows directory like everything else. 
 \begin{verbatim}
  ## This file contains a list of sensors and is one of the input file of
  ## run_tau_coeff.sh
@@ -428,11 +428,11 @@ We fully realize this isn't fun or very generic.  Future releases will include u
 :MAX_CPUs:256
 :CH_INT:1
 :EXE_FILE:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/build/bin/ODPS_Regress
-:WORK_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air
+:WORK_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workflows/MW/cosmir_air
 :PROF_SET:ECMWF83
-:SPC_COEFF_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air
-:TAU_PROFILE_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air
-:ATM_PROFLE_FILE:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workdir/MW/cosmir_air/ECMWF83.AtmProfile.nc
+:SPC_COEFF_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workflows/MW/cosmir_air
+:TAU_PROFILE_DIR:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workflows/MW/cosmir_air
+:ATM_PROFLE_FILE:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/workflows/MW/cosmir_air/ECMWF83.AtmProfile.nc
 :GET_SEN_INFO:/data/users/bjohnson/CRTM/tmp3/CRTM_coef/build/bin/GetSenInfo
 :IR_TYPE:3
 :COMPONENTS:DEFAULT
@@ -457,8 +457,8 @@ echo "#SBATCH --time=1:00:00" >> ${jobScript}
 echo "#SBATCH --ntasks=1" >> ${jobScript}
 echo "#SBATCH --cpus-per-task=1" >> ${jobScript}
 echo "#SBATCH --mem-per-cpu=4096" >> ${jobScript}
-echo "#SBATCH --output=<path>/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.txt" >> ${jobScript}
-echo "#SBATCH --error=<path>/CRTM_coef/workdir/MW/cosmir_air/control/output.%j.err" >> ${jobScript}
+echo "#SBATCH --output=<path>/CRTM_coef/workflows/MW/cosmir_air/control/output.%j.txt" >> ${jobScript}
+echo "#SBATCH --error=<path>/CRTM_coef/workflows/MW/cosmir_air/control/output.%j.err" >> ${jobScript}
 #echo "source /etc/bashrc" >> ${jobScript}
 # Load the required modules (you might have to mess around with these)
 echo "module purge" >> ${jobScript}
@@ -490,4 +490,3 @@ You'll want to rename the resultant \verb|results/taucoef.<sensor_id>.ECMWF83.nc
 To convert to binary format, use \verb|ODPS_NC2BIN| and follow the prompts, with the same endian caveats as previously noted. 
 
 \end{document}
-

@@ -20,7 +20,7 @@
 # 3) Merge (concatenate) tau coefficient files into one - run after 1)
 #----------------------------------------------------------------------
 
-EXE_file=/scratch/users/pstegmann/CRTM_coef/src/mains/TauRegress/ODPS/Assemble_ODPS/Cat_ODPS
+EXE_file=/scratch/users/pstegmann/CRTM_coef/src/apps/TauRegress/ODPS/Assemble_ODPS/Cat_ODPS
 ./cat_taucoef.sh tau_coeff.parameters $EXE_file
 
 #-----------------------------------------------------------------------------
