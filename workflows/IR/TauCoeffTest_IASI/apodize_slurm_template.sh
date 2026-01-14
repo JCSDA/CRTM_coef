@@ -23,8 +23,17 @@ LBLRTM_HITRAN_VERSION="LBLRTM v9.4; HITRAN 2000 + AER updates"
 
 # -- Change to the directory containing the
 # -- current TAPE5 file
-ROOT_DIR=/scratch/users/pstegmann/TauCoeffTest_IASI/
-Apodize_TauSpc_with_IRF=/data/users/pstegmann/lib/CRTM/trunk/src/TauProd/Infrared/Apodize_TauSpc_with_IRF/Apodize_TauSpc_with_IRF
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ROOT_DIR="${ROOT_DIR:-${SCRIPT_DIR}}"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
+Apodize_TauSpc_with_IRF="${APODIZE_TAUSPC_WITH_IRF:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Apodize_TauSpc_with_IRF/Apodize_TauSpc_with_IRF}"
 
 # ----------------------------
 # Change to required directory

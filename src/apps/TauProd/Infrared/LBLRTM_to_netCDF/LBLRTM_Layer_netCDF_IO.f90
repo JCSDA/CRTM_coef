@@ -298,6 +298,7 @@ CONTAINS
     INTEGER(Long) :: nf90_stat
     INTEGER(Long) :: groupid
     INTEGER :: n_points, n_spectra
+    INTEGER :: alloc_stat
     TYPE(LBLRTM_Fhdr_type) :: fhdr
 
     ! Setup
@@ -357,10 +358,23 @@ CONTAINS
       msg = 'Error allocating Layer object for group '//TRIM(group_name)
       CALL Read_Cleanup(); RETURN
     END IF
-    ! ...Check that the number of points is the same!!
+    ! ...Check that the number of points is the same
     IF ( Layer%n_Points /= n_points ) THEN
-      msg = 'Calculated number of Layer points is different from file for group '//TRIM(group_name)
-      CALL Read_Cleanup(); RETURN
+      ! Some SCNMRG outputs omit the extra "slop" point; trust file dimensions.
+      CALL LBLRTM_Layer_Destroy( Layer )
+      ALLOCATE( Layer%Spectrum( n_points, n_spectra ), STAT = alloc_stat )
+      IF ( alloc_stat /= 0 ) THEN
+        msg = 'Error reallocating Layer object for group '//TRIM(group_name)
+        CALL Read_Cleanup(); RETURN
+      END IF
+      Layer%n_Points = n_points
+      Layer%n_Spectra = n_spectra
+      Layer%Header = fhdr
+      Layer%Begin_Frequency = fhdr%Begin_Frequency
+      Layer%End_Frequency = fhdr%End_Frequency
+      Layer%Frequency_Interval = fhdr%Frequency_Interval
+      Layer%Spectrum = 0.0_FP
+      Layer%Is_Allocated = .TRUE.
     END IF
 
 

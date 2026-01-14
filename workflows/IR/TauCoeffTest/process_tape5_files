@@ -117,9 +117,28 @@ usage()
 #-------------------------------------------------------------------------------
 
 SCRIPT_NAME="`basename $0`"
-LBLRUN=AER/aer_lblrtm_v12.8_lnfl_v3.1/lblrtm/lblrtm_v12.8_linux_gnu_dbl 
-TAPE3_DIR=./lnfl
-LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
+if [ -z "${LBLRUN:-}" ]; then
+  LBLRUN="${LBLRTM_EXE:-lblrtm}"
+fi
+TAPE3_DIR="${TAPE3_DIR:-./lnfl}"
+LBLRTM_DATA_DIR="${LBLRTM_DATA_DIR:-${CRTM_COEF_ROOT}/external/LBLRTM/data}"
+LBLRTM_to_netCDF="${LBLRTM_TO_NETCDF:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF}"
+LBLRTM_N_LAYERS="${LBLRTM_N_LAYERS:-100}"
+LBLRTM_DOUBLE_PANEL="${LBLRTM_DOUBLE_PANEL:-FALSE}"
+KEEP_LBLRTM_FILES="${KEEP_LBLRTM_FILES:-no}"
+LOCAL_RUN="${LOCAL_RUN:-no}"
+if [ "${LOCAL_RUN}" != "yes" ] && ! command -v sbatch >/dev/null 2>&1; then
+  LOCAL_RUN="yes"
+fi
 
 #-------------------------------------------------------------------------------
 #                             -- DEFINE DEFAULTS --
@@ -863,10 +882,12 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
 
           # -- Create output file names
           UPWELLING_TAPE_FILE="TAPE20"
+          UPWELLING_TAPE_FALLBACK="TAPE12"
           UPWELLING_TAU_LBLRTM_FILE="upwelling_tau.${ID_TAG}"
           UPWELLING_TAU_NETCDF_FILE="${UPWELLING_TAU_LBLRTM_FILE}.nc"
 
           DOWNWELLING_TAPE_FILE="TAPE21"
+          DOWNWELLING_TAPE_FALLBACK="TAPE13"
           DOWNWELLING_TAU_LBLRTM_FILE="downwelling_tau.${ID_TAG}"
           DOWNWELLING_TAU_NETCDF_FILE="${DOWNWELLING_TAU_LBLRTM_FILE}.nc"
 
@@ -914,9 +935,10 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
           echo >> ${SCRIPT_FILE}
           # I changed the following lines to be able to run LBLRTM - Isaac Moradi - May 18, 2016
           echo "cd ${RESULTS_DIR}" >> ${SCRIPT_FILE} 
-          echo "\rm -f TAPE5 TAPE3" >> ${SCRIPT_FILE}  
+          echo "rm -f TAPE5 TAPE3" >> ${SCRIPT_FILE}  
           echo "ln -s ${ROOT_DIR}/FSCDXS FSCDXS" >> ${SCRIPT_FILE}   
           echo "ln -s ${ROOT_DIR}/xs xs" >> ${SCRIPT_FILE}   
+          echo "ln -s ${LBLRTM_DATA_DIR}/absco-ref_wv-mt-ckd.nc absco-ref_wv-mt-ckd.nc" >> ${SCRIPT_FILE}
           echo "ln -s ${TAPE3_DIR}/${TAPE3_FILE} TAPE3" >> ${SCRIPT_FILE}   
           echo "ln -s ${TAPE5_FILE} TAPE5" >> ${SCRIPT_FILE}  
           echo "# ${LBLRUN} -d -n -r ${RESULTS_DIR} -s ${TAPE3_FILE} ${TAPE5_FILE}" >> ${SCRIPT_FILE}
@@ -960,9 +982,11 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
           echo "# cd ${RESULTS_DIR}" >> ${SCRIPT_FILE}  # Isaac
 
           echo >> ${SCRIPT_FILE}
-          echo "# -- Check that ${UPWELLING_TAPE_FILE} exists" >> ${SCRIPT_FILE}
-          echo "if [ -f ${UPWELLING_TAPE_FILE} ]; then " >> ${SCRIPT_FILE}
+          echo "# -- Prefer SCNMRG output when available, fallback to direct LBLRTM output" >> ${SCRIPT_FILE}
+          echo "if [ -f ${UPWELLING_TAPE_FILE} ]; then" >> ${SCRIPT_FILE}
           echo "  mv ${UPWELLING_TAPE_FILE} ${UPWELLING_TAU_LBLRTM_FILE}" >> ${SCRIPT_FILE}
+          echo "elif [ -f ${UPWELLING_TAPE_FALLBACK} ]; then" >> ${SCRIPT_FILE}
+          echo "  mv ${UPWELLING_TAPE_FALLBACK} ${UPWELLING_TAU_LBLRTM_FILE}" >> ${SCRIPT_FILE}
           echo "else" >> ${SCRIPT_FILE}
           echo "  echo '${SCRIPT_FILE}:${UPWELLING_TAPE_FILE} not found!' >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
           echo "  ls >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
@@ -970,9 +994,11 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
           echo "fi" >> ${SCRIPT_FILE}
 
 #          echo >> ${SCRIPT_FILE}
-#          echo "# -- Check that ${DOWNWELLING_TAPE_FILE} exists" >> ${SCRIPT_FILE}
-#          echo "if [ -f ${DOWNWELLING_TAPE_FILE} ]; then " >> ${SCRIPT_FILE}
+#          echo "# -- Prefer SCNMRG output when available, fallback to direct LBLRTM output" >> ${SCRIPT_FILE}
+#          echo "if [ -f ${DOWNWELLING_TAPE_FILE} ]; then" >> ${SCRIPT_FILE}
 #          echo "  mv ${DOWNWELLING_TAPE_FILE} ${DOWNWELLING_TAU_LBLRTM_FILE}" >> ${SCRIPT_FILE}
+#          echo "elif [ -f ${DOWNWELLING_TAPE_FALLBACK} ]; then" >> ${SCRIPT_FILE}
+#          echo "  mv ${DOWNWELLING_TAPE_FALLBACK} ${DOWNWELLING_TAU_LBLRTM_FILE}" >> ${SCRIPT_FILE}
 #          echo "else" >> ${SCRIPT_FILE}
 #          echo "  echo '${SCRIPT_FILE}:${DOWNWELLING_TAPE_FILE} not found!' >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
 #          echo "  ls >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
@@ -995,15 +1021,16 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
           echo "export TITLE=\"${ID_ATTRIBUTE} Transmittance production run for ${PROFILE_SET_ID} profile set. Upwelling (Layer->TOA) transmittance.\"" >>  ${SCRIPT_FILE}
           echo "export HISTORY=\"${LBLRTM_HITRAN_VERSION}\"" >>  ${SCRIPT_FILE}
           echo "export COMMENT=\"${PROFILE_SET_ID}\"" >>  ${SCRIPT_FILE}
-          # filename, nLayer, doublepanel?, 
-          echo "${LBLRTM_to_netCDF} ${UPWELLING_TAU_LBLRTM_FILE} ${UPWELLING_TAU_LBLRTM_FILE}.nc.signal 100 FALSE > error.txt">> ${SCRIPT_FILE}
+          # filename, nLayer, doublepanel?,
+          echo "${LBLRTM_to_netCDF} ${UPWELLING_TAU_LBLRTM_FILE} ${UPWELLING_TAU_NETCDF_FILE} ${LBLRTM_N_LAYERS} ${LBLRTM_DOUBLE_PANEL} > error.txt">> ${SCRIPT_FILE}
           echo "sleep 10" >> ${SCRIPT_FILE}
           echo >> ${SCRIPT_FILE}
           echo "# -- Check that file was created cleanly" >> ${SCRIPT_FILE}
-          echo "if [ ! -f ${UPWELLING_TAU_LBLRTM_FILE}.nc.signal ]; then" >> ${SCRIPT_FILE}
-          echo "  echo '${SCRIPT_FILE}:${UPWELLING_TAU_LBLRTM_FILE}.nc creation failed' >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
+          echo "if [ ! -f ${UPWELLING_TAU_NETCDF_FILE} ]; then" >> ${SCRIPT_FILE}
+          echo "  echo '${SCRIPT_FILE}:${UPWELLING_TAU_NETCDF_FILE} creation failed' >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
           echo "  exit 2" >> ${SCRIPT_FILE}
           echo "fi" >> ${SCRIPT_FILE}
+          echo "touch ${UPWELLING_TAU_NETCDF_FILE}.signal" >> ${SCRIPT_FILE}
           echo >> ${SCRIPT_FILE}
 # we don't actually need downwelling file
           echo "# -- Downwelling file" >> ${SCRIPT_FILE}
@@ -1011,20 +1038,23 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
           echo "export TITLE=\"${ID_ATTRIBUTE} Transmittance production run for ${PROFILE_SET_ID} profile set.  Downwelling (Layer->SFC) transmittance.\"" >>  ${SCRIPT_FILE}
           echo "export HISTORY=\"${LBLRTM_HITRAN_VERSION}\"" >>  ${SCRIPT_FILE}
           echo "export COMMENT=\"${PROFILE_SET_ID}\"" >>  ${SCRIPT_FILE}
-          # filename, nLayer, doublepanel?, 
-          echo "# ${LBLRTM_to_netCDF} ${DOWNWELLING_TAU_LBLRTM_FILE} ${DOWNWELLING_TAU_LBLRTM_FILE}.nc.signal 100 FALSE">> ${SCRIPT_FILE}
+          # filename, nLayer, doublepanel?,
+          echo "# ${LBLRTM_to_netCDF} ${DOWNWELLING_TAU_LBLRTM_FILE} ${DOWNWELLING_TAU_NETCDF_FILE} ${LBLRTM_N_LAYERS} ${LBLRTM_DOUBLE_PANEL}">> ${SCRIPT_FILE}
           echo "# sleep 10" >> ${SCRIPT_FILE}
           echo >> ${SCRIPT_FILE}
           echo "# -- Check that file was created cleanly" >> ${SCRIPT_FILE}
-          echo "# if [ ! -f ${DOWNWELLING_TAU_LBLRTM_FILE}.nc.signal ]; then" >> ${SCRIPT_FILE}
-          echo "#  echo '${SCRIPT_FILE}:${DOWNWELLING_TAU_LBLRTM_FILE}.nc creation failed' >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
+          echo "# if [ ! -f ${DOWNWELLING_TAU_NETCDF_FILE} ]; then" >> ${SCRIPT_FILE}
+          echo "#  echo '${SCRIPT_FILE}:${DOWNWELLING_TAU_NETCDF_FILE} creation failed' >> ${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
           echo "#  exit 2" >> ${SCRIPT_FILE}
           echo "# fi" >> ${SCRIPT_FILE}
+          echo "# touch ${DOWNWELLING_TAU_NETCDF_FILE}.signal" >> ${SCRIPT_FILE}
           echo >> ${SCRIPT_FILE}
 
           echo "# -- Remove LBLRTM format files" >> ${SCRIPT_FILE}
-          echo "rm -f ${UPWELLING_TAU_LBLRTM_FILE} 2>>${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
-          echo "# rm -f ${DOWNWELLING_TAU_LBLRTM_FILE} 2>>${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
+          echo "if [ \"${KEEP_LBLRTM_FILES}\" != \"yes\" ]; then" >> ${SCRIPT_FILE}
+          echo "  rm -f ${UPWELLING_TAU_LBLRTM_FILE} 2>>${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
+          echo "  # rm -f ${DOWNWELLING_TAU_LBLRTM_FILE} 2>>${ERROR_LOG_FILE}" >> ${SCRIPT_FILE}
+          echo "fi" >> ${SCRIPT_FILE}
 
           # -- Remove the script files
           echo >> ${SCRIPT_FILE}; echo >> ${SCRIPT_FILE}
@@ -1074,7 +1104,11 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
 
          #if [ $THIS_BAND -gt 48 ] && [ $THIS_BAND -lt 85 ] 
          #then
-         EXEC_BAND="${EXEC_BAND} cd ${RESULTS_DIR}; srun --export=ALL --share ${SCRIPT_FILE}; \rm -f ${SCRIPT_FILE}; cd ${ROOT_DIR}; "
+          if [ "${LOCAL_RUN}" = "yes" ]; then
+            (cd "${RESULTS_DIR}" && "./${SCRIPT_FILE}")
+          else
+            EXEC_BAND="${EXEC_BAND} cd ${RESULTS_DIR}; srun --export=ALL --share ${SCRIPT_FILE}; \rm -f ${SCRIPT_FILE}; cd ${ROOT_DIR}; "
+          fi
          #fi
           # ------------------
           # Increment counters
@@ -1098,6 +1132,7 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
         #sbatch ${JOB_COMMAND_FILE}
 #        /bin/cat > ${JOB_COMMAND_FILE} <<EOF
 #        # Submit the job on the fly
+        if [ "${LOCAL_RUN}" != "yes" ]; then
         sbatch <<EOF
 #!/bin/bash
 # Job step for: ${ID_TAG}
@@ -1113,6 +1148,7 @@ LBLRTM_to_netCDF=../../../src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
 #SBATCH --job-name=${PROFILE_TAG}_${ANGLE_TAG}_${TAPE3_TAG}
 ${EXEC_BAND}
 EOF
+        fi
 
         # -----------------------------------
         # Increment molecule set job counter

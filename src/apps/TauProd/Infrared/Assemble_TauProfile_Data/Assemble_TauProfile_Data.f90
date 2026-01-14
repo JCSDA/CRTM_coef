@@ -176,6 +176,10 @@ PROGRAM Assemble_TauProfile_Data
   INTEGER :: Error_Status
   INTEGER :: i, j, k, l, m, n
   INTEGER :: im, m1, m2
+  INTEGER :: i_idx, n_angles_subset, n_profiles_subset
+  INTEGER :: angle_begin, angle_end
+  CHARACTER(32) :: env_value
+  REAL(fp), ALLOCATABLE :: Angle_List(:)
   INTEGER :: l1, l2
   INTEGER :: n_m, Profile_Set
   INTEGER :: n_j, jIdx
@@ -188,6 +192,7 @@ PROGRAM Assemble_TauProfile_Data
   TYPE( ProcessControl_type ) :: ProcessControl
   TYPE( TauProfile_type )     :: TauProfile
   REAL(fp), ALLOCATABLE    :: Geometric_Angle_Fix (:,:,:)  ! A fix for geometric angle by Isaac Moradi
+  REAL(fp) :: Level_Pressure_Reversed(N_LEVELS)
   
 
   !#----------------------------------------------------------------------------#
@@ -356,6 +361,24 @@ PROGRAM Assemble_TauProfile_Data
 
   m1 = 1
   m2 = N_PROFILES( Profile_Set )
+  angle_begin = ZENITH_ANGLE_BEGIN
+  angle_end = ZENITH_ANGLE_END
+
+  CALL GET_ENVIRONMENT_VARIABLE('TAUPROFILE_PROFILE_BEGIN', env_value)
+  IF ( LEN_TRIM(env_value) > 0 ) READ(env_value, *) m1
+  CALL GET_ENVIRONMENT_VARIABLE('TAUPROFILE_PROFILE_END', env_value)
+  IF ( LEN_TRIM(env_value) > 0 ) READ(env_value, *) m2
+  CALL GET_ENVIRONMENT_VARIABLE('TAUPROFILE_ANGLE_BEGIN', env_value)
+  IF ( LEN_TRIM(env_value) > 0 ) READ(env_value, *) angle_begin
+  CALL GET_ENVIRONMENT_VARIABLE('TAUPROFILE_ANGLE_END', env_value)
+  IF ( LEN_TRIM(env_value) > 0 ) READ(env_value, *) angle_end
+
+  m1 = MAX(m1, 1)
+  m2 = MIN(m2, N_PROFILES( Profile_Set ))
+  angle_begin = MAX(angle_begin, ZENITH_ANGLE_BEGIN)
+  angle_end = MIN(angle_end, ZENITH_ANGLE_END)
+  n_profiles_subset = m2 - m1 + 1
+  n_angles_subset = angle_end - angle_begin + 1
 
 
 
@@ -367,7 +390,7 @@ PROGRAM Assemble_TauProfile_Data
 
     ! Allocate Geometric Angle - another silly fix by Isaac Moradi
     ! Layer x Angle x Profile
-    ALLOCATE(Geometric_Angle_Fix(N_LAYERS, N_ZENITH_ANGLES, N_PROFILES( Profile_Set )))    
+    ALLOCATE(Geometric_Angle_Fix(N_LAYERS, n_angles_subset, n_profiles_subset))
 
     !#--------------------------------------------------------------------------#
     !#                     -- LOOP OVER MOLECULE SETS --                        #
@@ -406,7 +429,7 @@ PROGRAM Assemble_TauProfile_Data
         !#                       -- LOOP OVER ANGLES --                         #
         !#----------------------------------------------------------------------#
 
-        Angle_Loop: DO i = ZENITH_ANGLE_BEGIN, ZENITH_ANGLE_END
+        Angle_Loop: DO i = angle_begin, angle_end
 
 
           ! -- Create a string of the angle number
@@ -471,12 +494,15 @@ PROGRAM Assemble_TauProfile_Data
             l2 = ProcessControl%Channel_Index( 2, n )
 
             ! -- Create the file (CLOBBER mode)
+            Level_Pressure_Reversed = LEVEL_PRESSURE(N_LEVELS:1:-1)
+            IF ( .NOT. ALLOCATED( Angle_List ) ) THEN
+              ALLOCATE( Angle_List( angle_end - angle_begin + 1 ) )
+              Angle_List = ZENITH_ANGLE_SECANT( angle_begin:angle_end )
+            END IF
             Error_Status = Create_TauProfile_netCDF( TRIM( ProcessControl%TauProfile_Filename( n ) ), &
-!                                                     LEVEL_PRESSURE, &
-! Replaced this because level pressure is reversed in the Tau_Production_Parameter
-                                                     LEVEL_PRESSURE(N_LEVELS:1:-1), &
+                                                     Level_Pressure_Reversed, &
                                                      ProcessControl%List( l1:l2 )%Channel, &
-                                                     ZENITH_ANGLE_SECANT, &
+                                                     Angle_List, &
                                                      (/ ( im, im = m1, m2 ) /), &
                                                      Molecule_Set_Numbers( 1:n_j ), &
                                                      Release = TauProfile%Release, &
@@ -605,7 +631,8 @@ PROGRAM Assemble_TauProfile_Data
           ! This is a silly fix as Geometric_Angle wasn't written in the files - Isaac Moradi
           ! Here are the dimensions for Geometric angle arrays 
           ! REAL(fp), POINTER :: Geometric_Angle(:,:,:) => NULL() ! K x I x M OR n_Layers  x n_Angles x n_Profiles
-          Geometric_Angle_Fix(:,i,:) = ZENITH_ANGLE(i)
+          i_idx = i - angle_begin + 1
+          Geometric_Angle_Fix(:,i_idx,:) = ZENITH_ANGLE(i)
 
           ! --------------------------------
           ! Destroy the TauProfile structure

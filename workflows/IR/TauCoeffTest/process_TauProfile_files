@@ -45,9 +45,22 @@ usage()
 }
 
 SCRIPT_NAME="`basename $0`"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
 root_dir=$(pwd)
-Assemble_TauProfile_Data=../../../src/TauProd/Infrared/Assemble_TauProfile_Data/Assemble_TauProfile_Data
-Compute_Effective_TauProfile=../../../src/TauProd/Infrared/Compute_Effective_TauProfile/Compute_Effective_TauProfile
+Assemble_TauProfile_Data="${ASSEMBLE_TAUPROFILE_DATA:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Assemble_TauProfile_Data/Assemble_TauProfile_Data}"
+Compute_Effective_TauProfile="${COMPUTE_EFFECTIVE_TAUPROFILE:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Compute_Effective_TauProfile/Compute_Effective_TauProfile}"
+LOCAL_RUN="${LOCAL_RUN:-no}"
+if [ "${LOCAL_RUN}" != "yes" ] && ! command -v sbatch >/dev/null 2>&1; then
+  LOCAL_RUN="yes"
+fi
 
 #-------------------------------------------------------------------------------
 #                        -- SET THE PROCESSING DEFAULTS --
@@ -409,6 +422,9 @@ Compute_Effective_TauProfile=../../../src/TauProd/Infrared/Compute_Effective_Tau
      # Submit the job on the fly
 #     /bin/cat > ${JOB_COMMAND_FILE} <<EOF
 echo "EXECUTABLE $(pwd)/${SCRIPT_FILE}"
+     if [ "${LOCAL_RUN}" = "yes" ]; then
+       "./${SCRIPT_FILE}"
+     else
      sbatch <<EOF
 #!/bin/bash
 # Job step for: ${SCRIPT_FILE}
@@ -424,6 +440,7 @@ echo "EXECUTABLE $(pwd)/${SCRIPT_FILE}"
 #SBATCH --job-name=${DIRECTION_NAME}
 srun $(pwd)/${SCRIPT_FILE} 
 EOF
+     fi
 
   done   # DIRECTION_NUMBER loop
 

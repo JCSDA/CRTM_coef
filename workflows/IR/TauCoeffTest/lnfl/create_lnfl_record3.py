@@ -48,6 +48,8 @@ print("Enter Vmin  and Vmax and list of species separated by : [e.g., 0.0  20000
 
 wavenumber = [float(x) for x in sys.argv[1:3]]
 selected_species = sys.argv[3].split(":")
+if len(selected_species) == 1 and selected_species[0] == "NONE":
+    selected_species = []
 
 print("vmin %d vmax %d"%(wavenumber[0], wavenumber[1]))
 print("selected species: ", end="")

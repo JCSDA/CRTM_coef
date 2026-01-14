@@ -9,4 +9,5 @@
 #
 
 add_subdirectory( AtmProfile )
+add_subdirectory( Infrared )
 add_subdirectory( Microwave )

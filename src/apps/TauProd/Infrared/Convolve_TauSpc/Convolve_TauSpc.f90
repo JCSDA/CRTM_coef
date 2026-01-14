@@ -843,7 +843,7 @@ PROGRAM Convolve_TauSpc
 
       WRITE( Tau_FileBand, '( "band",i3.3 )' ) Band_Number
       Tau_Filename( lBand ) = './'//Tau_FileBand//'/'//&
-                              TRIM( Tau_FilePrefix )//Tau_FileBand//'.nc.signal' ! I added '.signal' here and removed it from the next check
+                              TRIM( Tau_FilePrefix )//Tau_FileBand//'.nc'
 
 
       ! ------------------------------------------------------------
@@ -854,7 +854,7 @@ PROGRAM Convolve_TauSpc
       ! file has been written and closed. Thus if the signal file
       ! exists, the data file is complete and readable.
       ! ------------------------------------------------------------
-      IF ( File_Exists( TRIM( Tau_Filename( lBand ) )) ) THEN
+      IF ( File_Exists( TRIM( Tau_Filename( lBand ) )//'.signal' ) ) THEN
 
         ! Update the available band variables
         n_Available_Bands = n_Available_Bands + 1

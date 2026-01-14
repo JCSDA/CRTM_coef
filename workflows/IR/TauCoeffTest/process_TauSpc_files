@@ -107,11 +107,24 @@ usage()
 #-------------------------------------------------------------------------------
 
 SCRIPT_NAME="`basename $0`"
-Create_ProcessControl_File=../../../src/TauProd/Infrared/Create_ProcessControl_File/Create_ProcessControl_File
-Convolve_TauSpc_with_SRF=../../../src/TauProd/Infrared/Convolve_TauSpc/Convolve_TauSpc
-Check_ProcessControl_File=../../../src/TauProd/Infrared/Check_ProcessControl_File/Check_ProcessControl_File
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
+Create_ProcessControl_File="${CREATE_PROCESSCONTROL_FILE:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Create_ProcessControl_File/Create_ProcessControl_File}"
+Convolve_TauSpc_with_SRF="${CONVOLVE_TAUSPC_WITH_SRF:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Convolve_TauSpc/Convolve_TauSpc}"
+Check_ProcessControl_File="${CHECK_PROCESSCONTROL_FILE:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Check_ProcessControl_File/Check_ProcessControl_File}"
 DF_INDEX=1
 root_dir=$(pwd)
+LOCAL_RUN="${LOCAL_RUN:-no}"
+if [ "${LOCAL_RUN}" != "yes" ] && ! command -v sbatch >/dev/null 2>&1; then
+  LOCAL_RUN="yes"
+fi
 
 #-------------------------------------------------------------------------------
 #                        -- SET THE PROCESSING DEFAULTS --
@@ -403,8 +416,7 @@ root_dir=$(pwd)
         # Get the molecule set tag name
         # -----------------------------
 
-        #MOLECULE_SET_TAG=`./Define_Molecule_Tag ${MOLECULE_SET_NUMBER}`
-        MOLECULE_SET_TAG=$(/scratch/users/pstegmann/TauCoeffTest/Define_Molecule_Tag ${MOLECULE_SET_NUMBER})
+        MOLECULE_SET_TAG="$(${SCRIPT_DIR}/Define_Molecule_Tag ${MOLECULE_SET_NUMBER})"
 
         if [ $? -ne 0 ]; then
           echo "${SCRIPT_NAME}: Error constructing molecule tag name for molecule index ${MOLECULE_SET_NUMBER}"
@@ -674,7 +686,11 @@ root_dir=$(pwd)
           # --------------------------------
 
           chmod 700 ${SCRIPT_FILE}
-          EXEC="${EXEC} srun  --share $(pwd)/${SCRIPT_FILE}; "
+          if [ "${LOCAL_RUN}" = "yes" ]; then
+            "./${SCRIPT_FILE}"
+          else
+            EXEC="${EXEC} srun  --share $(pwd)/${SCRIPT_FILE}; "
+          fi
 
           # ------------------------------------------------------------
           # Add the current script as a job step in the job command file
@@ -699,8 +715,9 @@ root_dir=$(pwd)
         # ---------------------------
         # Submit the job command file
         # ---------------------------
-        echo "Submitting job control file ${JOB_COMMAND_FILE}..."
-        #llsubmit ${JOB_COMMAND_FILE}
+        if [ "${LOCAL_RUN}" != "yes" ]; then
+          echo "Submitting job control file ${JOB_COMMAND_FILE}..."
+          #llsubmit ${JOB_COMMAND_FILE}
 
           # Submit the job on the fly
           # /bin/cat > ${JOB_COMMAND_FILE} <<EOF
@@ -719,6 +736,7 @@ root_dir=$(pwd)
 #SBATCH --job-name=${JOB_TAG}
 ${EXEC}
 EOF
+        fi
 
         # ------------------------------
         # Go back to the angle directory

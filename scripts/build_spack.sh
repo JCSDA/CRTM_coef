@@ -6,6 +6,8 @@ SPACK_ENV="${SPACK_ENV:-/home/ben/spack-stack/envs/unified-env.mylinux}"
 MODULE_PATH="${MODULE_PATH:-/home/ben/spack-stack/envs/unified-env.mylinux/modules}"
 MODULE_NAME="${MODULE_NAME:-openmpi/5.0.8/none/none/jedi-fv3-env}"
 BUILD_DIR="${1:-build-spack}"
+ECBUILD_LOG_FILE="${ECBUILD_LOG_FILE:-${BUILD_DIR}/ecbuild.log}"
+ECBUILD_LOG_LEVEL="${ECBUILD_LOG_LEVEL:-INFO}"
 
 source "${SPACK_STACK_DIR}/setup.sh"
 module use "${MODULE_PATH}"
@@ -48,6 +50,8 @@ cmake -S . -B "${BUILD_DIR}" \
   -DCMAKE_C_COMPILER="${CC}" \
   -DNetCDF_C_CONFIG_EXECUTABLE="${NC_CONFIG}" \
   -DNetCDF_Fortran_CONFIG_EXECUTABLE="${NF_CONFIG}" \
+  -DECBUILD_LOG_FILE="${ECBUILD_LOG_FILE}" \
+  -DECBUILD_LOG_LEVEL="${ECBUILD_LOG_LEVEL}" \
   -DBLA_VENDOR=OpenBLAS \
   -DBLAS_LIBRARIES="${openblas_lib}" \
   -DLAPACK_LIBRARIES="${openblas_lib}" \

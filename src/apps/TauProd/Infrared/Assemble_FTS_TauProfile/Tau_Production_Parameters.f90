@@ -22,7 +22,6 @@ MODULE Tau_Production_Parameters
   ! -----------------
   ! Module usage
   USE Type_Kinds       , ONLY: fp
-  USE LBLRTM_Parameters, ONLY: LBLRTM_FILE_TYPE => LBLRTM_SINGLE_PANEL_TYPE
   ! Disable all implicit typing
   IMPLICIT NONE
 
@@ -32,10 +31,9 @@ MODULE Tau_Production_Parameters
   ! ------------
   ! Everything is default private
   PRIVATE
-  ! Inherited visibility
-  PUBLIC :: LBLRTM_FILE_TYPE
-
-
+  ! Avoid module name collisions in shared build trees.
+  ! Use the single-panel LBLRTM file type directly here.
+  INTEGER, PUBLIC, PARAMETER :: LBLRTM_FILE_TYPE = 3
   ! -------------------------------
   ! Atmospheric profile information
   ! -------------------------------
@@ -193,43 +191,43 @@ MODULE Tau_Production_Parameters
   ! The names of the allowed molecular sets.
   ! These values are used in filenames and
   ! other transmittance production program inputs
-  CHARACTER(LEN=7), PUBLIC, PARAMETER, DIMENSION(N_MOLECULE_SETS) :: MOLECULE_SET_TAG = &
-    (/ 'mol1   ', &  !   1
-       'mol2   ', &  !   2
-       'mol3   ', &  !   3
-       'mol4   ', &  !   4
-       'mol5   ', &  !   5
-       'mol6   ', &  !   6
-       'mol7   ', &  !   7
-       'anc    ', &  !   8 (all, no continua)
-       'con    ', &  !   9 (continua_only)
-       'awc    ', &  !  10 (all, with continua)
-       'wvo    ', &  !  11
-       'wet    ', &  !  12
-       'dry    ', &  !  13
-       'ozo    ', &  !  14
-       'wco    ', &  !  15
-       'doz    ', &  !  16
-       'molc1    ', &!  17 [was 'wvd    '] (PS)
-       'molc2  ', &  !  18 (O2 +CH4)
-       'molc3  ', &  !  19 (O2+CH4+CO)
-       'molc4  ', &  !  20 (O2+CH4+CO+N2O)
-       'molc5  ', &  !  21 (O2+CH4+CO+N2O+CO2)
-       'molc6  ', &  !  22 (O2+CH4+CO+N2O+CO2+H20)
-       'molt1  ', &  !  ( first 7 molecules + 8 NO)   
-       'molt2  ', &  !  ( first 7 molecules + 9 SO2)     
-       'molt3  ', &  !  ( first 7 molecules + 10 NO2)    
-       'molt4  ', &  !  ( first 7 molecules + 12 HNO3)    
-       'molt5  ', &  !  ( first 7 molecules + 19 OCS)    
-       'molt6  ', &  !  ( first 7 molecules + 22 N2)    
-       'effmol1', &  ! 101
-       'effwet ', &  ! 112
-       'effdry ', &  ! 113
-       'effozo ', &  ! 114
-       'effch4 ', &  ! 118
-       'effco  ', &  ! 119
-       'effn2o ', &  ! 120 
-       'effco2 '/)   ! 121 
+  CHARACTER(LEN=9), PUBLIC, PARAMETER, DIMENSION(N_MOLECULE_SETS) :: MOLECULE_SET_TAG = &
+    (/ 'mol1     ', &  !   1
+       'mol2     ', &  !   2
+       'mol3     ', &  !   3
+       'mol4     ', &  !   4
+       'mol5     ', &  !   5
+       'mol6     ', &  !   6
+       'mol7     ', &  !   7
+       'anc      ', &  !   8 (all, no continua)
+       'con      ', &  !   9 (continua_only)
+       'awc      ', &  !  10 (all, with continua)
+       'wvo      ', &  !  11
+       'wet      ', &  !  12
+       'dry      ', &  !  13
+       'ozo      ', &  !  14
+       'wco      ', &  !  15
+       'doz      ', &  !  16
+       'molc1    ', &  !  17 [was 'wvd    '] (PS)
+       'molc2    ', &  !  18 (O2 +CH4)
+       'molc3    ', &  !  19 (O2+CH4+CO)
+       'molc4    ', &  !  20 (O2+CH4+CO+N2O)
+       'molc5    ', &  !  21 (O2+CH4+CO+N2O+CO2)
+       'molc6    ', &  !  22 (O2+CH4+CO+N2O+CO2+H20)
+       'molt1    ', &  !  ( first 7 molecules + 8 NO)
+       'molt2    ', &  !  ( first 7 molecules + 9 SO2)
+       'molt3    ', &  !  ( first 7 molecules + 10 NO2)
+       'molt4    ', &  !  ( first 7 molecules + 12 HNO3)
+       'molt5    ', &  !  ( first 7 molecules + 19 OCS)
+       'molt6    ', &  !  ( first 7 molecules + 22 N2)
+       'effmol1  ', &  ! 101
+       'effwet   ', &  ! 112
+       'effdry   ', &  ! 113
+       'effozo   ', &  ! 114
+       'effch4   ', &  ! 118
+       'effco    ', &  ! 119
+       'effn2o   ', &  ! 120
+       'effco2   '/)   ! 121 
 
 
   ! The ID values associated with the allowed moleculer sets

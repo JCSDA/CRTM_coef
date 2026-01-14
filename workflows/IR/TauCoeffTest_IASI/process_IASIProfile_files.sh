@@ -45,9 +45,18 @@ usage()
 }
 
 SCRIPT_NAME="`basename $0`"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
 root_dir=$(pwd)
-Assemble_FTS_TauProfile=/data/users/pstegmann/lib/CRTM/trunk/src/TauProd/Infrared/Assemble_FTS_TauProfile/Assemble_FTS_TauProfile
-Compute_Effective_TauProfile=/data/users/pstegmann/projects/Moradi_stuff/crtm/src/TauProd/Infrared/Compute_Effective_TauProfile_FTS/Compute_Effective_TauProfile
+Assemble_FTS_TauProfile="${ASSEMBLE_FTS_TAUPROFILE:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Assemble_FTS_TauProfile/Assemble_FTS_TauProfile}"
+Compute_Effective_TauProfile="${COMPUTE_EFFECTIVE_TAUPROFILE:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Compute_Effective_TauProfile/Compute_Effective_TauProfile}"
 
 #-------------------------------------------------------------------------------
 #                        -- SET THE PROCESSING DEFAULTS --

@@ -7,6 +7,10 @@
 # CMakeLists.txt for LBLRTM_to_netCDF
 #
 
+# Set the directory to place the compiled mod files
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules)
+include_directories(${CMAKE_Fortran_MODULE_DIRECTORY})
+
 # Source files
 set(SRCS
     Type_Kinds.f90
@@ -42,6 +46,11 @@ set(SRCS
 
 # Create executable
 add_executable(LBLRTM_to_netCDF ${SRCS})
+
+target_compile_options(LBLRTM_to_netCDF PRIVATE
+    $<$<COMPILE_LANG_AND_ID:Fortran,GNU>:-cpp>
+    $<$<COMPILE_LANG_AND_ID:Fortran,Intel>:-fpp>
+)
 
 # Link NetCDF
 target_link_libraries(LBLRTM_to_netCDF

@@ -317,9 +317,9 @@ MODULE Tau_Production_Parameters
 !                        'upwelling  ', &
 !                        'downwelling' /)
 ! Changed this to make sure that RADIANCE and DIRECTION_NAME match  
-  CHARACTER(*), PUBLIC, PARAMETER, DIMENSION(N_DIRECTIONS) :: &
+  CHARACTER(len=11), PUBLIC, PARAMETER, DIMENSION(N_DIRECTIONS) :: &
     DIRECTION_NAME = (/ 'upwelling  ', &
                         'downwelling', &
-                        'radiance   '/)
+                        'radiance   ' /)
   
 END MODULE Tau_Production_Parameters

@@ -384,11 +384,19 @@ PROGRAM Compute_Coeff
   END IF
  
   WRITE(*,*) n_Layers, Nlay, Natm, n_Profiles
-  IF (Nlay /= n_Layers .or. Natm /= n_Profiles) THEN
-  
-    PRINT *, 'Error: the number of layers or number of profiles are not consistent between atmFile and transFile'
+  IF (Nlay /= n_Layers) THEN
+    PRINT *, 'Error: layer count mismatch between atmFile and transFile'
     STOP
-    
+  ENDIF
+
+  IF (n_Profiles > Natm) THEN
+    PRINT *, 'Error: transFile has more profiles than atmFile'
+    STOP
+  ENDIF
+
+  IF (n_Profiles < Natm) THEN
+    PRINT *, 'Warning: using subset of atm profiles to match transFile'
+    Natm = n_Profiles
   ENDIF
 
 

@@ -140,9 +140,9 @@ PROGRAM Apodize_TauSpc_with_IRF
 
   INTEGER, PARAMETER :: N_SENSOR_SETS = 3 ! PS: 2 -> 3
 
-  CHARACTER(*), PARAMETER,  DIMENSION(N_SENSOR_SETS) :: &
-                SENSOR_ID=(/'iasi_metop-a', & 
-                            'cris_npp    ', &
+  CHARACTER(len=18), PARAMETER,  DIMENSION(N_SENSOR_SETS) :: &
+                SENSOR_ID=(/'iasi_metop-a      ', &
+                            'cris_npp          ', &
                             'iasi-ng_metop-sg-a' /) ! PS: Added iasi-ng_metop-sg-a 
   INTEGER,  PARAMETER,  DIMENSION(N_SENSOR_SETS) :: Sensor_idx = (/1, 2, 3/) ! PS Added idx=3.
   INTEGER,  PARAMETER,  DIMENSION(N_SENSOR_SETS) :: WMO_SENSOR_ID    = (/221, 620, 999/) ! PS: Added 999

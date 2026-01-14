@@ -117,7 +117,16 @@ usage()
 #-------------------------------------------------------------------------------
 
 SCRIPT_NAME="`basename $0`"
-Apodize_TauSpc_with_IRF=/data/users/pstegmann/lib/CRTM/trunk/src/TauProd/Infrared/Apodize_TauSpc_with_IRF/Apodize_TauSpc_with_IRF
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
+Apodize_TauSpc_with_IRF="${APODIZE_TAUSPC_WITH_IRF:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/Apodize_TauSpc_with_IRF/Apodize_TauSpc_with_IRF}"
 
 #-------------------------------------------------------------------------------
 #                             -- DEFINE DEFAULTS --

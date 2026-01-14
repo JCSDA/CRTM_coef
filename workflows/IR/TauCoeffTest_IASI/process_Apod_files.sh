@@ -117,9 +117,20 @@ usage()
 #-------------------------------------------------------------------------------
 
 SCRIPT_NAME="`basename $0`"
-LBLRUN=/data/users/pstegmann/AER/aer_lblrtm_v12.8_lnfl_v3.1/lblrtm/lblrtm_v12.8_linux_gnu_dbl 
-TAPE3_DIR=/data/users/pstegmann/projects/TauCoeffTest/lnfl
-LBLRTM_to_netCDF=/data/users/pstegmann/projects/Moradi_stuff/crtm/src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
+if [ -z "${LBLRUN:-}" ]; then
+  LBLRUN="${LBLRTM_EXE:-lblrtm}"
+fi
+TAPE3_DIR="${TAPE3_DIR:-${CRTM_COEF_ROOT}/workflows/IR/TauCoeffTest/lnfl}"
+LBLRTM_to_netCDF="${LBLRTM_TO_NETCDF:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF}"
 
 #-------------------------------------------------------------------------------
 #                             -- DEFINE DEFAULTS --

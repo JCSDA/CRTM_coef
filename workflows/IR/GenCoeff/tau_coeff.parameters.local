@@ -1,0 +1,16 @@
+# Local parameter template for IR regression in this repository.
+:MAX_CPUs:4
+:CH_INT:1
+:EXE_FILE:/home/ben/CRTM/CRTM_coef/build-spack/src/apps/TauRegress/ODPS/ODPS_Regress/ODPS_Regress
+:WORK_DIR:/home/ben/CRTM/CRTM_coef/workflows/IR/GenCoeff/workdir
+:PROF_SET:ECMWF83
+:SPC_COEFF_DIR:/home/ben/CRTM/CRTM_coef/workflows/IR/GenCoeff
+:TAU_PROFILE_DIR:/home/ben/CRTM/CRTM_coef/workflows/IR/TauCoeffTest/TauProfile_data
+:ATM_PROFLE_FILE:/home/ben/CRTM/CRTM_coef/data/reference/TauProd/AtmProfile/ECMWF83.AtmProfile.nc
+:GET_SEN_INFO:/home/ben/CRTM/CRTM_coef/build-spack/src/apps/TauRegress/ODPS/GetSenInfo/GetSenInfo
+:IR_TYPE:2
+:COMPONENTS:DEFAULT
+# Parameters below should not be modified in normal operations
+:COMPONENT_GROUP1:dry,wlo,wco,ozo,co2,n2o,co,ch4
+:COMPONENT_GROUP2:dry,wlo,wco,ozo,co2
+:COMPONENT_GROUP3:dry,wet

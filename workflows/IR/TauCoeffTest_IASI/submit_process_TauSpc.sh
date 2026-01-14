@@ -14,5 +14,6 @@
 #module purge
 #module load license_intel intel/18.0.3  #whatever version you need
 #module load hdf/4.2.14    #and any other modules needed
-/scratch/users/pstegmann/TauCoeffTest/process_TauSpc_files
-
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+${CRTM_COEF_ROOT}/workflows/IR/TauCoeffTest/process_TauSpc_files

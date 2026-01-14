@@ -6,5 +6,33 @@
 *.mod
 log
 .DS_Store
+* - CRTM_coef - DEBUG - CMake project*
 AGENTS.md
 CLAUDE.md
+
+# External dependencies
+external/LBLRTM
+external/LNFL
+external/line_files
+
+# Build directories
+build/
+build-spack/
+
+# Generated NetCDF outputs
+*.nc
+!data/**/*.nc
+!SRFDATA/**/*.nc
+
+# Test outputs
+*.signal
+workdir/
+workflows/IR/TauCoeffTest/profile*/
+workflows/IR/GenCoeff/workdir/
+
+# LNFL line files (large binary)
+workflows/IR/TauCoeffTest/lnfl/TAPE1
+workflows/IR/TauCoeffTest/lnfl/TAPE3*
+workflows/IR/TauCoeffTest/lnfl/tape3.*
+workflows/IR/TauCoeffTest/lnfl/TAPE10
+workflows/IR/TauCoeffTest/lnfl/TAPE7

@@ -25,11 +25,21 @@
 # The root directory
 # ------------------
 
-ROOT_DIR=/scratch/users/pstegmann/TauCoeffTest_IASI
-
-LBLRUN=/data/users/pstegmann/AER/aer_lblrtm_v12.8_lnfl_v3.1/lblrtm/lblrtm_v12.8_linux_gnu_dbl 
-LBLRTM_to_netCDF=/data/users/pstegmann/projects/Moradi_stuff/crtm/src/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF
-TAPE3_DIR=/data/users/pstegmann/projects/TauCoeffTest/lnfl
+ROOT_DIR="${ROOT_DIR:-$(pwd)}"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
+if [ -z "${LBLRUN:-}" ]; then
+  LBLRUN="${LBLRTM_EXE:-lblrtm}"
+fi
+LBLRTM_to_netCDF="${LBLRTM_TO_NETCDF:-${CRTM_COEF_BUILD}/src/apps/TauProd/Infrared/LBLRTM_to_netCDF/LBLRTM_to_netCDF}"
+TAPE3_DIR="${TAPE3_DIR:-${CRTM_COEF_ROOT}/workflows/IR/TauCoeffTest/lnfl}"
 
 # -- Create LBLRTM/HITRAN version string
 LBLRTM_HITRAN_VERSION="LBLRTM v9.4; HITRAN 2000 + AER updates"
@@ -207,7 +217,6 @@ cd ${ROOT_DIR}
 # ------------------------------------
 
 echo \"Processing run finished at: \`date\`\" >> ${RESULTS_DIR}/${ERROR_LOG_FILE}
-
 
 
 

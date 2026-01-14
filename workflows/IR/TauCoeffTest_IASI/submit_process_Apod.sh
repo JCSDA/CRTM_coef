@@ -14,4 +14,5 @@
 #module purge
 #module load license_intel intel/18.0.3  #whatever version you need
 #module load hdf/4.2.14    #and any other modules needed
-/scratch/users/pstegmann/TauCoeffTest_IASI/process_apodize_driver
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+${SCRIPT_DIR}/process_apodize_driver

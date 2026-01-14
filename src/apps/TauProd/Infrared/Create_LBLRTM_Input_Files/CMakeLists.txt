@@ -7,6 +7,10 @@
 # CMakeLists.txt for Create_LBLRTM_Input_Files
 #
 
+# Set the directory to place the compiled mod files
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules)
+include_directories(${CMAKE_Fortran_MODULE_DIRECTORY})
+
 # Source files
 set(SRCS
     Type_Kinds.f90

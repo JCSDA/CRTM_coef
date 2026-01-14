@@ -13,8 +13,16 @@ PARAM_NAME_LIST="WORK_DIR PROF_SET SPC_COEFF_DIR GET_SEN_INFO"
 PARAM_FILE=tau_coeff.parameters
 
 # Merge program
-#EXE_FILE=/home/Paul.Vandelst/CRTM/trunk/src/TauRegress/ODPS/Merge_ODPS_ODAS/Merge_ODPS_ODAS
-EXE_FILE=/data/users/pstegmann/lib/CRTM/trunk/src/TauRegress/ODPS/Merge_ODPS_ODAS/Merge_ODPS_ODAS
+SCRIPT_DIR=$(pwd)
+CRTM_COEF_ROOT="${CRTM_COEF_ROOT:-$(cd "${SCRIPT_DIR}/../../.." && pwd)}"
+if [ -z "${CRTM_COEF_BUILD:-}" ]; then
+  if [ -d "${CRTM_COEF_ROOT}/build-spack" ]; then
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build-spack"
+  else
+    CRTM_COEF_BUILD="${CRTM_COEF_ROOT}/build"
+  fi
+fi
+EXE_FILE="${MERGE_ODPS_ODAS_EXE:-${CRTM_COEF_BUILD}/src/apps/TauRegress/ODPS/Merge_ODPS_ODAS/Merge_ODPS_ODAS}"
 
 #--- read in parameters from $PARAM_FILE and assign their 
 #--- values to the variables whose names are listed in
@@ -25,7 +33,7 @@ read_parameters
 
 #--- current directory
 
-SCRIPT_DIR=${PWD}
+# SCRIPT_DIR set above
 
 #--- get the sensor names from the sensor_list file
 
