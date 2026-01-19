@@ -37,6 +37,7 @@ PROGRAM Create_SpcCoeff
                                        Display_Message, Program_Message
   USE Compare_Float_Numbers    , ONLY: OPERATOR(.EqualTo.)
   USE SignalFile_Utility       , ONLY: Create_SignalFile
+  USE Linear_Interpolation     , ONLY: Linear_Interpolate
   USE SensorInfo_Parameters    , ONLY: MICROWAVE_SENSOR, &
                                        INFRARED_SENSOR, &
                                        VISIBLE_SENSOR  , &
@@ -180,6 +181,16 @@ PROGRAM Create_SpcCoeff
   osrf_comment = '; oSRF Information: '//TRIM(osrf_comment)
   osrf_history = '; oSRF Information: '//TRIM(osrf_history)
 
+  ! -- FIX: Override invalid WMO IDs for known sensors if missing/invalid --
+  IF ( wmo_satellite_id < 0 .OR. wmo_satellite_id == 65535 ) THEN
+    IF ( TRIM(sensor_id) == 'abi_g19' ) THEN
+       wmo_satellite_id = 273 ! GOES-19
+       wmo_sensor_id = 0      ! ABI
+       msg = 'Overriding invalid WMO IDs (Set to 273/0) for abi_g19'
+       CALL Display_Message( PROGRAM_NAME, msg, INFORMATION )
+    END IF
+  END IF
+
 
   ! Allocate the SpcCoeff structure                                                   
   CALL SpcCoeff_Create( spccoeff, n_channels )
@@ -224,17 +235,13 @@ PROGRAM Create_SpcCoeff
     CASE( INFRARED_SENSOR )
       spccoeff%Polarization = UNPOLARIZED
       CALL SpcCoeff_SetSolar( SpcCoeff )
-      IF ( sensor_id(1:4) == 'airs' .or. sensor_id(1:6) == 'mistic' .or. sensor_id(1:6) == 'geoirs') THEN
-        solar_filename = 'dF_0.0025.Solar.nc'
-      ELSE
-        solar_filename = 'dF_0.1000.Solar.nc'
-      END IF
+      solar_filename = 'dF_0.0010.Solar.nc'
+      WRITE(*,'(A)') 'Using solar file: dF_0.0010.Solar.nc for IR sensor'
 
     CASE( VISIBLE_SENSOR )
       spccoeff%Polarization = UNPOLARIZED
       CALL SpcCoeff_SetSolar( spccoeff )
       solar_filename = 'dF_0.1000.Solar.nc'
-
     CASE DEFAULT
       msg = 'Can only handle MW, IR, and VIS sensors so far.'
       CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
@@ -339,31 +346,64 @@ PROGRAM Create_SpcCoeff
       ! ...Compute the frequency intervals
       df_osrf  = (f2-f1)/REAL(n_band_points-1, fp)
       df_solar = (solar%f2-solar%f1)/REAL(solar%n_frequencies-1, fp)
+
+      ! ...Handle df mismatch: interpolate solar spectrum if needed
       IF ( ABS(df_osrf-df_solar) > 1.0e-06_fp ) THEN
-        WRITE( msg, '("df values for oSRF(",es23.16, ") ",&
-                             &"and Solar(",es23.16, ") are different")' ) df_osrf, df_solar
-        CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
+        ! Grids don't match - interpolate solar to oSRF grid
+        WRITE(*,'(A,ES12.5,A,ES12.5)') '  Auto-interpolating solar spectrum: df_solar=', &
+          df_solar, ' -> df_oSRF=', df_osrf
+
+        ! Check that oSRF frequency range is within solar bounds
+        IF ( f1 < solar%f1 .OR. f2 > solar%f2 ) THEN
+          WRITE( msg, '("oSRF frequency range [",F10.2,",",F10.2, &
+            &"] exceeds solar range [",F10.2,",",F10.2,"]")' ) f1, f2, solar%f1, solar%f2
+          CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
+        END IF
+
+        ! Allocate solar irradiance array for interpolated output
+        CALL PtrArr_Create( solar_irradiance, n_band_points )
+        IF ( .NOT. ALL(PtrArr_Associated( solar_irradiance )) ) THEN
+          WRITE( msg, '("Error allocating oSRF #",i0, " solar irradiance PtrArr for interpolation")' ) l
+          CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
+        END IF
+
+        ! Interpolate solar irradiance to oSRF frequency grid
+        err_stat = Linear_Interpolate( &
+          (/ (solar%f1 + ii*df_solar, ii=0,solar%n_frequencies-1) /), &  ! Solar frequencies
+          solar%irradiance,                                             &  ! Solar irradiance values
+          (/ (f1 + ii*df_osrf, ii=0,n_band_points-1) /),                 &  ! oSRF frequencies
+          solar_irradiance(1)%Arr )                                        ! Interpolated output
+
+        IF ( err_stat /= SUCCESS ) THEN
+          msg = 'Error interpolating solar irradiance to oSRF grid'
+          CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
+        END IF
+
+      ELSE
+        ! Grids match - allocate and use direct indexing (original behavior)
+        CALL PtrArr_Create( solar_irradiance, n_points )
+        IF ( .NOT. ALL(PtrArr_Associated( solar_irradiance )) ) THEN
+          WRITE( msg, '("Error allocating oSRF #",i0, " solar irradiance PtrArr")' ) l
+          CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
+        END IF
+
+        idx_f1 = NINT((f1-solar%f1)/df_solar) + 1
+        idx_f2 = NINT((f2-solar%f1)/df_solar) + 1
+        IF ( (idx_f1 < 1 .OR. idx_f1 > solar%n_Frequencies) .OR. &
+             (idx_f2 < 1 .OR. idx_f2 > solar%n_Frequencies) ) THEN
+          msg = 'Solar indices for oSRF end points are invalid'
+          CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
+        END IF
+        IF ( (idx_f2-idx_f1+1) /= n_band_points ) THEN
+          msg = 'No. of solar points corresponding to oSRF are different'
+          CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
+        END IF
+
+        ! Extract matching solar irradiance slice
+        solar_irradiance(1)%Arr = solar%irradiance(idx_f1:idx_f2)
       END IF
-      ! ...Find the indices of the solar spectrum corresponding to the oSRF begin and end frequencies
-      idx_f1 = NINT((f1-solar%f1)/df_solar) + 1
-      idx_f2 = NINT((f2-solar%f1)/df_solar) + 1
-      IF ( (idx_f1 < 1 .OR. idx_f1 > solar%n_Frequencies) .OR. &
-           (idx_f2 < 1 .OR. idx_f2 > solar%n_Frequencies) ) THEN
-        msg = 'Solar indices for oSRF end points are invalid'
-        CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
-      END IF
-      IF ( (idx_f2-idx_f1+1) /= n_band_points ) THEN
-        msg = 'No. of solar points corresponding to oSRF are different'
-        CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
-      END IF
-      ! ...Allocate the solar irradiance pointer array
-      CALL PtrArr_Create( solar_irradiance, n_points )
-      IF ( .NOT. ALL(PtrArr_Associated( solar_irradiance )) ) THEN
-        WRITE( msg, '("Error allocating oSRF #",i0, " solar irradiance PtrArr")' ) l
-        CALL Display_Message( PROGRAM_NAME, msg, FAILURE ); STOP
-      END IF
+
       ! ...Convolve the solar spectrum with the oSRF
-      solar_irradiance(1)%Arr = solar%irradiance(idx_f1:idx_f2)
       err_stat = oSRF_Convolve( &
         osrf                        , &
         solar_irradiance            , &

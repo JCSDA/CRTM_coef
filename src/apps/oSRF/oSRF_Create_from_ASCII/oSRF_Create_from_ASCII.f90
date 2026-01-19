@@ -33,6 +33,13 @@ PROGRAM oSRF_Create_from_ASCII
   USE Spectral_Units_Conversion, ONLY: GHz_to_inverse_cm, &
                                        micron_to_inverse_cm
   USE LinkedList
+  USE SensorInfo_Define,         ONLY: SensorInfo_type, &
+                                       Destroy_SensorInfo
+  USE SensorInfo_LinkedList,     ONLY: SensorInfo_List_type, &
+                                       Destroy_SensorInfo_List, &
+                                       GetFrom_SensorInfo_List
+  USE SensorInfo_IO,             ONLY: Read_SensorInfo
+  USE File_Utility,              ONLY: File_Exists
 
   IMPLICIT NONE
 
@@ -42,6 +49,7 @@ PROGRAM oSRF_Create_from_ASCII
   INTEGER(KIND = fp):: ios
   INTEGER(KIND = fp):: numvalues
   INTEGER(KIND = fp):: ii, ll
+  REAL(fp) :: temp_val  ! Temporary for in-place array reversal
   INTEGER(KIND = fp):: buffer
   INTEGER(KIND = Single):: unit
   INTEGER(KIND = Single):: n_Channels = 12
@@ -50,7 +58,9 @@ PROGRAM oSRF_Create_from_ASCII
   INTEGER(KIND = Single):: n_interp
   REAL(KIND = fp):: delta_f, &
                    freq, &
-                   val 
+                   val, &
+                   dummy
+  CHARACTER(LEN = 4096):: line_buffer
   CHARACTER(LEN=10), PARAMETER, DIMENSION(4) :: FREQUENCY_UNITS = (/ &
                                                 '[GHz]     ', &
                                                 '[cm^-1]   ', &
@@ -66,6 +76,12 @@ PROGRAM oSRF_Create_from_ASCII
   REAL(KIND = fp), DIMENSION(:,:), ALLOCATABLE:: srf_data_interp
   TYPE(node), POINTER:: head, current, previous
   CHARACTER(LEN = 3):: interpolation_needed
+  ! SensorInfo lookup variables
+  CHARACTER(LEN = 256), PARAMETER:: SENSORINFO_FILENAME = 'SensorInfo'
+  TYPE(SensorInfo_List_type):: SensorInfo_List
+  TYPE(SensorInfo_type):: SensorInfo
+  INTEGER:: wmo_satellite_id, wmo_sensor_id
+  LOGICAL:: sensorinfo_exists
 
 
   ! =====================================
@@ -98,15 +114,47 @@ PROGRAM oSRF_Create_from_ASCII
   END IF
   ! Create an instance of oSRF_File
   CALL oSRF_File_Create( oSRF_File, n_Channels )
+
+  ! =====================================
+  ! SensorInfo lookup for WMO IDs
+  ! =====================================
+  ! Automatically check for local SensorInfo file
+  wmo_satellite_id = 1023  ! Default placeholder
+  wmo_sensor_id = 2047     ! Default placeholder
+
+  sensorinfo_exists = File_Exists( SENSORINFO_FILENAME )
+  IF ( sensorinfo_exists ) THEN
+    WRITE(*,'(A)') ' Found local SensorInfo file, looking up WMO IDs...'
+    ! Read the SensorInfo file
+    Error_Status = Read_SensorInfo( SENSORINFO_FILENAME, SensorInfo_List, Quiet=1 )
+    IF ( Error_Status /= SUCCESS ) THEN
+      WRITE(*,'(A)') ' Warning: Could not read SensorInfo file. Using default WMO IDs (1023/2047).'
+    ELSE
+      ! Look up the sensor by Sensor_Id
+      Error_Status = GetFrom_SensorInfo_List( SensorInfo_List, TRIM(Sensor_Id), SensorInfo )
+      IF ( Error_Status /= SUCCESS ) THEN
+        WRITE(*,'(A,A,A)') ' Warning: Sensor_Id "', TRIM(Sensor_Id), '" not found. Using default WMO IDs (1023/2047).'
+      ELSE
+        wmo_satellite_id = SensorInfo%WMO_Satellite_ID
+        wmo_sensor_id = SensorInfo%WMO_Sensor_ID
+        WRITE(*,'(A,A,A,I5,A,I5)') ' Found ', TRIM(Sensor_Id), &
+          ': WMO_Satellite_ID=', wmo_satellite_id, ', WMO_Sensor_ID=', wmo_sensor_id
+        Error_Status = Destroy_SensorInfo( SensorInfo )
+      END IF
+      Error_Status = Destroy_SensorInfo_List( SensorInfo_List )
+    END IF
+  ELSE
+    WRITE(*,'(A)') ' No local SensorInfo file found. Using default WMO IDs (1023/2047).'
+  END IF
+
   ! ...Copy over other information
   oSRF_File%Filename         = TRIM(Sensor_Id) // '.osrf.nc'
   oSRF_File%Sensor_ID        = TRIM(Sensor_Id)
-  oSRF_File%WMO_Satellite_Id = 1023
-  oSRF_File%WMO_Sensor_Id    = 2047
-  !oSRF_File%Sensor_Type      = MICROWAVE_SENSOR
-  oSRF_File%Title            = 'TROPICS sv7'
-  oSRF_File%History          = 'B. Johnson Aug. 29, 2024'
-  oSRF_File%Comment          = 'Test implementation. oSRF_Create_from_ASCII.f90'
+  oSRF_File%WMO_Satellite_Id = wmo_satellite_id
+  oSRF_File%WMO_Sensor_Id    = wmo_sensor_id
+  oSRF_File%Title            = TRIM(Sensor_Id)
+  oSRF_File%History          = 'Created by oSRF_Create_from_ASCII'
+  oSRF_File%Comment          = 'oSRF_Create_from_ASCII.f90'
   oSRF_File%n_Channels       = n_Channels
 
   ! Set the sensor type
@@ -179,25 +227,46 @@ PROGRAM oSRF_Create_from_ASCII
         STATUS='OLD', &
         ACTION='READ')
       IF( ios > 0 ) THEN
-        WRITE(*,*) ios
-        STOP "Error reading the SRF ASCII file!"
+        WRITE(*,*) ios, oSRF_Filename
+        STOP "Error opening the SRF ASCII file!"
       END IF
+      WRITE(*,*) "Opened unit: ", unit
+      FLUSH(6)
 
       numvalues = 0
       ioloop: DO
-        READ(unit, *,IOSTAT = ios) freq, val
+        WRITE(*,*) "Reading line..."
+        READ(unit, '(A)', IOSTAT = ios, IOMSG = msg) line_buffer
         IF( ios < 0 ) THEN
           WRITE(*,*) "Number of SRF nodes: ", numvalues
           EXIT
-        ELSE IF ( oSRF_File%Sensor_Type == INFRARED_SENSOR &
+        ELSE IF ( ios > 0 ) THEN
+          WRITE(*,*) ios
+          WRITE(*,*) TRIM(msg)
+          STOP "IO-Error!"
+        END IF
+
+        ! Check for comments or empty lines
+        IF (LEN_TRIM(line_buffer) == 0 .OR. line_buffer(1:1) == '#' .OR. line_buffer(1:1) == '!') CYCLE
+
+        ! Try reading 3 columns (e.g. VIS: Wavelength, Wavenumber, SRF)
+        READ(line_buffer, *, IOSTAT = ios) freq, dummy, val
+        IF ( ios /= 0 ) THEN
+           ! Fallback to 2 columns (freq, SRF)
+           READ(line_buffer, *, IOSTAT = ios) freq, val
+           IF ( ios /= 0 ) THEN
+              WRITE(*,*) "Error parsing line: ", TRIM(line_buffer)
+              STOP "Parse-Error!"
+           END IF
+        END IF
+
+        IF ( oSRF_File%Sensor_Type == INFRARED_SENSOR &
                   .AND. freq > 3500.0 ) THEN
           WRITE(*,*) "Channel SRF broader than Thermal IR band. & 
                       Discarding surplus information"
           EXIT
-        ELSE IF ( ios > 0 ) THEN
-          WRITE(*,*) ios
-          STOP "IO-Error!"
         END IF
+        
         ALLOCATE( current )
         current%datum(1) = freq
         current%datum(2) = val 
@@ -231,12 +300,23 @@ PROGRAM oSRF_Create_from_ASCII
       !
       IF ( oSRF_File%Sensor_Type == MICROWAVE_SENSOR ) THEN
         srf_data(:,1) = GHz_to_inverse_cm(srf_data(:,1))
-      ELSE IF ( oSRF_File%Sensor_Type == INFRARED_SENSOR ) THEN
-        srf_data(:,1) = srf_data(:,1) ! do nothing (IR is already in cm^-1)
-      ELSE IF ( oSRF_File%Sensor_Type == VISIBLE_SENSOR ) THEN
+      ELSE IF ( (oSRF_File%Sensor_Type == INFRARED_SENSOR) .OR. &
+                (oSRF_File%Sensor_Type == VISIBLE_SENSOR) .OR. &
+                (oSRF_File%Sensor_Type == ULTRAVIOLET_SENSOR) ) THEN
+        ! Convert wavelength (microns) to wavenumber (cm^-1)
         srf_data(:,1) = micron_to_inverse_cm(srf_data(:,1))
-      ELSE IF ( oSRF_File%Sensor_Type == ULTRAVIOLET_SENSOR ) THEN
-        srf_data(:,1) = micron_to_inverse_cm(srf_data(:,1))
+        ! Reverse in-place to get monotonically increasing wavenumbers (required for interpolation)
+        ! Use explicit loop to avoid any temporary array allocation issues
+        DO ii = 1, SIZE(srf_data,1)/2
+          ! Swap frequency values
+          temp_val = srf_data(ii,1)
+          srf_data(ii,1) = srf_data(SIZE(srf_data,1)-ii+1,1)
+          srf_data(SIZE(srf_data,1)-ii+1,1) = temp_val
+          ! Swap response values
+          temp_val = srf_data(ii,2)
+          srf_data(ii,2) = srf_data(SIZE(srf_data,1)-ii+1,2)
+          srf_data(SIZE(srf_data,1)-ii+1,2) = temp_val
+        END DO
       END IF
 
       SELECT CASE (interpolation_needed)
@@ -244,9 +324,9 @@ PROGRAM oSRF_Create_from_ASCII
           ! ============================================================================
           ! **** Create a frequency array with the desired spectral resolution  ****
           !  
-          n_interp = ( srf_data(UBOUND(srf_data, 1), 1) - srf_data(LBOUND(srf_data, 1), 1) )/delta_f
+          n_interp = INT(( srf_data(UBOUND(srf_data, 1), 1) - srf_data(LBOUND(srf_data, 1), 1) )/delta_f) + 1
           ALLOCATE( srf_data_interp(n_interp, 2) )
-          srf_data_interp(:,1) = (/ (srf_data(1, 1) + delta_f*ii, ii = 0, n_interp) /)
+          srf_data_interp(:,1) = (/ (srf_data(1, 1) + delta_f*ii, ii = 0, n_interp-1) /)
           WRITE(*,*) srf_data(1, 1), LBOUND(srf_data, 1), LBOUND(srf_data, 2)
 
           ! ============================================================================
@@ -272,7 +352,8 @@ PROGRAM oSRF_Create_from_ASCII
           END IF      
  
           ! Check whether the new oSRF resolution is coarser than old the ASCII one:
-          IF ( (delta_f >= (srf_data(2, 1) - srf_data(1, 1)) ) ) THEN
+          ! Use ABS() to handle both increasing (MW) and decreasing (IR/VIS) data
+          IF ( (delta_f >= ABS(srf_data(2, 1) - srf_data(1, 1)) ) ) THEN
             msg = 'Input resolution delta_f is too coarse for interpolation!'
             CALL Display_Message( PROGRAM_NAME, msg, FAILURE)
             print *, srf_data(2, 1),srf_data(1, 1),delta_f
@@ -291,6 +372,13 @@ PROGRAM oSRF_Create_from_ASCII
           END IF
 
           DEALLOCATE(srf_data)
+
+        CASE DEFAULT
+          ! No interpolation - copy srf_data to srf_data_interp for consistent handling
+          ALLOCATE( srf_data_interp(SIZE(srf_data,1), 2) )
+          srf_data_interp = srf_data
+          DEALLOCATE( srf_data )
+
       END SELECT
 
 
@@ -313,53 +401,28 @@ PROGRAM oSRF_Create_from_ASCII
       oSRF_File%oSRF(ll)%n_Points      = UBOUND(srf_data_interp(:,1), 1) - LBOUND(srf_data_interp(:,1), 1) + 1
 
       ! Fill the frequency and response arrays band-by-band
+      ! Note: srf_data_interp now used in all cases (interpolated or reversed as needed)
       Band_Loop: DO ii = 1, n_Bands
         WRITE(*,*) "Band: ", ii
-        SELECT CASE (interpolation_needed)
 
-          CASE("yes")
+        oSRF_File%oSRF(ll)%f1(ii) = srf_data_interp(LBOUND(srf_data_interp(:,1), 1), 1)  ! in [FREQUENCY_UNITS]
+        oSRF_File%oSRF(ll)%f2(ii) = srf_data_interp(UBOUND(srf_data_interp(:,1), 1), 1)  ! in [FREQUENCY_UNITS]
 
-            oSRF_File%oSRF(ll)%f1(ii) = srf_data_interp(LBOUND(srf_data_interp(:,1), 1), 1)  ! in [FREQUENCY_UNITS]
-            oSRF_File%oSRF(ll)%f2(ii) = srf_data_interp(UBOUND(srf_data_interp(:,1), 1), 1)  ! in [FREQUENCY_UNITS]
-
-            Error_Status = oSRF_SetValue( &
-                                  self             = oSRF_File%oSRF(ll)   , & 
-                                  Band             = INT(ii, Single)      , &  
-                                  Version          = 1                    , &  
-                                  Sensor_Id        = TRIM(Sensor_Id)      , &  
-                                  WMO_Satellite_Id = 1                    , &  
-                                  WMO_Sensor_Id    = 1                    , &  
-                                  Sensor_Type      = oSRF_File%Sensor_Type, &  
-                                  Channel          = INT(ll-1+channel_start, Single)       , &  
-                                  Frequency        = srf_data_interp(:,1), &  ! in [FREQUENCY_UNITS]
-                                  Response         = srf_data_interp(:,2) )
-          IF ( Error_Status /= SUCCESS ) THEN
-            msg = 'Error assigning oSRF data values.'
-            CALL Display_Message( PROGRAM_NAME, msg, FAILURE )
-          END IF
-
-        CASE DEFAULT
-      
-            oSRF_File%oSRF(ll)%f1(ii) = srf_data(LBOUND(srf_data(:,1), 1), 1)  ! in [FREQUENCY_UNITS]
-            oSRF_File%oSRF(ll)%f2(ii) = srf_data(UBOUND(srf_data(:,1), 1), 1)  ! in [FREQUENCY_UNITS]
-
-            Error_Status = oSRF_SetValue( &
-                                  self             = oSRF_File%oSRF(ll)   , & 
-                                  Band             = INT(ii, Single)      , &  
-                                  Version          = 1                    , &  
-                                  Sensor_Id        = TRIM(Sensor_Id)      , &  
-                                  WMO_Satellite_Id = 1                    , &  
-                                  WMO_Sensor_Id    = 1                    , &  
-                                  Sensor_Type      = oSRF_File%Sensor_Type, &  
-                                  Channel          = INT(ll-1+channel_start, Single)       , &  
-                                  Frequency        = srf_data(:,1), &  ! in [FREQUENCY_UNITS]
-                                  Response         = srf_data(:,2) )
-          IF ( Error_Status /= SUCCESS ) THEN
-            msg = 'Error assigning oSRF data values.'
-            CALL Display_Message( PROGRAM_NAME, msg, FAILURE )
-          END IF
-
-        END SELECT
+        Error_Status = oSRF_SetValue( &
+                              self             = oSRF_File%oSRF(ll)   , &
+                              Band             = INT(ii, Single)      , &
+                              Version          = 1                    , &
+                              Sensor_Id        = TRIM(Sensor_Id)      , &
+                              WMO_Satellite_Id = 1                    , &
+                              WMO_Sensor_Id    = 1                    , &
+                              Sensor_Type      = oSRF_File%Sensor_Type, &
+                              Channel          = INT(ll-1+channel_start, Single)       , &
+                              Frequency        = srf_data_interp(:,1), &  ! in [FREQUENCY_UNITS]
+                              Response         = srf_data_interp(:,2) )
+        IF ( Error_Status /= SUCCESS ) THEN
+          msg = 'Error assigning oSRF data values.'
+          CALL Display_Message( PROGRAM_NAME, msg, FAILURE )
+        END IF
       END DO Band_Loop
 
 
@@ -402,12 +465,9 @@ PROGRAM oSRF_Create_from_ASCII
                                Error_Status                              )
       END IF
 
-      SELECT CASE(interpolation_needed)
-        CASE("yes")
-          DEALLOCATE(srf_data_interp)
-        CASE DEFAULT
-          DEALLOCATE(srf_data)
-      END SELECT
+      ! Deallocate srf_data_interp at end of channel loop - it's used in all cases
+      DEALLOCATE(srf_data_interp)
+
   END DO Channel_Loop
 
   ! Write the oSRF_File instance to the nc file
